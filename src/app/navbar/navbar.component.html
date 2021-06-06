@@ -15,11 +15,17 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="havaintoasemat">Sää havaintoasemat</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="!login" class="nav-item">
         <a class="nav-link" routerLink="rekisteroidy">Rekisteröidy</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="!login" class="nav-item">
         <a class="nav-link" routerLink="kirjaudu">Kirjaudu</a>
+      </li>
+      <li *ngIf="login"  class="nav-item">
+        <a class="nav-link" routerLink="omattiedot">Omat tiedot</a>
+      </li>
+      <li *ngIf="login" class="nav-item">
+        <a class="nav-link" routerLink="kirjaudu" (click)="doLogout()">Kirjaudu ulos</a>
       </li>
     </ul>
   </div>

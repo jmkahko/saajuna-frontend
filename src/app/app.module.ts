@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +13,8 @@ import { HavaintoasematComponent } from './havaintoasemat/havaintoasemat.compone
 import { RekisteroidyComponent } from './rekisteroidy/rekisteroidy.component';
 import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
 import { HaeasemaComponent } from './haeasema/haeasema.component';
+import { AuthGuard } from './auth.guard';
+import { OmattiedotComponent } from './omattiedot/omattiedot.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +25,17 @@ import { HaeasemaComponent } from './haeasema/haeasema.component';
     HavaintoasematComponent,
     RekisteroidyComponent,
     KirjauduComponent,
-    HaeasemaComponent
+    HaeasemaComponent,
+    OmattiedotComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
