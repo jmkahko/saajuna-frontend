@@ -11,8 +11,8 @@ export class AuthGuard implements CanActivate {
             return true;
         }
 
-        // Jos tokenia ei ole palataan login sivulle
-        this.router.navigate(['/login']);
+        // Jos tokenia ei ole palataan etusivulle
+        this.router.navigate(['/']);
         return false;
     }
 }

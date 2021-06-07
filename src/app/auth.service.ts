@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 })
 @Injectable()
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users/login'; // autentikaatiopalvelun osoite
+  private apiUrllogin = 'http://localhost:3000/users/login'; // kirjaudu
+  private apiUrlrekisteroidy = 'http://localhost:3000/users/register'; // rekisteröidy
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut
@@ -26,7 +27,7 @@ export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     // tässä ei käytetä JSON.stringify -metodia lähtevälle tiedolle
     return this.http
-      .post(this.apiUrl, { username: username, password: password })
+      .post(this.apiUrllogin, { username: username, password: password })
       .pipe(
         map((res) => {
           console.log(res); // loggaa alla olevan tyylisen vastauksen
@@ -48,7 +49,7 @@ export class AuthService {
                   'accesstoken',
                   JSON.stringify({ username: username, adminlogin: true, token: token })
                 );
-                this.loginTrue(); // lähetetään viesti navbariin että vaihdetaan login:true -tilaan
+                this.adminLoginTrue; // lähetetään viesti navbariin että vaihdetaan adminLoginTrue tilaan
                 console.log('admin login onnistui');
                 return true; // saatiin token
               } else if (payload.username === username && payload.isadmin === false) {
@@ -83,9 +84,59 @@ export class AuthService {
     return this.subject.asObservable();
   }
 
+  // Lähetetään, jos on admin käyttäjä kirjautunut
+  adminLoginTrue(): Observable<any> {
+    this.subject.next(true);
+    return this.subject.asObservable();
+  }
+
   // logout poistaa tokenin sessionStoragesta
   logout(): void {
     this.token = null;
     sessionStorage.removeItem('accesstoken');
   }
+
+  // Rekisteröidään uusi käyttäjä. Admin käyttäjiä ei pysty tekemään nettisivun kautta
+  rekisteroidy(username: string, password: string): Observable<boolean> {
+    return this.http
+    .post(this.apiUrlrekisteroidy, { username: username, password: password, isadmin: false })
+    .pipe(
+      map((res) => {
+        console.log(res); // loggaa alla olevan tyylisen vastauksen
+        const token = res['token']; // otetaan vastauksesta token
+        if (token) {
+          this.token = token;
+          /* Tässä tutkitaan onko tokenin payloadin sisältö oikea.
+           Jos on, laitetaan token sessionStorageen ja palautetaan true
+           jolloin käyttäjä pääsee Admin-sivulle
+        */
+          try {
+            // dekoodataan token
+            const payload = this.jwtHelp.decodeToken(token);
+            console.log(payload);
+            // Tässä voidaan tarkistaa tokenin oikeellisuus
+            if (payload.username === username && payload.isadmin === false) {
+              // token sessionStorageen
+              sessionStorage.setItem(
+                'accesstoken',
+                JSON.stringify({ username: username, adminlogin: false, token: token })
+              );
+              this.adminLoginTrue; // lähetetään viesti navbariin että vaihdetaan adminLoginTrue tilaan
+              console.log('käyttäjä kirjautuminen onnistui');
+              return true; // saatiin token
+            } else {
+              console.log('login epäonnistui');
+              return false; // ei saatu tokenia
+            }
+          } catch (err) {
+            return false;
+          }
+        } else {
+          console.log('rekisteröinti onnistui');
+          return false;
+        }
+      })
+    );
+  }
+
 }
