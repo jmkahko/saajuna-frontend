@@ -24,7 +24,7 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen.
 
 Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa? Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen? Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
-Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika).
+Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmantieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON muotoon vei paljon aikaa.
 Aikaa on käytetty backendiin ainakin 30-40 h ja frontendiin xxx h.
 
 ## Työssä hyödynnetyt tutoriaalit
@@ -33,6 +33,9 @@ Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
 Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
 Tour of Heroes https://angular.io/tutorial frontendissä.
+
+Koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
+
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin ohjeita StackOverFlow:sta.
 
 ### Sekalaiset
