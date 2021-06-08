@@ -8,15 +8,11 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnDestroy {
   login: boolean;
-  adminlogin: boolean; // Saadaan sessionStoragesta, onko kirjatunut admin vai ei
   subscription: Subscription; // Subscription -tyyppiseen olioon voidaan tallentaa observablen tilaus.
 
   constructor(private authService: AuthService) {
     // Tilataan viesti ja tallennetaan tulos this.login -muuttujaan
     this.subscription = this.authService.loginTrue().subscribe(message => { this.login = message; });
-
-    // Tilataan viesti ja tallennetaan tulos this.adminlogin -muuttujaan. Jos admin-tunnuksella on kirjauduttu
-    this.subscription = this.authService.adminLoginTrue().subscribe(message => { this.adminlogin = message; });
 
     /* varmistetaan että login -tila säilyy myös kun sivu päivitetään
        varmistus tehdään katsomalla onko token sessionstoragessa.
@@ -28,7 +24,6 @@ export class NavbarComponent implements OnDestroy {
     } else {
       this.login = false;
     }
-
   }
 
   ngOnDestroy() {
@@ -38,7 +33,6 @@ export class NavbarComponent implements OnDestroy {
 
   doLogout() {
     this.login = false;
-    this.adminlogin = false;
   }
 
 }

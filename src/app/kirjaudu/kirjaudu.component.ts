@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-kirjaudu',
@@ -9,9 +10,12 @@ import { AuthService } from '../auth.service';
 })
 export class KirjauduComponent implements OnInit {
   error = '';
+
   // injektoidaan router ja authService
   constructor(private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+
+     }
 
   ngOnInit() {
     // aina kun login-komponentti ladataan, poistetaan token

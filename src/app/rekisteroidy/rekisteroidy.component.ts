@@ -14,8 +14,7 @@ export class RekisteroidyComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    // aina kun login-komponentti ladataan, poistetaan token
-    this.authService.logout();
+
   }
 
   // lomakkeen lähetys
@@ -24,6 +23,7 @@ export class RekisteroidyComponent implements OnInit {
     this.authService.rekisteroidy(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
+          this.error = 'Rekisteröinti onnistui'
           this.router.navigate(['/omattiedot']);
         } else {
           this.error = 'Rekisteröinti epäonnistui';
@@ -32,3 +32,6 @@ export class RekisteroidyComponent implements OnInit {
   }
 
 }
+
+
+

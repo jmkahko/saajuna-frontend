@@ -1,4 +1,5 @@
 <div class="container">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   <div class="d-flex mt-3 mb-3">Kirjaudu</div>
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
     <div class="form-group">
@@ -8,6 +9,5 @@
         <input type="password" class="form-control" name="salasana" ngModel /><br />
         <button type="submit" class="btn btn-success">Kirjaudu</button>
     </div>
-    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 </form>
 </div>

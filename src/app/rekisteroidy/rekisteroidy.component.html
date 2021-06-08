@@ -1,6 +1,9 @@
 <div class="container">
   <h2>Rekisteröidy Sääjuna -sovelluksen käyttäjäksi</h2>
   <div class="d-flex mt-3 mb-3">Rekistöröinti mahdollistaa omien säähavainto ja juna-asemien tallennuksen</div>
+  <div *ngIf="error" class="alert alert-success">
+    <strong>Rekisteröinti onnistui!</strong> Kirjaudu sisään
+  </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f.valid)" novalidate>
 
   <div class="form-group">
