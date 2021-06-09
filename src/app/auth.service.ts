@@ -4,17 +4,13 @@ import { JwtHelperService } from '@auth0/angular-jwt'; // kirjasto jwt:n käsitt
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 @Injectable()
 export class AuthService {
-  private apiUrllogin = 'http://localhost:3000/users/login/'; // kirjaudu
-  private apiUrlrekisteroidy = 'http://localhost:3000/users/register/'; // rekisteröidy
-  private apiUrlsalasanvaihto = 'http://localhost:3000/users/changepassword/'; // salasanan vaihto
-  private apiUrltunnuspoisto = 'http://localhost:3000/users/deleteuser/'; // tunnuksen poisto
+  private apiUrl = 'http://localhost:3000/users'; // Pää url
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut
@@ -36,7 +32,7 @@ export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     // tässä ei käytetä JSON.stringify -metodia lähtevälle tiedolle
     return this.http
-      .post(this.apiUrllogin, { username: username, password: password })
+      .post(`${this.apiUrl}/login/`, { username: username, password: password })
       .pipe(
         map((res) => {
           console.log(res); // loggaa alla olevan tyylisen vastauksen
@@ -108,7 +104,7 @@ export class AuthService {
   // Rekisteröidään uusi käyttäjä. Admin käyttäjiä ei pysty tekemään nettisivun kautta
   rekisteroidy(username: string, password: string): Observable<boolean> {
     return this.http
-    .post(this.apiUrlrekisteroidy, { username: username, password: password, isadmin: false })
+    .post(`${this.apiUrl}/register/`, { username: username, password: password, isadmin: false })
     .pipe(
       map((res) => {
         console.log(res); // loggaa alla olevan tyylisen vastauksen
@@ -148,7 +144,7 @@ export class AuthService {
     );
   }
 
-  // Rekisteröidään uusi käyttäjä. Admin käyttäjiä ei pysty tekemään nettisivun kautta
+  // Käyttäjän salasanan vaihto
   vaihdaSalana(password: string): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -158,7 +154,7 @@ export class AuthService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     console.log(this.id);
-    const url = `${this.apiUrlsalasanvaihto}${this.id}`;
+    const url = `${this.apiUrl}/changepassword/${this.id}`;
     console.log(url);
 
     return this.http
@@ -172,6 +168,7 @@ export class AuthService {
       );
   } 
 
+  // Käyttäjätunnuksen poisto
   poistaTunnus(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -181,7 +178,7 @@ export class AuthService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     console.log(this.id);
-    const url = `${this.apiUrltunnuspoisto}${this.id}`;
+    const url = `${this.apiUrl}/deleteuser/${this.id}`;
     console.log(url);
 
     return this.http
