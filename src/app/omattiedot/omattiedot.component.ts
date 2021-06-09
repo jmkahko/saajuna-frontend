@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { JunaAsemaService } from '../juna-asema.service';
+import { RautatieAsemat } from '../rautatieAsemat';
 
 @Component({
   selector: 'app-omattiedot',
@@ -13,16 +14,23 @@ export class OmattiedotComponent implements OnInit {
   error1 = '';
   salasanainfo = '';
   poistoinfo = '';
+  junainfo = '';
+  admintieto = '';
   public username: string;
+  rautatietasemat : Array<RautatieAsemat> = [];
 
   // injektoidaan router ja authService
   constructor(
     private router: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private junaAsematService: JunaAsemaService) {
       // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
       const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
       this.username = currentUser && currentUser.username;
 
+      if (this.username === 'admin') {
+        this.junaAsematService.haeAsemat().subscribe(data => this.rautatietasemat = data);
+      }
     }
 
     ngOnInit() {
@@ -30,7 +38,6 @@ export class OmattiedotComponent implements OnInit {
     }
 
   salasanvaihto(formData, isFormValid: boolean) {
-
     // Tarkistetaan onko uusi ja vanha salasan samoja
     if (formData.vanhasalasana !== formData.salasana) {
       // Tarkistetaan onko uusi ja sama uudelleen salasanat samoja
@@ -66,6 +73,30 @@ export class OmattiedotComponent implements OnInit {
         
       } else {
         this.poistoinfo = 'Käyttäjätunnus on poistettu';
+      }
+    });
+  }
+
+  // Rautatieasemien lisäys admin oikeudella
+  lisaaJunaAsemat() {
+    this.junaAsematService.lisaaAsemat()
+      .subscribe(result => {
+      if (result === true) {
+        
+      } else {
+        this.junainfo = 'Rautatieasemat lisätty';
+      }
+    });
+  }
+
+  // Rautatieasemien poisto admin oikeudella
+  poistaJunaAsemat() {
+    this.junaAsematService.poistaAsemat()
+      .subscribe(result => {
+      if (result === true) {
+        
+      } else {
+        this.junainfo = 'Rautatieasemat poistettu';
       }
     });
   }

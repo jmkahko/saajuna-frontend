@@ -56,6 +56,7 @@ export class AuthService {
                   'accesstoken',
                   JSON.stringify({ username: username, adminlogin: true, token: token })
                 );
+                this.loginTrue(); // lähetetään viesti navbariin että vaihdetaan login:true -tilaan
                 console.log('admin login onnistui');
                 return true; // saatiin token
               } else if (payload.username === username && payload.isadmin === false) {
