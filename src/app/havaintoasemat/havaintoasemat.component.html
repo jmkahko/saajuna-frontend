@@ -1,1 +1,57 @@
-<p>havaintoasemat works!</p>
+<div class="container">
+  <div class="d-flex mt-3 mb-3">Säähavaintoaseman haku</div>
+
+  <form #f="ngForm" (ngSubmit)="haeRautatieasema(f.value)" novalidate>
+    <div class="form-group">
+      <input
+        #tunnus="ngModel"
+        type="text"
+        class="form-control"
+        placeholder="Hae havaintoasemaa"
+        name="säähavaintoasema"
+        ngModel
+        required
+        required
+      />
+    </div>
+
+    <div class="custom-control custom-checkbox mb-3">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tyyppiAsema"
+        name="tyyppi"
+      />
+      <label class="custom-control-label" for="customCheck"
+        >Havaintoasema</label
+      >
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tyyppiPysakki"
+        name="tyyppi"
+      />
+      <label class="custom-control-label" for="customCheck">Pysäkki</label>
+    </div>
+
+    <div class="custom-control custom-radio">
+      <p>käytössä</p>
+      <input
+        type="radio"
+        class="custom-control-input"
+        id="kaytossaKylla"
+        name="kaytossa"
+      />
+      <label class="custom-control-label" for="customRadio">Kyllä</label>
+      <input
+        type="radio"
+        class="custom-control-input"
+        id="kaytossaEi"
+        name="kaytossa"
+      />
+      <label class="custom-control-label" for="customRadio">Ei</label>
+    </div>
+
+    <br />
+  </form>
+</div>
