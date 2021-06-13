@@ -2,7 +2,12 @@
   <a class="navbar-brand" href="#">Sääjuna</a>
 
   <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -13,7 +18,7 @@
         <a class="nav-link" routerLink="junaasemat">Juna-asemat</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="havaintoasemat">Sää havaintoasemat</a>
+        <a class="nav-link" routerLink="havaintoasemat">Säähavaintoasemat</a>
       </li>
       <li *ngIf="!login" class="nav-item">
         <a class="nav-link" routerLink="rekisteroidy">Rekisteröidy</a>
@@ -25,7 +30,9 @@
         <a class="nav-link" routerLink="omattiedot">Omat tiedot</a>
       </li>
       <li *ngIf="login" class="nav-item">
-        <a class="nav-link" routerLink="kirjaudu" (click)="doLogout()">Kirjaudu ulos</a>
+        <a class="nav-link" routerLink="kirjaudu" (click)="doLogout()"
+          >Kirjaudu ulos</a
+        >
       </li>
     </ul>
   </div>

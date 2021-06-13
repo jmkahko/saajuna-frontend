@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-flex mt-3 mb-3">Säähavaintoaseman haku</div>
 
-  <form #f="ngForm" (ngSubmit)="haeRautatieasema(f.value)" novalidate>
+  <form #f="ngForm" (ngSubmit)="haeHavaintoAsema(f.value)" novalidate>
     <div class="form-group">
       <input
         #tunnus="ngModel"
@@ -14,7 +14,7 @@
         required
       />
     </div>
-
+    <!-- 
     <div class="custom-control custom-checkbox mb-3">
       <input
         type="checkbox"
@@ -53,5 +53,7 @@
     </div>
 
     <br />
+  </form>
+</div> -->
   </form>
 </div>
