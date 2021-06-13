@@ -1,38 +1,68 @@
 <div class="container">
   <h2>Rekisteröidy Sääjuna -sovelluksen käyttäjäksi</h2>
-  <div class="d-flex mt-3 mb-3">Rekistöröinti mahdollistaa omien säähavainto ja juna-asemien tallennuksen</div>
+  <div class="d-flex mt-3 mb-3">
+    Rekisteröinti mahdollistaa omien säähavaintojen ja juna-asemien
+    tallennuksen.
+  </div>
   <div *ngIf="error" class="alert alert-success">
     <strong>Rekisteröinti onnistui!</strong> Kirjaudu sisään
   </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f.valid)" novalidate>
-
-  <div class="form-group">
-    <label for="tunnus">Tunnus:</label>
-    <input #tunnus="ngModel" type="text" class="form-control" placeholder="Syötä tunnus" name="tunnus" ngModel required>
-    <div class="alert alert-danger" [hidden]="!f.form.hasError('required', 'tunnus') || f.pristine">
-      <strong>Varoitus!</strong> Nimi vaaditaan
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div>
-      <label for="salasana">Salasana:</label>
-      <input #salasana="ngModel" type="password" class="form-control" placeholder="Syötä salasana" name="salasana" ngModel required minlength="5">
-      <div class="alert alert-danger" [hidden]="!f.form.hasError('required', 'salasana') || f.pristine">
-        <strong>Varoitus!</strong> Salasana vaaditaan
-      </div>
-      <div class="alert alert-danger" [hidden]="!f.form.hasError('minlength', 'salasana')">
-        <strong>Varoitus!</strong> Salasana on liian lyhyt
+    <div class="form-group">
+      <label for="tunnus">Tunnus:</label>
+      <input
+        #tunnus="ngModel"
+        type="text"
+        class="form-control"
+        placeholder="Syötä tunnus"
+        name="tunnus"
+        ngModel
+        required
+      />
+      <div
+        class="alert alert-danger"
+        [hidden]="!f.form.hasError('required', 'tunnus') || f.pristine"
+      >
+        <strong>Varoitus!</strong> Nimi vaaditaan
       </div>
     </div>
-  </div>
 
-  <br />
-  <div class="form-group">
-    <!-- Lähetetään lomake eteenpäin -->
-    <button type="submit" class="btn btn-success">Rekisteröidy</button>
-    <!-- Saadaan tyhjennettyä tiedot -->
-    <button type="button" class="btn btn-danger" (click)="f.resetForm()">Tyhjennä</button>
-  </div>
-</form>
+    <div class="form-group">
+      <div>
+        <label for="salasana">Salasana:</label>
+        <input
+          #salasana="ngModel"
+          type="password"
+          class="form-control"
+          placeholder="Syötä salasana"
+          name="salasana"
+          ngModel
+          required
+          minlength="5"
+        />
+        <div
+          class="alert alert-danger"
+          [hidden]="!f.form.hasError('required', 'salasana') || f.pristine"
+        >
+          <strong>Varoitus!</strong> Salasana vaaditaan
+        </div>
+        <div
+          class="alert alert-danger"
+          [hidden]="!f.form.hasError('minlength', 'salasana')"
+        >
+          <strong>Varoitus!</strong> Salasana on liian lyhyt
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+      <!-- Lähetetään lomake eteenpäin -->
+      <button type="submit" class="btn btn-success">Rekisteröidy</button>
+      <!-- Saadaan tyhjennettyä tiedot -->
+      <button type="button" class="btn btn-danger" (click)="f.resetForm()">
+        Tyhjennä
+      </button>
+    </div>
+  </form>
 </div>

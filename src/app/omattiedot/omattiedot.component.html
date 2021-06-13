@@ -3,46 +3,84 @@
     <strong>Onnistui!</strong> Salasana vaihdettu
   </div>
   <div *ngIf="poistoinfo" class="alert alert-info">
-    <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta
+    <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta.
   </div>
   <div *ngIf="error" class="alert alert-danger">
-    <strong>Salasanan vaihto epäonnistui!</strong> Salasanat eivät täsmää
+    <strong>Salasanan vaihto epäonnistui!</strong> Salasanat eivät täsmää.
   </div>
   <div *ngIf="error1" class="alert alert-danger">
-    <strong>Salasanan vaihto epäonnistui!</strong> Vanha ja uusi salasana eivät voi olla samoja
+    <strong>Salasanan vaihto epäonnistui!</strong> Vanha ja uusi salasana eivät
+    voi olla samat.
   </div>
   <div *ngIf="junainfo" class="alert alert-info">
-    <strong>Toiminto onnistui!</strong> {{junainfo}}
+    <strong>Toiminto onnistui!</strong> {{ junainfo }}
   </div>
   <div *ngIf="username === 'admin'" class="alert alert-warning">
     <strong>Admin kirjautunut!</strong>
   </div>
 
   <div *ngIf="username !== 'admin'">
-  <h2>Hei käyttäjä, {{username}}</h2>
-  <div class="d-flex mt-3 mb-3">Omissa tiedoissa voit vaihtaa suosikki sää- ja juna-asemia. Muuttaa salasanasi ja myös poistaa käyttäjätunnuksesi</div>
+    <h2>Hei käyttäjä, {{ username }}</h2>
+    <div class="d-flex mt-3 mb-3">
+      Omissa tiedoissa voit vaihtaa suosikki sää- ja juna-asemia, muuttaa
+      salasanasi ja myös poistaa käyttäjätunnuksesi
+    </div>
 
-  <h4>Salasanan vaihto</h4>
+    <h4>Salasanan vaihto</h4>
     <form #f="ngForm" (ngSubmit)="salasanvaihto(f.value, f.valid)" novalidate>
-
       <div class="form-group">
         <label for="vanhasalasana">Vanha salasana:</label>
-        <input #tunnus="ngModel" type="password" class="form-control" placeholder="Syötä vanha salasana" name="vanhasalasana" ngModel required required>
+        <input
+          #tunnus="ngModel"
+          type="password"
+          class="form-control"
+          placeholder="Syötä vanha salasana"
+          name="vanhasalasana"
+          ngModel
+          required
+          required
+        />
       </div>
 
       <div class="form-group">
         <label for="salasana">Uusi salasana:</label>
-        <input #tunnus="ngModel" type="password" class="form-control" placeholder="Syötä uusi salasana" name="salasana" ngModel required required minlength="5">
-        <div class="alert alert-danger" [hidden]="!f.form.hasError('minlength', 'salasana')">
+        <input
+          #tunnus="ngModel"
+          type="password"
+          class="form-control"
+          placeholder="Syötä uusi salasana"
+          name="salasana"
+          ngModel
+          required
+          required
+          minlength="5"
+        />
+        <div
+          class="alert alert-danger"
+          [hidden]="!f.form.hasError('minlength', 'salasana')"
+        >
           <strong>Varoitus!</strong> Salasana on liian lyhyt
         </div>
       </div>
 
       <div class="form-group">
         <label for="salasana2">Uusi salasana uudelleen:</label>
-        <input #tunnus="ngModel" type="password" class="form-control" placeholder="Syötä uusi salasana uudelleen" name="salasana2" ngModel required required minlength="5">
-        <div class="alert alert-danger" [hidden]="!f.form.hasError('minlength', 'salasana2')">
-          <strong>Varoitus!</strong> Salasana on liian lyhyt
+        <input
+          #tunnus="ngModel"
+          type="password"
+          class="form-control"
+          placeholder="Syötä uusi salasana uudelleen"
+          name="salasana2"
+          ngModel
+          required
+          required
+          minlength="5"
+        />
+        <div
+          class="alert alert-danger"
+          [hidden]="!f.form.hasError('minlength', 'salasana2')"
+        >
+          <strong>Varoitus!</strong> Salasanasi on liian lyhyt.
         </div>
       </div>
 
@@ -51,23 +89,39 @@
         <!-- Lähetetään lomake eteenpäin -->
         <button type="submit" class="btn btn-success">Vaihda</button>
         <!-- Saadaan tyhjennettyä tiedot -->
-        <button type="button" class="btn btn-danger" (click)=f.resetForm() (click)="virheidenPoisto()">Tyhjennä</button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="f.resetForm()"
+          (click)="virheidenPoisto()"
+        >
+          Tyhjennä
+        </button>
       </div>
     </form>
   </div>
 
   <div *ngIf="username !== 'admin'">
     <h4>Käyttäjätunnuksen poisto</h4>
-    <button type="button" class="btn btn-danger" (click)="poistaTunnus()">Poista tunnus</button>
+    <button type="button" class="btn btn-danger" (click)="poistaTunnus()">
+      Poista tunnus
+    </button>
   </div>
-  <br>
+  <br />
 
   <!-- Näytetään admin käyttäjälle rautatieasemien ylläpito -->
   <div *ngIf="username === 'admin'">
     <h4>Rautatieasemien ylläpito</h4>
-    <p>Asemia tietokannassa: {{rautatietasemat.length}}</p>
-    <p>Ennen asemien lisäystä, vanhat asemat täytyy poistaa alta. Muuten asemat ovat tuplasti</p>
-    <button type="button" class="btn btn-success" (click)="lisaaJunaAsemat()">Lisää asemat</button> 
-    <button type="button" class="btn btn-warning" (click)="poistaJunaAsemat()">Poista asemat</button>
+    <p>Asemia tietokannassa: {{ rautatietasemat.length }}</p>
+    <p>
+      Ennen asemien lisäystä, vanhat asemat täytyy poistaa alta. Muuten asemat
+      ovat tuplasti
+    </p>
+    <button type="button" class="btn btn-success" (click)="lisaaJunaAsemat()">
+      Lisää asemat
+    </button>
+    <button type="button" class="btn btn-warning" (click)="poistaJunaAsemat()">
+      Poista asemat
+    </button>
   </div>
 </div>
