@@ -1,5 +1,5 @@
 export class HavaintoAsemat {
-  // konstruktorimetodi joka rakentaa student-olion
+  // konstruktorimetodi joka rakentaa havaintoasemat-olion
   constructor(
     public name: string,
     public fmisid: number,
