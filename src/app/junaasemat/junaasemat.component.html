@@ -1,6 +1,10 @@
 <div class="container">
 
   <div class="d-flex mt-3 mb-3">Rautatieaseman haku</div>
+  <p>Rautatieasemia {{ rautatietasemat.length }}</p>
+  <p>Seisakkeita {{ rautatietasemat.length }}</p>
+  <p>Käytössä {{ rautatietasemat.length }}</p>
+  <p>Ei käytössä {{ rautatietasemat.length }}</p>
 
   <form #f="ngForm" (ngSubmit)="haeRautatieasema(f.value)" novalidate>
 

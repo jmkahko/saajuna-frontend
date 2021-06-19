@@ -1,5 +1,6 @@
 <div class="container">
   <div class="d-flex mt-3 mb-3">Säähavaintoaseman haku</div>
+  <p>Havaintoasemia tallennettu yhteensä {{ havaintoasemat.length }}</p>
 
   <form #f="ngForm" (ngSubmit)="haeHavaintoAsema(f.value)" novalidate>
     <div class="form-group">

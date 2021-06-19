@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { JunaAsemaService } from '../juna-asema.service';
 import { RautatieAsemat } from '../rautatieAsemat';
+import { HavaintoasemaService } from '../havaintoasema.service';
+import { HavaintoAsemat } from '../havaintoasemat';
 
 @Component({
   selector: 'app-omattiedot',
@@ -18,18 +20,21 @@ export class OmattiedotComponent implements OnInit {
   admintieto = '';
   public username: string;
   rautatietasemat : Array<RautatieAsemat> = [];
+  havaintoasemat: Array<HavaintoAsemat> = [];
 
   // injektoidaan router ja authService
   constructor(
     private router: Router,
     private authService: AuthService,
-    private junaAsematService: JunaAsemaService) {
+    private junaAsematService: JunaAsemaService,
+    private havaintoAsemaService: HavaintoasemaService) {
       // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
       const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
       this.username = currentUser && currentUser.username;
 
       if (this.username === 'admin') {
         this.junaAsematService.haeAsemat().subscribe(data => this.rautatietasemat = data);
+        this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
       }
     }
 

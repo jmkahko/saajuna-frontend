@@ -1,6 +1,7 @@
 export class SaaEnnuste {
   // konstruktorimetodi joka rakentaa sääennuste-olion
   constructor(
+    public _id: string,
     public time: String, // Kellonaika
     public GeopHeight: Number,
     public Temperature: Number,
