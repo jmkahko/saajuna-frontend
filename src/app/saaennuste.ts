@@ -15,7 +15,7 @@ export class SaaEnnuste {
     public WindGust: Number,
     public DewPoint: Number,
     public otalCloudCover: Number,
-    public WeatherSymbol3: Number, // Säätyypin kuvanumero
+    public WeatherSymbol3: Number, // Säätyypin kuvan numero
     public LowCloudCover: Number,
     public MediumCloudCover: Number,
     public HighCloudCover: Number,
@@ -28,5 +28,5 @@ export class SaaEnnuste {
     public RadiationDiffuseAccumulation: Number,
     public LandSeaMask: Number,
     public place: String
-  ) {} // Paikannimi esim. Kajaani
+  ) {}
 }

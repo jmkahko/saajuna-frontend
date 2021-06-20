@@ -23,14 +23,14 @@ export class HavaintoasemaService {
     return error.message || error;
   }
 
-  // Hae kaikki havaintoasemat
+  // Hae kaikki säähavaintoasemat
   haeHavaintoAsemat(): Observable<HavaintoAsemat[]> {
     return this.http
       .get<HavaintoAsemat[]>(`${this.apiUrl}/`)
       .pipe(catchError(this.handleError));
   }
 
-  // Haetaan tietty havaintoasema
+  // Haetaan tietty säähavaintoasema
   haeHavaintoAsema(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -50,7 +50,7 @@ export class HavaintoasemaService {
       })
     );
   }
-  // Haetaan tietyn havaintoaseman säätiedot 10 minuuttia
+  // Haetaan tietyn säähavaintoaseman säätiedot, jos viimeisestä hausta on kulunyt yli 10 minuuttia
   haeHavaintoAsema10Min(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -70,7 +70,7 @@ export class HavaintoasemaService {
       })
     );
   }
-  // Haetaan tietyn havaintoaseman sääennuste paikan nimellä
+  // Haetaan tietyn säähavaintoaseman sääennuste paikan nimellä
   haeHavaintoAsemaNimella(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
