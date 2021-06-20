@@ -20,7 +20,9 @@ export class HavaintoasematComponent implements OnInit {
     //   .haeHavaintoAsemat()
     //   .subscribe((data) => (this.havaintoasemat = data));
   }
+  // Push a search term into the observable stream.
   search(term: string): void {
+    // subject vastaanottaa hakutermin
     this.searchTerms.next(term);
   }
 
@@ -37,8 +39,10 @@ export class HavaintoasematComponent implements OnInit {
       // switch to new search observable each time the term changes
       // vaihdaliitos vaihtaa palvelimelta tulevaan streamiin, jolla saadaan
       // haetut sankarit.
-      switchMap((term: string) => this.havaintoAsemaService.haeHavaintoAsemat())
+      switchMap((term: string) =>
+        this.havaintoAsemaService.haeHavaintoAsemat(term)
+      )
     );
   }
-  haeHavaintoAsema(formdata) {}
+  haeHavaintoAsemat(formdata) {}
 }
