@@ -32,25 +32,32 @@ export class HavaintoasemaService {
   }
 
   // Haetaan tietty säähavaintoasema
-  haeHavaintoAsema(): Observable<any> {
-    // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
-    const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
-
-    // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
-    const tokenheaders = {
-      headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
-    };
-    const url = `${this.apiUrl}/:fmisid`;
-    console.log(url);
-
-    return this.http.get(url, tokenheaders).pipe(
-      map((res) => {
-        console.log(res);
-        console.log('Havaintoasema haettu');
-        return false;
-      })
-    );
+  haeHavaintoAsema(id: string): Observable<HavaintoAsemat> {
+    return this.http
+      .get<HavaintoAsemat>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
+
+  // haeHavaintoAsema(): Observable<any> {
+  //   // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
+  //   const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+
+  //   // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
+  //   const tokenheaders = {
+  //     headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
+  //   };
+  //   const url = `${this.apiUrl}/:fmisid`;
+  //   console.log(url);
+
+  //   return this.http.get(url, tokenheaders).pipe(
+  //     map((res) => {
+  //       console.log(res);
+  //       console.log('Havaintoasema haettu');
+  //       return false;
+  //     })
+  //   );
+  // }
+
   // Haetaan tietyn säähavaintoaseman säätiedot, jos viimeisestä hausta on kulunyt yli 10 minuuttia
   haeHavaintoAsema10Min(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
