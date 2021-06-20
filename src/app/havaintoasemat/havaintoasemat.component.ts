@@ -14,7 +14,7 @@ export class HavaintoasematComponent implements OnInit {
   constructor(private havaintoAsemaService: HavaintoasemaService) {
     this.havaintoAsemaService
       .haeHavaintoAsemat()
-      .subscribe(data => this.havaintoasemat = data);
+      .subscribe((data) => (this.havaintoasemat = data));
   }
 
   ngOnInit(): void {}
