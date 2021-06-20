@@ -12,9 +12,9 @@ import { JunaasematComponent } from './junaasemat/junaasemat.component';
 import { HavaintoasematComponent } from './havaintoasemat/havaintoasemat.component';
 import { RekisteroidyComponent } from './rekisteroidy/rekisteroidy.component';
 import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
-import { HaeasemaComponent } from './haeasema/haeasema.component';
 import { AuthGuard } from './auth.guard';
 import { OmattiedotComponent } from './omattiedot/omattiedot.component';
+import { EtusivuComponent } from './etusivu/etusivu.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,8 @@ import { OmattiedotComponent } from './omattiedot/omattiedot.component';
     HavaintoasematComponent,
     RekisteroidyComponent,
     KirjauduComponent,
-    HaeasemaComponent,
-    OmattiedotComponent
+    OmattiedotComponent,
+    EtusivuComponent
   ],
   imports: [
     BrowserModule,
