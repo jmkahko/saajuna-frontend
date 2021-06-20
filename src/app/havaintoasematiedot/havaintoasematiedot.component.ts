@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./havaintoasematiedot.component.css'],
 })
 export class HavaintoasematiedotComponent implements OnInit {
-  havaintoasema1;
+  havaintoasema;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +25,7 @@ export class HavaintoasematiedotComponent implements OnInit {
   haeHavaintoAsema(): void {
     const id = this.route.snapshot.paramMap.get('fmisid');
     this.HavaintoAsematService.haeHavaintoAsema(id).subscribe(
-      (havaintoasema1) => (this.havaintoasema1 = havaintoasema1)
+      (havaintoasema) => (this.havaintoasema = havaintoasema)
     );
   }
 }
