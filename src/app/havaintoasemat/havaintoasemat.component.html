@@ -5,13 +5,18 @@
   <h4><label for="search-box">Säähavaintoaseman haku</label></h4>
   <p>Kirjoita säähavaintoaseman nimi hakukenttään.</p>
   <div>
-    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+    <input
+      #searchBox
+      id="search-box"
+      (input)="search(searchBox.value)"
+      placeholder="Etsi säähavaintoasema"
+    />
 
     <ul class="search-result">
       <!-- async pipe eli filtteri tilaa observablen tässä templatessa, jolloin
       tieto (sankarit) saadaan ulos observablesta. -->
       <li *ngFor="let havaintoasema of havaintoasemat$ | async">
-        <a routerLink="/detail/{{ havaintoasema._id }}">
+        <a routerLink="/havaintoasema/{{ havaintoasema._id }}">
           {{ havaintoasema.name }}
         </a>
       </li>
