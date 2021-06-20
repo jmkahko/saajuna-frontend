@@ -10,6 +10,7 @@ import { HavaintoAsemat } from './havaintoasemat'; // Tuodaan havaintoasemien ti
 export class HavaintoasemaService {
   private apiUrl = 'http://localhost:3000/saaasemat'; // Havaintoasemien pää url
   public token: string;
+  log: any;
 
   constructor(private http: HttpClient) {
     // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin

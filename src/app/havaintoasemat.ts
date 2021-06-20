@@ -8,7 +8,7 @@ export class HavaintoAsemat {
     public wmo: number,
     public longitude: string,
     public latitude: string,
-    public caltitude: number,
+    public altitude: number,
     public group: string,
     public start: string
   ) {}

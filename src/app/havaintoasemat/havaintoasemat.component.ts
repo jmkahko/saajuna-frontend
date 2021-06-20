@@ -39,9 +39,7 @@ export class HavaintoasematComponent implements OnInit {
       // switch to new search observable each time the term changes
       // vaihdaliitos vaihtaa palvelimelta tulevaan streamiin, jolla saadaan
       // haetut sankarit.
-      switchMap((term: string) =>
-        this.havaintoAsemaService.haeHavaintoAsemat(term)
-      )
+      switchMap((term: string) => this.havaintoAsemaService.haeHavaintoAsemat())
     );
   }
   haeHavaintoAsemat(formdata) {}
