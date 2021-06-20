@@ -1,5 +1,5 @@
 export class RautatieAsemat {
-  // konstruktorimetodi joka rakentaa student-olion
+  // konstruktorimetodi joka rakentaa rautatieasemat-olion
   constructor(  
     public _id: string,
     public assengerTraffic: boolean,

@@ -15,6 +15,7 @@ import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
 import { AuthGuard } from './auth.guard';
 import { OmattiedotComponent } from './omattiedot/omattiedot.component';
 import { EtusivuComponent } from './etusivu/etusivu.component';
+import { RautatieasemanTiedotComponent } from './rautatieaseman-tiedot/rautatieaseman-tiedot.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EtusivuComponent } from './etusivu/etusivu.component';
     RekisteroidyComponent,
     KirjauduComponent,
     OmattiedotComponent,
-    EtusivuComponent
+    EtusivuComponent,
+    RautatieasemanTiedotComponent,
   ],
   imports: [
     BrowserModule,

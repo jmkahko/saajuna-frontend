@@ -5,6 +5,7 @@ import { HavaintoasematComponent } from './havaintoasemat/havaintoasemat.compone
 import { JunaasematComponent } from './junaasemat/junaasemat.component';
 import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
 import { OmattiedotComponent } from './omattiedot/omattiedot.component';
+import { RautatieasemanTiedotComponent } from './rautatieaseman-tiedot/rautatieaseman-tiedot.component';
 import { RekisteroidyComponent } from './rekisteroidy/rekisteroidy.component';
 
 // Reitit navbaaria varten
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'kirjaudu', component: KirjauduComponent} ,
   { path: 'omattiedot', component: OmattiedotComponent },
   { path: 'etusivu', component: EtusivuComponent },
+  { path: 'rautatieasema/:id', component: RautatieasemanTiedotComponent },
   { path: '', redirectTo:'/etusivu', pathMatch: 'full'}
 ];
 

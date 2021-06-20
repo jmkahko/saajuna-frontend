@@ -1,0 +1,21 @@
+<div class="container">
+  <div *ngIf="station">
+    <h2>{{station.stationName}}</h2>
+    <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
+    <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
+    <h4 *ngIf="!station.passengerTraffic">Ei käytössä</h4>
+    <h4 *ngIf="station.passengerTraffic">Käytössä</h4>
+  </div>
+
+  <div *ngFor="let aikataulu of aikataulu">
+
+  <ul>
+    <li>
+        Juna {{aikataulu.trainNumber}} {{aikataulu.trainType}}
+        Saapuu asemalle {{aikataulu.arrivalLiveEstimateTime}} ja lähtee {{aikataulu.departureScheduledTime}}
+    </li>
+  </ul>
+
+</div>
+
+</div>
