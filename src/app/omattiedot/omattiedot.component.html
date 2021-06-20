@@ -1,6 +1,6 @@
 <div class="container">
   <div *ngIf="salasanainfo" class="alert alert-success">
-    <strong>Onnistui!</strong> Salasana vaihdettu
+    <strong>Onnistui!</strong> Salasanasi on vaihdettu
   </div>
   <div *ngIf="poistoinfo" class="alert alert-info">
     <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta.
@@ -59,7 +59,7 @@
           class="alert alert-danger"
           [hidden]="!f.form.hasError('minlength', 'salasana')"
         >
-          <strong>Varoitus!</strong> Salasana on liian lyhyt
+          <strong>Varoitus!</strong> Salasanasi on liian lyhyt
         </div>
       </div>
 
@@ -113,10 +113,10 @@
   <div *ngIf="username === 'admin'">
     <h4>Rautatieasemien ylläpito</h4>
     <p>Asemia tietokannassa: {{ rautatietasemat.length }}</p>
-    <p>Säähavaintoasemia tietokananssa: {{ havaintoasemat.length }}</p>
+    <p>Säähavaintoasemia tietokannassa: {{ havaintoasemat.length }}</p>
     <p>
-      Ennen asemien lisäystä, vanhat asemat täytyy poistaa alta. Muuten asemat
-      ovat tuplasti
+      Ennen asemien lisäystä, vanhat asemat täytyy poistaa tietokannasta. Muuten
+      asemat ovat kahteen kertaan.
     </p>
     <button type="button" class="btn btn-success" (click)="lisaaJunaAsemat()">
       Lisää asemat
