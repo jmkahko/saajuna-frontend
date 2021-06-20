@@ -1,60 +1,25 @@
 <div class="container">
-  <div class="d-flex mt-3 mb-3">Säähavaintoaseman haku</div>
-  <p>Havaintoasemia tallennettu yhteensä {{ havaintoasemat.length }}</p>
+  <!-- <div class="d-flex mt-3 mb-3">Säähavaintoaseman haku</div> -->
+  <!-- <p>Havaintoasemia tallennettu yhteensä {{ havaintoasemat.length }}</p> -->
 
-  <form #f="ngForm" (ngSubmit)="haeHavaintoAsema(f.value)" novalidate>
-    <div class="form-group">
-      <input
-        #tunnus="ngModel"
-        type="text"
-        class="form-control"
-        placeholder="Hae havaintoasemaa"
-        name="säähavaintoasema"
-        ngModel
-        required
-        required
-      />
-    </div>
-    <!-- 
-    <div class="custom-control custom-checkbox mb-3">
-      <input
-        type="checkbox"
-        class="custom-control-input"
-        id="tyyppiAsema"
-        name="tyyppi"
-      />
-      <label class="custom-control-label" for="customCheck"
-        >Havaintoasema</label
-      >
-      <input
-        type="checkbox"
-        class="custom-control-input"
-        id="tyyppiPysakki"
-        name="tyyppi"
-      />
-      <label class="custom-control-label" for="customCheck">Pysäkki</label>
-    </div>
+  <h4><label for="search-box">Säähavaintoaseman haku</label></h4>
+  <p>Kirjoita säähavaintoaseman nimi hakukenttään.</p>
+  <div>
+    <input
+      #searchBox
+      id="search-box"
+      (input)="search(searchBox.value)"
+      placeholder="Etsi säähavaintoasema"
+    />
 
-    <div class="custom-control custom-radio">
-      <p>käytössä</p>
-      <input
-        type="radio"
-        class="custom-control-input"
-        id="kaytossaKylla"
-        name="kaytossa"
-      />
-      <label class="custom-control-label" for="customRadio">Kyllä</label>
-      <input
-        type="radio"
-        class="custom-control-input"
-        id="kaytossaEi"
-        name="kaytossa"
-      />
-      <label class="custom-control-label" for="customRadio">Ei</label>
-    </div>
-
-    <br />
-  </form>
-</div> -->
-  </form>
+    <ul class="search-result">
+      <!-- async pipe eli filtteri tilaa observablen tässä templatessa, jolloin
+  tieto (sankarit) saadaan ulos observablesta. -->
+      <li *ngFor="let havaintoasema of hasemat">
+        <a routerLink="/havaintoasema/{{ havaintoasema._id }}">
+          {{ havaintoasema.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

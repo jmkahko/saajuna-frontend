@@ -3,11 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
 
-// Tuodaan rautatieasemien tiedot
-import { RautatieAsemat } from '../rautatieAsemat';
 import { JunaAsemaService } from '../juna-asema.service';
-import { SplitInterpolation } from '@angular/compiler';
-import { nextTick } from 'process';
 
 @Component({
   selector: 'app-rautatieaseman-tiedot',
