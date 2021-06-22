@@ -1,21 +1,67 @@
 <div class="container">
   <div *ngIf="station">
-    <h2>{{station.stationName}}</h2>
     <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
     <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
+    <h4>{{station.stationName}}</h4>
     <h4 *ngIf="!station.passengerTraffic">Ei käytössä</h4>
     <h4 *ngIf="station.passengerTraffic">Käytössä</h4>
   </div>
 
-  <div *ngFor="let aikataulu of aikataulu">
+  <h3>Saapuvat junat</h3>
+  <div>
 
-  <ul>
-    <li>
-        Juna {{aikataulu.trainNumber}} {{aikataulu.trainType}}
-        Saapuu asemalle {{aikataulu.arrivalLiveEstimateTime}} ja lähtee {{aikataulu.departureScheduledTime}}
-    </li>
-  </ul>
 
-</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Juna</th>
+          <th>Tyyppi</th>
+          <th>Saapuu aikataulu</th>
+          <th>Saapuu</th>
+          <th>Mistä</th>
+          <th>Aikatauluero</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let aikataulu of aikataulu">
+        <tr *ngIf="aikataulu.arrivalScheduledTime">
+          <td><a routerLink="/junat/aikataulu/{{aika}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
+          <td>{{aikataulu.trainType}}</td>
+          <td>{{aikataulu.arrivalScheduledTime | date:'long'}}</td>
+          <td>{{aikataulu.arrivalLiveEstimateTime | date:'long'}}</td>
+          <td>{{aikataulu.startStation}}</td>
+          <td>{{aikataulu.arrivalDifferenceInMinutes}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Lähtevät junat</h3>
+    <div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Juna</th>
+          <th>Tyyppi</th>
+          <th>Lähtee aikataulu</th>
+          <th>Lähtee</th>
+          <th>Mihin</th>
+          <th>Aikatauluero</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let aikataulu of aikataulu">
+        <tr *ngIf="aikataulu.departureScheduledTime">
+          <td><a routerLink="/junat/aikataulu/{{aika}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
+          <td>{{aikataulu.trainType}}</td>
+          <td>{{aikataulu.departureScheduledTime | date:'long'}}</td>
+          <td>{{aikataulu.departureLiveEstimateTime | date:'long'}}</td>
+          <td>{{aikataulu.endStation}}</td>
+          <td>{{aikataulu.departureDifferenceInMinutes}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
 
 </div>

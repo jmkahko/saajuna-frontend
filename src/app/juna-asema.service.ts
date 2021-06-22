@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { RautatieAsemat } from './rautatieAsemat'; // Tuodaan rautatieasemien tieto
 import { RautatieAsemaAikataulu } from './rautatieasemaAikataulu';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,7 +52,6 @@ export class JunaAsemaService {
       .get<RautatieAsemaAikataulu>(`${this.apiUrl}/aikataulu/${station}/${arrived_trains}/${arriving_trains}/${departed_trains}/${departing_trains}`)
       .pipe(catchError(this.handleError));
   }
-
 
   // Lisätään rautatieasemat 
   lisaaAsemat(): Observable<any> {
