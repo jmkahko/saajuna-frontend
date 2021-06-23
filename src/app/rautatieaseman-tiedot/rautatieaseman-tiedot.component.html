@@ -1,4 +1,8 @@
 <div class="container">
+  <!-- Jos JSON sanomassa palautuu tyhjä taulukko näytetään virhe ilmoitus-->
+  <div class="alert alert-danger" *ngIf="!aikataulu?.length">
+    <strong>Varoitus!</strong> Paikalta ei saatu juna tietoja.
+  </div>
   <div *ngIf="station">
     <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
     <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
@@ -10,8 +14,6 @@
 
   <h3>Saapuvat junat</h3>
   <div>
-
-
     <table class="table table-striped">
       <thead>
         <tr>
@@ -25,10 +27,10 @@
       </thead>
       <tbody *ngFor="let aikataulu of aikataulu">
         <tr *ngIf="aikataulu.arrivalScheduledTime">
-          <td><a routerLink="/junat/aikataulu/{{aika}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
+          <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
           <td>{{aikataulu.trainType}}</td>
-          <td>{{aikataulu.arrivalScheduledTime | date:'long'}}</td>
-          <td>{{aikataulu.arrivalLiveEstimateTime | date:'long'}}</td>
+          <td>{{aikataulu.arrivalScheduledTime | date:'medium'}}</td>
+          <td>{{aikataulu.arrivalLiveEstimateTime | date:'medium'}}</td>
           <td>{{aikataulu.startStationLongName}}</td>
           <td>{{aikataulu.arrivalDifferenceInMinutes}}</td>
         </tr>
@@ -52,10 +54,10 @@
       </thead>
       <tbody *ngFor="let aikataulu of aikataulu">
         <tr *ngIf="aikataulu.departureScheduledTime">
-          <td><a routerLink="/junat/aikataulu/{{aika}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
+          <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
           <td>{{aikataulu.trainType}}</td>
-          <td>{{aikataulu.departureScheduledTime | date:'long'}}</td>
-          <td>{{aikataulu.departureLiveEstimateTime | date:'long'}}</td>
+          <td>{{aikataulu.departureScheduledTime | date:'medium'}}</td>
+          <td>{{aikataulu.departureLiveEstimateTime | date:'medium'}}</td>
           <td>{{aikataulu.endStationLongName}}</td>
           <td>{{aikataulu.departureDifferenceInMinutes}}</td>
         </tr>

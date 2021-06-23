@@ -1,0 +1,24 @@
+<div class="container">
+  <h3>Juna {{junaaikataulu.trainNumber}} {{junaaikataulu.trainType}}</h3>
+  <p>{{junaaikataulu.startStationLongName}} -> {{junaaikataulu.endStationLongName}}</p>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Asema</th>
+          <th>Aika</th>
+          <th>Todellinen Aika</th>
+          <th>Aikatauluero</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
+        <tr *ngIf="aikataulu.trainStopping === true">
+          <td>{{aikataulu.stationLongName}}</td>
+          <td>{{aikataulu.scheduledTime | date:'medium'}}</td>
+          <td>{{aikataulu.actualTime | date:'medium'}}</td>
+          <td>{{aikataulu.differenceInMinutes}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

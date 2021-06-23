@@ -4,6 +4,7 @@ import { EtusivuComponent } from './etusivu/etusivu.component';
 import { HavaintoasematComponent } from './havaintoasemat/havaintoasemat.component';
 import { HavaintoasematiedotComponent } from './havaintoasematiedot/havaintoasematiedot.component';
 import { JunaasematComponent } from './junaasemat/junaasemat.component';
+import { JunantiedotComponent } from './junantiedot/junantiedot.component';
 import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
 import { OmattiedotComponent } from './omattiedot/omattiedot.component';
 import { RautatieasemanTiedotComponent } from './rautatieaseman-tiedot/rautatieaseman-tiedot.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'omattiedot', component: OmattiedotComponent },
   { path: 'etusivu', component: EtusivuComponent },
   { path: 'rautatieasema/:id', component: RautatieasemanTiedotComponent },
+  { path: 'juna/aikataulu/:aika/:junanumero', component: JunantiedotComponent },
   { path: 'havaintoasematiedot', component: HavaintoasematiedotComponent },
   { path: '', redirectTo: '/etusivu', pathMatch: 'full' },
 ];

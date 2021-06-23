@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import { JunaAsemaService } from '../juna-asema.service';
 
 @Component({

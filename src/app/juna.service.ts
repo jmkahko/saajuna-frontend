@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { Juna } from './juna';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,18 @@ export class JunaService {
     return error.message || error;
   }
 
+  // Hae tietyn junan aikataulu
+  haeAikataulu(date: string, train: number): Observable<Juna[]> {
+    return this.http
+    .get<Juna[]>(`${this.apiUrl}/aikataulu/${date}/${train}`)
+    .pipe(catchError(this.handleError));
+  }
 
+  // Hae tietyn junan paikkatieto
+  haePaikkatieto(date: string, train: number) {
+    return this.http
+    .get(`${this.apiUrl}/paikkatieto/${date}/${train}`)
+    .pipe(catchError(this.handleError));
+  }
 
 }
