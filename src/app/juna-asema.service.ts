@@ -39,6 +39,14 @@ export class JunaAsemaService {
       .pipe(catchError(this.handleError));
   }
 
+
+  // Yksittäisen rautatieaseman haku lyhytkoodilla
+  haeAsemaLyhytKoodi(stationShortCode: string) {
+    return this.http
+    .get(`${this.apiUrl}/shortcode/${stationShortCode}`)
+    .pipe(catchError(this.handleError));
+  }
+
   /* 
     Haetaan tietynaseman aikataulu haluttujen tietojen perusteella
       station = Minkäaseman tiedot palautetaan

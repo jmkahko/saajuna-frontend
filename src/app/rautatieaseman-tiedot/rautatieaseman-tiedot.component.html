@@ -2,6 +2,7 @@
   <div *ngIf="station">
     <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
     <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
+    <h4 *ngIf="station.type == 'TURNOUT_IN_THE_OPEN_LINE'">Linjavaihde</h4>
     <h4>{{station.stationName}}</h4>
     <h4 *ngIf="!station.passengerTraffic">Ei käytössä</h4>
     <h4 *ngIf="station.passengerTraffic">Käytössä</h4>
@@ -28,7 +29,7 @@
           <td>{{aikataulu.trainType}}</td>
           <td>{{aikataulu.arrivalScheduledTime | date:'long'}}</td>
           <td>{{aikataulu.arrivalLiveEstimateTime | date:'long'}}</td>
-          <td>{{aikataulu.startStation}}</td>
+          <td>{{aikataulu.startStationLongName}}</td>
           <td>{{aikataulu.arrivalDifferenceInMinutes}}</td>
         </tr>
       </tbody>
@@ -55,7 +56,7 @@
           <td>{{aikataulu.trainType}}</td>
           <td>{{aikataulu.departureScheduledTime | date:'long'}}</td>
           <td>{{aikataulu.departureLiveEstimateTime | date:'long'}}</td>
-          <td>{{aikataulu.endStation}}</td>
+          <td>{{aikataulu.endStationLongName}}</td>
           <td>{{aikataulu.departureDifferenceInMinutes}}</td>
         </tr>
       </tbody>
