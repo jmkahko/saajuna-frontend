@@ -14,8 +14,8 @@
       <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
         <tr *ngIf="aikataulu.trainStopping === true">
           <td>{{aikataulu.stationLongName}}</td>
-          <td>{{aikataulu.scheduledTime | date:'medium'}}</td>
-          <td>{{aikataulu.actualTime | date:'medium'}}</td>
+          <td>{{aikataulu.scheduledTime | date:'dd.MM H:mm'}}</td>
+          <td>{{aikataulu.actualTime | date:'dd.MM H:mm'}}</td>
           <td>{{aikataulu.differenceInMinutes}}</td>
         </tr>
       </tbody>

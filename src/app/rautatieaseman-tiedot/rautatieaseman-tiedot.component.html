@@ -29,8 +29,8 @@
         <tr *ngIf="aikataulu.arrivalScheduledTime">
           <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
           <td>{{aikataulu.trainType}}</td>
-          <td>{{aikataulu.arrivalScheduledTime | date:'medium'}}</td>
-          <td>{{aikataulu.arrivalLiveEstimateTime | date:'medium'}}</td>
+          <td>{{aikataulu.arrivalScheduledTime | date:'dd.MM H:mm'}}</td>
+          <td>{{aikataulu.arrivalLiveEstimateTime | date:'dd.MM H:mm'}}</td>
           <td>{{aikataulu.startStationLongName}}</td>
           <td>{{aikataulu.arrivalDifferenceInMinutes}}</td>
         </tr>
@@ -56,8 +56,8 @@
         <tr *ngIf="aikataulu.departureScheduledTime">
           <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}}</a></td>
           <td>{{aikataulu.trainType}}</td>
-          <td>{{aikataulu.departureScheduledTime | date:'medium'}}</td>
-          <td>{{aikataulu.departureLiveEstimateTime | date:'medium'}}</td>
+          <td>{{aikataulu.departureScheduledTime | date:'dd.MM H:mm'}}</td>
+          <td>{{aikataulu.departureLiveEstimateTime | date:'dd.MM H:mm'}}</td>
           <td>{{aikataulu.endStationLongName}}</td>
           <td>{{aikataulu.departureDifferenceInMinutes}}</td>
         </tr>
