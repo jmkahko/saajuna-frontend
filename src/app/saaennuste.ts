@@ -14,7 +14,7 @@ export class SaaEnnuste {
     public MaximumWind: Number,
     public WindGust: Number,
     public DewPoint: Number,
-    public otalCloudCover: Number,
+    public TotalCloudCover: Number,
     public WeatherSymbol3: Number, // Säätyypin kuvan numero
     public LowCloudCover: Number,
     public MediumCloudCover: Number,

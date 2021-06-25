@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'etusivu', component: EtusivuComponent },
   { path: 'rautatieasema/:id', component: RautatieasemanTiedotComponent },
   { path: 'juna/aikataulu/:aika/:junanumero', component: JunantiedotComponent },
-  { path: 'havaintoasematiedot', component: HavaintoasematiedotComponent },
+  { path: 'havaintoasematiedot/:id', component: HavaintoasematiedotComponent },
   { path: '', redirectTo: '/etusivu', pathMatch: 'full' },
 ];
 
