@@ -13,10 +13,8 @@
     />
 
     <ul class="search-result">
-      <!-- async pipe eli filtteri tilaa observablen tässä templatessa, jolloin
-  tieto (sankarit) saadaan ulos observablesta. -->
       <li *ngFor="let havaintoasema of hasemat">
-        <a routerLink="/havaintoasema/{{ havaintoasema._id }}">
+        <a routerLink="/havaintoasematiedot/{{ havaintoasema._id }}">
           {{ havaintoasema.name }}
         </a>
       </li>

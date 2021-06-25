@@ -1,5 +1,24 @@
 <div class="container">
   <div *ngIf="havaintoasema">
-    <h2>{{ havaintoasema.id }}</h2>
+    <h2>{{ havaintoasema.name }}</h2>
+  </div>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Aika</th>
+          <th>Lämpötila</th>
+          <th *ngIf="saanyt.ws_10min !== null">Tuuli</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ saanyt.time | date: 'dd.MM H:mm' }}</td>
+          <td>{{ saanyt.t2m }}</td>
+          <td *ngIf="saanyt.ws_10min !== null">{{ saanyt.ws_10min }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
