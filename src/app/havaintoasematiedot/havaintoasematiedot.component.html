@@ -33,12 +33,12 @@
             <th *ngIf="saanyt.rh !== null">Kosteus</th>
             <th *ngIf="saanyt.td !== null">Kastepiste</th>
             <th *ngIf="saanyt.r_1h !== null">Sademäärä tunnissa</th>
-            <th *ngIf="saanyt.ri_10min !== null">ri_10min</th>
+            <th *ngIf="saanyt.ri_10min !== null">Sateen rankkuus</th>
             <th *ngIf="saanyt.snow_aws !== null">Lumensyvyys</th>
-            <th *ngIf="saanyt.p_sea !== null">Paine</th>
+            <th *ngIf="saanyt.p_sea !== null">Ilmanpaine</th>
             <th *ngIf="saanyt.vis !== null">Näkyvyys</th>
             <th *ngIf="saanyt.n_man !== null">Pilvisyys</th>
-            <th *ngIf="saanyt.wawa !== null">wawa</th>
+            <th *ngIf="saanyt.wawa !== null">Säätila</th>
           </tr>
         </thead>
         <tbody>
@@ -62,8 +62,62 @@
       </table>
     </div>
   </div>
+
+  <div>
+    <div class="card">
+      <h4>Sääennuste</h4>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th>Aika</th>
+            <th *ngIf="saaennuste.Temperature !== null">Lämpötila</th>
+
+            <th *ngIf="saaennuste.WeatherSymbol3 !== null">WeatherSymbol3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ saaennuste.time | date: 'dd.MM H:mm' }}</td>
+            <td *ngIf="saaennuste.Temperature !== null">
+              {{ saaennuste.Temperature }}
+            </td>
+            <td *ngIf="saaennuste.WeatherSymbol3 !== null">
+              {{ saaennuste.WeatherSymbol3 }}
+              <img
+                src="../../assets/symbols/{{ saaennuste.WeatherSymbol3 }}.svg"
+                style="height: 100px; width: 100px"
+              />
+              <!-- 
+            <td *ngIf="saaennuste.WeatherSymbol3 !== null">
+              {{ saaennuste.WeatherSymbol3 }}
+              <img src="../../assets/symbols/me.png" /> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<!--  public fmisid: Number, // esim. Kajaani Petäisenniska 126736
-    public place: String
+<!--     <td><img alt="{{m.Name}}" ng-src="{{m.Photo}}" style="height:100px;width:100px" /></td>
+
+
+  
+<div class="row">
+                    <div class="col-sm-6 col-md-4" ng-repeat="item in items" ng-cloak>
+                        <div class="thumbnail">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt="" style="max-width: 50px;">
+                                    </a>
+                                </div>
+
+
+            <td *ngIf="saaennuste.WeatherSymbol3 !== null">
+              {{ saaennuste.WeatherSymbol3 }}
+              <img
+                ng-src="/symbols/{{ saaennuste.WeatherSymbols3[0] }}.svg "
+                style="height: 100px; width: 100px"
+              />
  -->

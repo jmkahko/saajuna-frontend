@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { SaaEnnuste } from './saaennuste';
 import { SaaNyt } from './saanyt';
 
 @Injectable({
@@ -26,6 +27,12 @@ export class SaaService {
   haeSaaNyt(fmisid: number): Observable<SaaNyt[]> {
     return this.http
       .get<SaaNyt[]>(`${this.apiUrl}/saanyt/${fmisid}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  haeSaaEnnuste(place: string): Observable<SaaEnnuste[]> {
+    return this.http
+      .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/${place}`)
       .pipe(catchError(this.handleError));
   }
 }

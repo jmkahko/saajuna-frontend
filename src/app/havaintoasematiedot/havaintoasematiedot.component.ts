@@ -14,6 +14,7 @@ import { SaaService } from '../saa.service';
 export class HavaintoasematiedotComponent implements OnInit {
   havaintoasema;
   saanyt;
+  saaennuste;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,7 @@ export class HavaintoasematiedotComponent implements OnInit {
   ngOnInit(): void {
     this.haeHavaintoAsema();
     this.haeSaaNyt();
+    this.haeSaaEnnuste();
   }
 
   haeHavaintoAsema(): void {
@@ -40,5 +42,11 @@ export class HavaintoasematiedotComponent implements OnInit {
         (saanyt) => (this.saanyt = saanyt)
       );
     });
+  }
+
+  haeSaaEnnuste(): void {
+    this.SaaService.haeSaaEnnuste('Utsjoki').subscribe(
+      (saaennuste) => (this.saaennuste = saaennuste)
+    );
   }
 }

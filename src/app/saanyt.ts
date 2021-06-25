@@ -10,12 +10,12 @@ export class SaaNyt {
     public rh: Number, // Kosteus
     public td: Number, // Kastepiste
     public r_1h: Number, // Sademäärä tunnissa
-    public ri_10min: Number, //
+    public ri_10min: Number, // Sateen rankkuus
     public snow_aws: Number, // Lumensyvyys
     public p_sea: Number, // Paine
     public vis: Number, // Näkyvyys
     public n_man: Number, // Pilvisyys
-    public wawa: Number, // wawa
+    public wawa: Number, // Säätila
     public fmisid: Number, // esim. Kajaani Petäisenniska 126736
     public place: String
   ) {}
