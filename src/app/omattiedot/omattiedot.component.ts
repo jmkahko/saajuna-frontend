@@ -5,6 +5,8 @@ import { JunaAsemaService } from '../juna-asema.service';
 import { RautatieAsemat } from '../rautatieAsemat';
 import { HavaintoasemaService } from '../havaintoasema.service';
 import { HavaintoAsemat } from '../havaintoasemat';
+import { FavoriteService } from '../favorite.service';
+import { Favorite } from '../favorite';
 
 @Component({
   selector: 'app-omattiedot',
@@ -22,11 +24,21 @@ export class OmattiedotComponent implements OnInit {
   rautatietasemat : Array<RautatieAsemat> = [];
   havaintoasemat: Array<HavaintoAsemat> = [];
 
+  // Suosikkeihin liittyvät
+  suosikit: Favorite;
+  id: string;
+  suosikkiUsername: string;
+  favoritesSaa1: number;
+  favoritesSaa2: number;
+  favoritesJuna1: string;
+  favoritesJuna2: string;
+
   // injektoidaan router ja authService
   constructor(
     private router: Router,
     private authService: AuthService,
     private junaAsematService: JunaAsemaService,
+    private favoriteService: FavoriteService,
     private havaintoAsemaService: HavaintoasemaService) {
       // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
       const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -38,9 +50,9 @@ export class OmattiedotComponent implements OnInit {
       }
     }
 
-    ngOnInit() {
-
-    }
+  ngOnInit() {
+    this.haeSuosikit(this.username);
+  }
 
   salasanvaihto(formData, isFormValid: boolean) {
     // Tarkistetaan onko uusi ja vanha salasan samoja
@@ -104,6 +116,18 @@ export class OmattiedotComponent implements OnInit {
         this.junainfo = 'Rautatieasemat poistettu';
       }
     });
+  }
+
+  // Hae suosikki sää- ja rautatieasemat
+  haeSuosikit(username) {
+   this.favoriteService.haeSuosikit(username).subscribe(data => this.suosikit = data);
+  }
+
+  // Suosikki sää- ja rautatieasemien päivitys
+  suosikkienPaivitys(formData) {
+    // Päivitetään tiedot tietokantaan
+    this.favoriteService.paivitaSuosikit(this.suosikit._id, formData.favoritesSaa1, formData.favoritesSaa2, formData.favoritesJuna1, formData.favoritesJuna2)
+      .subscribe(() => this.haeSuosikit(this.username))
   }
 
 }

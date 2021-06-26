@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 @Injectable()
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users'; // Pää url
+  private apiUrl = 'http://localhost:3000/users'; // Pää user url
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut
@@ -26,6 +26,8 @@ export class AuthService {
     const currentId = JSON.parse(sessionStorage.getItem('accesstoken'));
     this.id = currentId && currentId.id;
   }
+
+
   /* login-metodi ottaa yhteyden backendin autentikaatioreittiin, postaa tunnarit
   ja palauttaa Observablena true tai false riippuen siitä saatiinko lähetetyillä
   tunnareilla token backendistä */

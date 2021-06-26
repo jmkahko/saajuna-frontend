@@ -19,8 +19,35 @@
     <strong>Admin kirjautunut!</strong>
   </div>
 
+  <h2>Hei käyttäjä, {{ username }}</h2>
+
+  <!-- Suosikki rautatieaseman ja säähavaintoaseman määrittely-->
+  <h4>Suosikki rautatieasemien ja säähavaintoasemien määrittely</h4>
+  <form #f="ngForm" (ngSubmit)="suosikkienPaivitys(f.value)" novalidate>
+    <div class="form-group">
+      <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
+      <input type="text" class="form-control" id="favoritesJuna1" name="favoritesJuna1" placeholder={{suosikit.favoritesJuna1}} [(ngModel)]="favoritesJuna1" ngModel required/>
+      <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
+      <input type="text" class="form-control" id="favoritesJuna2" name="favoritesJuna2"placeholder={{suosikit.favoritesJuna2}}  [(ngModel)]="favoritesJuna2" ngModel required/>
+      <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
+      <input type="text" class="form-control" id="favoritesSaa1" name="favoritesSaa1" placeholder={{suosikit.favoritesSaa1}} [(ngModel)]="favoritesSaa1" ngModel required/>
+      <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
+      <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2" placeholder={{suosikit.favoritesSaa2}} [(ngModel)]="favoritesSaa2" ngModel required/>
+    </div>
+
+    <br />
+    <div class="form-group">
+      <!-- Lähetetään lomake eteenpäin -->
+      <button type="submit" class="btn btn-success">Päivitä suosikit</button>
+    </div>
+  </form>
+
+
+
+
+
+
   <div *ngIf="username !== 'admin'">
-    <h2>Hei käyttäjä, {{ username }}</h2>
     <div class="d-flex mt-3 mb-3">
       Omissa tiedoissa voit vaihtaa suosikki sää- ja juna-asemia, muuttaa
       salasanasi ja myös poistaa käyttäjätunnuksesi
