@@ -4,7 +4,7 @@
       <h2>{{ havaintoasema.name }}</h2>
       <p>
         Havaintoasema {{ havaintoasema.name }} ({{ havaintoasema.fmisid }}) on
-        perustettu vuonna {{ havaintoasema.start }}.
+        otettu käyttöön vuonna {{ havaintoasema.start }}.
       </p>
 
       <p>
@@ -34,7 +34,9 @@
             <th *ngIf="saanyt.td !== null">Kastepiste</th>
             <th *ngIf="saanyt.r_1h !== null">Sademäärä tunnissa</th>
             <th *ngIf="saanyt.ri_10min !== null">Sateen rankkuus</th>
-            <th *ngIf="saanyt.snow_aws !== null">Lumensyvyys</th>
+            <th *ngIf="saanyt.snow_aws !== null || saanyt.snow_aws === -1">
+              Lumensyvyys
+            </th>
             <th *ngIf="saanyt.p_sea !== null">Ilmanpaine</th>
             <th *ngIf="saanyt.vis !== null">Näkyvyys</th>
             <th *ngIf="saanyt.n_man !== null">Pilvisyys</th>
@@ -86,10 +88,6 @@
                 src="../../assets/symbols/{{ saaennuste.WeatherSymbol3 }}.svg"
                 style="height: 100px; width: 100px"
               />
-              <!-- 
-            <td *ngIf="saaennuste.WeatherSymbol3 !== null">
-              {{ saaennuste.WeatherSymbol3 }}
-              <img src="../../assets/symbols/me.png" /> -->
             </td>
           </tr>
         </tbody>
