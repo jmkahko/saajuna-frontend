@@ -34,7 +34,7 @@
             <th *ngIf="saanyt.td !== null">Kastepiste</th>
             <th *ngIf="saanyt.r_1h !== null">Sademäärä tunnissa</th>
             <th *ngIf="saanyt.ri_10min !== null">Sateen rankkuus</th>
-            <th *ngIf="saanyt.snow_aws !== null || saanyt.snow_aws >== 0">
+            <th *ngIf="saanyt.snow_aws !== null && saanyt.snow_aws > 0">
               Lumensyvyys
             </th>
             <th *ngIf="saanyt.p_sea !== null">Ilmanpaine</th>
@@ -49,12 +49,20 @@
             <td *ngIf="saanyt.t2m !== null">{{ saanyt.t2m }}</td>
             <td *ngIf="saanyt.ws_10min !== null">{{ saanyt.ws_10min }}</td>
             <td *ngIf="saanyt.wg_10min !== null">{{ saanyt.wg_10min }}</td>
-            <td *ngIf="saanyt.wd_10min !== null">{{ saanyt.wd_10min }}</td>
+            <td
+              *ngIf="
+                saanyt.wd_10min !== null &&
+                saanyt.wd_10min >= 23 &&
+                saanyt.wd_10min <= 68
+              "
+            >
+              koillistuulta
+            </td>
             <td *ngIf="saanyt.rh !== null">{{ saanyt.rh }}</td>
             <td *ngIf="saanyt.td !== null">{{ saanyt.td }}</td>
             <td *ngIf="saanyt.r_1h !== null">{{ saanyt.r_1h }}</td>
             <td *ngIf="saanyt.ri_10min !== null">{{ saanyt.ri_10min }}</td>
-            <td *ngIf="saanyt.snow_aws !== null || saanyt.snow_aws >= 0">
+            <td *ngIf="saanyt.snow_aws !== null && saanyt.snow_aws > 0">
               {{ saanyt.snow_aws }}
             </td>
             <td *ngIf="saanyt.p_sea !== null">{{ saanyt.p_sea }}</td>
