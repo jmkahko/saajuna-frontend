@@ -1,10 +1,10 @@
 export class SaaEnnuste {
   // konstruktorimetodi joka rakentaa sääennuste-olion
   constructor(
-    public _id: string,
+    public _id: String,
     public time: String, // Kellonaika
     public GeopHeight: Number,
-    public Temperature: Number,
+    public Temperature: Number, //Lämpötila
     public Pressure: Number,
     public Humidity: Number,
     public WindDirection: Number,
@@ -27,6 +27,6 @@ export class SaaEnnuste {
     public RadiationNetSurfaceSWAccumulation: Number,
     public RadiationDiffuseAccumulation: Number,
     public LandSeaMask: Number,
-    public latlon: String
+    public latlon: String //havaintoaseman koordinaatit
   ) {}
 }

@@ -27,10 +27,10 @@
           <tr>
             <th>Aika</th>
             <th *ngIf="saanyt.t2m !== null">Lämpötila</th>
-            <th *ngIf="saanyt.ws_10min !== null">Tuuli</th>
+            <th *ngIf="saanyt.ws_10min !== null">Tuulen nopeus</th>
             <th *ngIf="saanyt.wg_10min !== null">Tuulen puuska</th>
             <th *ngIf="saanyt.wd_10min !== null">Tuulen suunta</th>
-            <th *ngIf="saanyt.rh !== null">Kosteus</th>
+            <th *ngIf="saanyt.rh !== null">Ilmankosteus</th>
             <th *ngIf="saanyt.td !== null">Kastepiste</th>
             <th *ngIf="saanyt.r_1h !== null">Sademäärä tunnissa</th>
             <th *ngIf="saanyt.ri_10min !== null">Sateen rankkuus</th>
@@ -79,7 +79,7 @@
           <tr>
             <td>{{ saaennuste.time | date: 'dd.MM H:mm' }}</td>
             <td *ngIf="saaennuste.Temperature !== null">
-              {{ saaennuste.Temperature }}
+              {{ saaennuste.Temperature | number: '1.0-0' }}
             </td>
             <td *ngIf="saaennuste.WeatherSymbol3 !== null">
               <img
