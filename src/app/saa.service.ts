@@ -32,7 +32,7 @@ export class SaaService {
 
   haeSaaEnnuste(latlon: string): Observable<SaaEnnuste[]> {
     return this.http
-      .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/${latlon}`)
+      .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/latlon/${latlon}`)
       .pipe(catchError(this.handleError));
   }
 }

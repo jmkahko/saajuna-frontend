@@ -72,7 +72,7 @@
             <th>Aika</th>
             <th *ngIf="saaennuste.Temperature !== null">Lämpötila</th>
 
-            <th *ngIf="saaennuste.WeatherSymbol3 !== null">WeatherSymbol3</th>
+            <th *ngIf="saaennuste.WeatherSymbol3 !== null"></th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +82,6 @@
               {{ saaennuste.Temperature }}
             </td>
             <td *ngIf="saaennuste.WeatherSymbol3 !== null">
-              {{ saaennuste.WeatherSymbol3 }}
               <img
                 src="../../assets/symbols/{{ saaennuste.WeatherSymbol3 }}.svg"
                 style="height: 100px; width: 100px"

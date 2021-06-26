@@ -27,6 +27,6 @@ export class SaaEnnuste {
     public RadiationNetSurfaceSWAccumulation: Number,
     public RadiationDiffuseAccumulation: Number,
     public LandSeaMask: Number,
-    public place: String
+    public latlon: String
   ) {}
 }
