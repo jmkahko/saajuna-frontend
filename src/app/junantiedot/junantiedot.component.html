@@ -1,24 +1,73 @@
 <div class="container">
-  <h3>Juna {{junaaikataulu.trainNumber}} {{junaaikataulu.trainType}}</h3>
-  <p>{{junaaikataulu.startStationLongName}} -> {{junaaikataulu.endStationLongName}}</p>
-  <div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Asema</th>
-          <th>Aika</th>
-          <th>Todellinen Aika</th>
-          <th>Aikatauluero</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
-        <tr *ngIf="aikataulu.trainStopping === true">
-          <td>{{aikataulu.stationLongName}}</td>
-          <td>{{aikataulu.scheduledTime | date:'dd.MM H:mm'}}</td>
-          <td>{{aikataulu.actualTime | date:'dd.MM H:mm'}}</td>
-          <td>{{aikataulu.differenceInMinutes}}</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <!-- Tarkistetaan onko dataa tulossa, muuten näytetään varoitukset -->
+  <div class="alert alert-warning" *ngIf="junaaikataulu?.length <= 0">
+    <strong>Varoitus!</strong> Junan aikataulu tietoa ei saada
   </div>
+
+  <div class="alert alert-warning" *ngIf="junanpaikka?.length <= 0">
+    <strong>Varoitus!</strong> Junan sijainti tietoa ei saada
+  </div>
+
+  <!-- Junan aikataulu, kun juna on liikkeellä -->
+  <div class="aikataulu" *ngIf="junaaikataulu?.length !== 0 && junaaikataulu.runningCurrently">
+    <h3>Juna {{junaaikataulu.trainNumber}} {{junaaikataulu.trainType}}</h3>
+    <p>{{junaaikataulu.startStationLongName}} -> {{junaaikataulu.endStationLongName}}</p>
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Asema</th>
+            <th>Aika</th>
+            <th>Aikatauluero</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
+          <tr *ngIf="aikataulu.trainStopping === true">
+            <td>{{aikataulu.stationLongName}}</td>
+            <td *ngIf="!aikataulu.liveEstimateTime"><del>{{aikataulu.scheduledTime | date:'H:mm'}}</del> {{aikataulu.actualTime | date:'H:mm'}}</td>
+            <td *ngIf="aikataulu.liveEstimateTime">{{aikataulu.scheduledTime | date:'H:mm'}}</td>
+            <td *ngIf="!aikataulu.liveEstimateTime">{{aikataulu.differenceInMinutes}}</td>
+            <td *ngIf="aikataulu.liveEstimateTime"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Junan aikataulu, kun juna ei on liikkeellä -->
+  <div class="aikataulu" *ngIf="junaaikataulu?.length !== 0 && !junaaikataulu.runningCurrently">
+    <h3>Juna {{junaaikataulu.trainNumber}} {{junaaikataulu.trainType}}</h3>
+    <p>{{junaaikataulu.startStationLongName}} -> {{junaaikataulu.endStationLongName}}</p>
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Asema</th>
+            <th>Aika</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
+          <tr *ngIf="aikataulu.trainStopping === true">
+            <td>{{aikataulu.stationLongName}}</td>
+            <td>{{aikataulu.scheduledTime | date:'H:mm'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Junan nopeus ym. tietoja -->
+  <div class="sijainti" *ngIf="junanpaikka?.length !== 0">
+    <h3>Junan sijainti</h3>
+    <p>Sijaintitieto päivittyy n. 15 sekunnin välein. Kaikissa junissa <strong>EI</strong> ole GPS-päällä, joiden tietoja ei saada</p>
+    <p>Sijaintitieto päivittynyt viimeksi {{junanpaikka.timestamp | date:'dd.MM H:mm'}}</p>
+    <p>Junan nopeus {{junanpaikka.speed}} km/h</p>
+  </div>
+
+  <!-- Junan sijainti kartalla -->
+  <div class="kartta-sijainti" *ngIf="junanpaikka?.length !== 0">
+    <div id="kartta"></div>
+  </div>
+
 </div>

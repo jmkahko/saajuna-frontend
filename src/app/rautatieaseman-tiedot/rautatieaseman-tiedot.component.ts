@@ -25,7 +25,6 @@ export class RautatieasemanTiedotComponent implements OnInit {
   ngOnInit(): void {
     this.haeAsema();
     this.haeAsemanAikataulu();
-    this.haeAika();
   }
 
   // Haetaan rautatieaseman tiedot id:n perusteella
@@ -51,23 +50,6 @@ export class RautatieasemanTiedotComponent implements OnInit {
         this.junaAsematService.haeAsemanAikataulu(data.stationShortCode, arrived_trains, arriving_trains, departed_trains, departing_trains)
         .subscribe(aikataulu => this.aikataulu = aikataulu);
       });
-  }
-
-  haeAika(): void {
-    let aika1 = new Date();
-    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi
-
-    // Ajan muunnoksia (vuosi, kuukausi, päivä). 
-    let vuosi = aika1.getFullYear();
-    let kuukausi = aika1.getMonth() + 1;
-    let paiva = aika1.getDate();
-
-    // Muodostetaan aika hakua varten määrämuotoisena
-    this.aika =
-      vuosi + '-' + kuukausi + '-' + paiva;
-
-
-    console.log('Aika muutoksen jälkeen ' + this.aika);
   }
 
 }
