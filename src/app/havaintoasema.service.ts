@@ -87,7 +87,7 @@ export class HavaintoasemaService {
     const tokenheaders = {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
-    const url = `${this.apiUrl}/saaennuste/:place`;
+    const url = `${this.apiUrl}/saaennuste/:latlon`;
     console.log(url);
 
     return this.http.get(url, tokenheaders).pipe(
