@@ -45,3 +45,8 @@ Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sek
 ### Sekalaiset
 
 Lisätty sääsymbolien kuvakkeet /symbols kansioon.
+
+## Linkit
+
+http://snowfence.umn.edu/Components/winddirectionanddegrees.htm Tuulen suunnat asteikko
+https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje Sääsymbolien selitykset FMI

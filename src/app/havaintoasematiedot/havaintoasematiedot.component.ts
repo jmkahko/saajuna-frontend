@@ -45,7 +45,16 @@ export class HavaintoasematiedotComponent implements OnInit {
   }
 
   haeSaaEnnuste(): void {
-    this.SaaService.haeSaaEnnuste('Utsjoki').subscribe(
+    const id = this.route.snapshot.paramMap.get('id');
+    this.HavaintoAsematService.haeHavaintoAsema(id).subscribe((data: any) => {
+      this.SaaService.haeSaaEnnuste(
+        data.latitude + ',' + data.longitude
+      ).subscribe((saaennuste) => (this.saaennuste = saaennuste));
+    });
+  }
+
+  haeSaaEnnusteold(): void {
+    this.SaaService.haeSaaEnnuste('64.22,27.75').subscribe(
       (saaennuste) => (this.saaennuste = saaennuste)
     );
   }

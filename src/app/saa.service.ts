@@ -30,9 +30,9 @@ export class SaaService {
       .pipe(catchError(this.handleError));
   }
 
-  haeSaaEnnuste(place: string): Observable<SaaEnnuste[]> {
+  haeSaaEnnuste(latlon: string): Observable<SaaEnnuste[]> {
     return this.http
-      .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/${place}`)
+      .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/latlon/${latlon}`)
       .pipe(catchError(this.handleError));
   }
 }
