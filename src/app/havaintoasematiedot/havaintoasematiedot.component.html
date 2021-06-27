@@ -1,4 +1,8 @@
 <div class="container-md">
+  <!-- Jos JSON sanomassa palautuu tyhjä taulukko näytetään virhe ilmoitus-->
+  <!-- <div class="alert alert-warning" *ngIf="!aikataulu?.length">
+      <strong>Varoitus!</strong> Paikalta ei saatu juna tietoja.
+    </div> -->
   <div class="tiedot">
     <div *ngIf="havaintoasema">
       <h2>{{ havaintoasema.name }}</h2>
