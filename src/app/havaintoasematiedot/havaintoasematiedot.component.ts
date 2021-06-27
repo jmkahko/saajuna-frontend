@@ -137,6 +137,18 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  pilvisyys(pilvinro: number) {
+    if (pilvinro <= 1) {
+      return 'selkeää';
+    } else if (pilvinro >= 2 && pilvinro < 7) {
+      return 'melko selkeää tai puolipilvistä';
+    } else if (pilvinro >= 7 && pilvinro < 9) {
+      return 'melko pilvistä tai pilvistä';
+    } else if (pilvinro >= 9) {
+      return 'pilvisyyttä ei voi määrittää';
+    }
+  }
+
   saaSymbolit(luku) {
     let teksti = '';
     switch (luku) {

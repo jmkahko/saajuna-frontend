@@ -48,12 +48,16 @@
         <tbody>
           <tr>
             <td>{{ saanyt.time | date: 'dd.MM H:mm' }}</td>
-            <td *ngIf="saanyt.t2m !== null">{{ saanyt.t2m }}</td>
+            <td *ngIf="saanyt.t2m !== null">
+              {{ saanyt.t2m | number: '1.0-0' }} ℃
+            </td>
             <td *ngIf="saanyt.ws_10min !== null">
-              {{ saanyt.ws_10min }} {{ tuulenNopeus(saanyt.ws_10min) }}
+              {{ saanyt.ws_10min | number: '1.0-0' }} m/s
+              {{ tuulenNopeus(saanyt.ws_10min) }}
             </td>
             <td *ngIf="saanyt.wg_10min !== null">
-              {{ saanyt.wg_10min }} {{ tuulenPuuska(saanyt.wg_10min) }}
+              {{ saanyt.wg_10min | number: '1.0-0' }} m/s
+              {{ tuulenPuuska(saanyt.wg_10min) }}
             </td>
             <td *ngIf="saanyt.wd_10min !== null">
               {{ tuulenSuunta(saanyt.wd_10min) }}
@@ -62,19 +66,23 @@
                 src="../../assets/symbols/{{
                   tuulenSuuntaKuva(saanyt.wd_10min)
                 }}.png"
-                style="height: 30px; width: 30px"
+                style="height: 25px; width: 25px"
               />
             </td>
-            <td *ngIf="saanyt.rh !== null">{{ saanyt.rh }}</td>
-            <td *ngIf="saanyt.td !== null">{{ saanyt.td }}</td>
+            <td *ngIf="saanyt.rh !== null">{{ saanyt.rh }} %</td>
+            <td *ngIf="saanyt.td !== null">{{ saanyt.td }} ℃</td>
             <td *ngIf="saanyt.r_1h !== null">{{ saanyt.r_1h }}</td>
             <td *ngIf="saanyt.ri_10min !== null">{{ saanyt.ri_10min }}</td>
             <td *ngIf="saanyt.snow_aws !== null && saanyt.snow_aws > 0">
               {{ saanyt.snow_aws }}
             </td>
-            <td *ngIf="saanyt.p_sea !== null">{{ saanyt.p_sea }}</td>
-            <td *ngIf="saanyt.vis !== null">{{ saanyt.vis }}</td>
-            <td *ngIf="saanyt.n_man !== null">{{ saanyt.n_man }}</td>
+            <td *ngIf="saanyt.p_sea !== null">{{ saanyt.p_sea }} hPa</td>
+            <td *ngIf="saanyt.vis !== null">
+              {{ saanyt.vis / 1000 | number: '1.0-0' }} km
+            </td>
+            <td *ngIf="saanyt.n_man !== null">
+              {{ pilvisyys(saanyt.n_man) }} ({{ saanyt.n_man }}/8)
+            </td>
             <td *ngIf="saanyt.wawa !== null">
               {{ saaSymbolit(saanyt.wawa) }}
             </td>
@@ -100,7 +108,7 @@
           <tr>
             <td>{{ saaennuste.time | date: 'dd.MM H:mm' }}</td>
             <td *ngIf="saaennuste.Temperature !== null">
-              {{ saaennuste.Temperature | number: '1.0-0' }}
+              {{ saaennuste.Temperature | number: '1.0-0' }} ℃
             </td>
             <td *ngIf="saaennuste.WeatherSymbol3 !== null">
               <img
