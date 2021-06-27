@@ -23,21 +23,21 @@
 
   <div>
     <div class="card">
-      <h4>Sää tällä hetkellä</h4>
+      <h4>Sää tällä hetkellä {{ saanyt.time | date: 'dd.MM H:mm' }}</h4>
       <table class="table-responsive-lg">
         <thead>
           <tr>
-            <th>Aika</th>
+            <!-- <th>Aika</th> -->
             <th *ngIf="saanyt.t2m !== null">Lämpötila</th>
             <th *ngIf="saanyt.ws_10min !== null">Tuulen nopeus</th>
             <th *ngIf="saanyt.wg_10min !== null">Tuulen puuska</th>
             <th *ngIf="saanyt.wd_10min !== null">Tuulen suunta</th>
-            <th *ngIf="saanyt.rh !== null">Ilmankosteus</th>
+            <th *ngIf="saanyt.rh !== null">Ilman kosteus</th>
             <th *ngIf="saanyt.td !== null">Kastepiste</th>
             <th *ngIf="saanyt.r_1h !== null">Sademäärä tunnissa</th>
             <th *ngIf="saanyt.ri_10min !== null">Sateen rankkuus</th>
             <th *ngIf="saanyt.snow_aws !== null && saanyt.snow_aws > 0">
-              Lumensyvyys
+              Lumen syvyys
             </th>
             <th *ngIf="saanyt.p_sea !== null">Ilmanpaine</th>
             <th *ngIf="saanyt.vis !== null">Näkyvyys</th>
@@ -47,7 +47,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ saanyt.time | date: 'dd.MM H:mm' }}</td>
+            <!-- <td></td> -->
             <td *ngIf="saanyt.t2m !== null">
               {{ saanyt.t2m | number: '1.0-0' }} ℃
             </td>
@@ -94,11 +94,11 @@
 
   <div>
     <div class="card">
-      <h4>Sääennuste</h4>
+      <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm' }}</h4>
       <table class="table-responsive-lg">
         <thead>
           <tr>
-            <th>Aika</th>
+            <!-- <th>Aika</th> -->
             <th *ngIf="saaennuste.Temperature !== null">Lämpötila</th>
 
             <th *ngIf="saaennuste.WeatherSymbol3 !== null"></th>
@@ -106,7 +106,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ saaennuste.time | date: 'dd.MM H:mm' }}</td>
+            <!-- <td></td> -->
             <td *ngIf="saaennuste.Temperature !== null">
               {{ saaennuste.Temperature | number: '1.0-0' }} ℃
             </td>
