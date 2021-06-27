@@ -42,6 +42,8 @@ Koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materi
 
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin yksittäisiä ohjeita StackOverFlow:sta.
 
+Junakartan tekemiseen käytetty tätä tutoriaalia https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet
+
 ## Linkit
 
 http://snowfence.umn.edu/Components/winddirectionanddegrees.htm Tuulen suunnat asteikko
