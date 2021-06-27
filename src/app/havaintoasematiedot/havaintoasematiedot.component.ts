@@ -53,6 +53,10 @@ export class HavaintoasematiedotComponent implements OnInit {
     });
   }
 
+  //   var img = document.createElement('img');
+  // img.src = 'img/eqp/' + this.apparel + '/' + this.facing + '_idle.png';
+  // document.getElementById('gamediv').appendChild(img)
+
   tuulenSuunta(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'koillistuulta';
@@ -72,6 +76,28 @@ export class HavaintoasematiedotComponent implements OnInit {
       return 'pohjoistuulta';
     } else if (tsuuntanro >= 0 && tsuuntanro <= 22) {
       return 'pohjoistuulta';
+    }
+  }
+
+  tuulenSuuntaKuva(tsuuntanro: number) {
+    if (tsuuntanro >= 23 && tsuuntanro <= 68) {
+      return 'north-west';
+    } else if (tsuuntanro >= 69 && tsuuntanro <= 112) {
+      return 'east';
+    } else if (tsuuntanro >= 113 && tsuuntanro <= 158) {
+      return 'south-east';
+    } else if (tsuuntanro >= 159 && tsuuntanro <= 202) {
+      return 'south';
+    } else if (tsuuntanro >= 203 && tsuuntanro <= 248) {
+      return 'south-west';
+    } else if (tsuuntanro >= 249 && tsuuntanro <= 292) {
+      return 'west';
+    } else if (tsuuntanro >= 293 && tsuuntanro <= 337) {
+      return 'north-west';
+    } else if (tsuuntanro >= 338 && tsuuntanro <= 360) {
+      return 'north';
+    } else if (tsuuntanro >= 0 && tsuuntanro <= 22) {
+      return 'north';
     }
   }
 

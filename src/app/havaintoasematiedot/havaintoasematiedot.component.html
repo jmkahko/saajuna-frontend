@@ -56,9 +56,14 @@
               {{ saanyt.wg_10min }} {{ tuulenPuuska(saanyt.wg_10min) }}
             </td>
             <td *ngIf="saanyt.wd_10min !== null">
-              {{ saanyt.wd_10min }}
-
               {{ tuulenSuunta(saanyt.wd_10min) }}
+
+              <img
+                src="../../assets/symbols/{{
+                  tuulenSuuntaKuva(saanyt.wd_10min)
+                }}.png"
+                style="height: 30px; width: 30px"
+              />
             </td>
             <td *ngIf="saanyt.rh !== null">{{ saanyt.rh }}</td>
             <td *ngIf="saanyt.td !== null">{{ saanyt.td }}</td>
@@ -71,7 +76,7 @@
             <td *ngIf="saanyt.vis !== null">{{ saanyt.vis }}</td>
             <td *ngIf="saanyt.n_man !== null">{{ saanyt.n_man }}</td>
             <td *ngIf="saanyt.wawa !== null">
-              {{ saanyt.wawa }}{{ saaSymbolit(saanyt.wawa) }}
+              {{ saaSymbolit(saanyt.wawa) }}
             </td>
           </tr>
         </tbody>
