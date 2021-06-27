@@ -29,7 +29,12 @@ xxx
 Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa? Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen? Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
 Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON muotoon vei paljon aikaa.
-Aikaa on käytetty backendiin ainakin 30-40 h ja frontendiin 20-30 h.
+
+Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen ei onnistu, jos käyttäjä on rekisteröitynyt ja yrittää heti tehdä muutosta. Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen onnistuu, kun käyttäjä on kirjautunut ulos ja kirjautunut takaisin sisälle. Tähän meni useampi rupeama aikaa, muutettu, että Admin käyttäjällä on oikeus poistaa käyttäjiä.
+
+Junien ja rautatieasemien parserointi JSON sanomasta meni aikaa, myös ajan muutokseen, ennen kuin huomasi, että aika muuttuu helposti...
+
+Aikaa on käytetty backendiin ainakin 50-60 h ja frontendiin 40-50 h.
 
 ## Työssä hyödynnetyt tutoriaalit
 
@@ -42,7 +47,7 @@ Koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materi
 
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin yksittäisiä ohjeita StackOverFlow:sta.
 
-Junakartan tekemiseen käytetty tätä tutoriaalia https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet
+Junakartan tekemiseen käytetty tätä tutoriaalia https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet ja Node.js-kurssilla käytyä esimerkkiä
 
 ## Linkit
 
