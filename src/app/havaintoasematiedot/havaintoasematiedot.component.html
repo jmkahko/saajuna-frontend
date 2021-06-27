@@ -8,8 +8,10 @@
       </p>
 
       <p>
-        Havaintoaseman koordinaatit ovat (lat {{ havaintoasema.latitude }} lon
-        {{ havaintoasema.longitude }}).
+        Havaintoaseman koordinaatit ovat ({{
+          havaintoasema.latitude
+        }}
+        leveysastetta {{ havaintoasema.longitude }} pituusastetta).
       </p>
 
       <p>
@@ -47,16 +49,16 @@
           <tr>
             <td>{{ saanyt.time | date: 'dd.MM H:mm' }}</td>
             <td *ngIf="saanyt.t2m !== null">{{ saanyt.t2m }}</td>
-            <td *ngIf="saanyt.ws_10min !== null">{{ saanyt.ws_10min }}</td>
-            <td *ngIf="saanyt.wg_10min !== null">{{ saanyt.wg_10min }}</td>
-            <td
-              *ngIf="
-                saanyt.wd_10min !== null &&
-                saanyt.wd_10min >= 23 &&
-                saanyt.wd_10min <= 68
-              "
-            >
-              koillistuulta
+            <td *ngIf="saanyt.ws_10min !== null">
+              {{ saanyt.ws_10min }} {{ tuulenNopeus(saanyt.ws_10min) }}
+            </td>
+            <td *ngIf="saanyt.wg_10min !== null">
+              {{ saanyt.wg_10min }} {{ tuulenPuuska(saanyt.wg_10min) }}
+            </td>
+            <td *ngIf="saanyt.wd_10min !== null">
+              {{ saanyt.wd_10min }}
+
+              {{ tuulenSuunta(saanyt.wd_10min) }}
             </td>
             <td *ngIf="saanyt.rh !== null">{{ saanyt.rh }}</td>
             <td *ngIf="saanyt.td !== null">{{ saanyt.td }}</td>
@@ -68,7 +70,9 @@
             <td *ngIf="saanyt.p_sea !== null">{{ saanyt.p_sea }}</td>
             <td *ngIf="saanyt.vis !== null">{{ saanyt.vis }}</td>
             <td *ngIf="saanyt.n_man !== null">{{ saanyt.n_man }}</td>
-            <td *ngIf="saanyt.wawa !== null">{{ saanyt.wawa }}</td>
+            <td *ngIf="saanyt.wawa !== null">
+              {{ saanyt.wawa }}{{ saaSymbolit(saanyt.wawa) }}
+            </td>
           </tr>
         </tbody>
       </table>
