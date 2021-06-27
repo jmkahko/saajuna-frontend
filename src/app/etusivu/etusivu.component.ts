@@ -21,7 +21,7 @@ export class EtusivuComponent implements OnInit {
   suosikkisaa2;
   suosikkirautatie1;
   suosikkirautatie2;
-  login: boolean;
+  login: boolean; //tarkistetaan onko käyttäjä kirjautuneena sisään
 
   constructor(
     private route: ActivatedRoute,
