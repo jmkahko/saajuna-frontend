@@ -46,3 +46,4 @@ Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sek
 
 http://snowfence.umn.edu/Components/winddirectionanddegrees.htm Tuulen suunnat asteikko
 https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje Sääsymbolien selitykset FMI
+https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/ Pääsivun junan kuva
