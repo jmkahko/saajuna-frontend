@@ -12,6 +12,10 @@ export class FavoriteService {
   public username: string;
   public token: string;
   public favoriteid: string
+  private id: string;
+
+  // Suosikit taulukko
+  favoritelist: Array<Favorite> = [];
 
   constructor(private http: HttpClient) {
     // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
@@ -23,6 +27,23 @@ export class FavoriteService {
   private handleError(error: any): Observable<any> {
     console.error('An error occurred', error);
     return error.message || error;
+  }
+
+  // Haetaan kaikkien käyttäjien suosikit
+  haeKaikkiSuosikit(): Observable<Favorite[]> {
+    // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
+    const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+
+    // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
+    const tokenheaders = {
+      headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
+    };
+
+    const url = `${this.apiUrl}`;
+
+    return this.http
+    .get<Favorite[]>(url, tokenheaders)
+    .pipe(catchError(this.handleError));
   }
 
   // Haetaan tietyn käyttäjän suosikit
@@ -60,7 +81,7 @@ export class FavoriteService {
   }
 
   // Lisätään käyttäjälle suosikit
-  lisaaSuosikit(suosikit: any) {
+  lisaaSuosikit(tunnus:string, favoritesSaa1:string, favoritesSaa2: string, favoritesJuna1:number, favoritesJuna2: number) {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
 
@@ -72,8 +93,31 @@ export class FavoriteService {
     const url = `${this.apiUrl}`;
 
     return this.http
-      .post<Favorite>(url, suosikit, tokenheaders)
+      .post<Favorite>(url, {username: tunnus,favoritesSaa1: favoritesSaa1, favoritesSaa2: favoritesSaa2, favoritesJuna1: favoritesJuna1, favoritesJuna2: favoritesJuna2}, tokenheaders)
       .pipe(catchError(this.handleError))
+  }
+
+  // Käyttäjätunnuksen poisto
+  poistaSuosikkiTunnus(favoriteid: string): Observable<any> {
+    // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
+    const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+  
+    // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
+    const tokenheaders = {
+      headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
+    };
+    const url = `${this.apiUrl}/deletefavorite/${favoriteid}`;
+    console.log(url);
+  
+    return this.http
+      .delete(url, tokenheaders)
+      .pipe(
+        map((res) => {
+          console.log(res);
+          console.log('Poisto onnistui');
+          return false;
+        })
+     );
   }
 
 }

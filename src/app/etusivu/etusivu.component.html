@@ -17,7 +17,7 @@
       </thead>
       <tbody *ngFor="let aikataulu of suosikkirautatie1">
         <tr *ngIf="aikataulu.arrivalScheduledTime">
-          <td>{{aikataulu.trainNumber}} {{aikataulu.trainType}}</td>
+          <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}} {{aikataulu.trainType}}</a></td>
           <td>{{aikataulu.departureScheduledTime | date:'dd.MM H:mm'}}</td>
         </tr>
       </tbody>
@@ -36,7 +36,7 @@
       </thead>
       <tbody *ngFor="let aikataulu of suosikkirautatie1">
         <tr *ngIf="aikataulu.departureScheduledTime">
-          <td>{{aikataulu.trainNumber}} {{aikataulu.trainType}}</td>
+          <td><a routerLink="/juna/aikataulu/{{aikataulu.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu.trainNumber}}">{{aikataulu.trainNumber}} {{aikataulu.trainType}}</a></td>
           <td>{{aikataulu.departureScheduledTime | date:'dd.MM H:mm'}}</td>
         </tr>
       </tbody>
@@ -55,7 +55,7 @@
         </thead>
         <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
           <tr *ngIf="aikataulu2.arrivalScheduledTime">
-            <td>{{aikataulu2.trainNumber}} {{aikataulu2.trainType}}</td>
+            <td><a routerLink="/juna/aikataulu/{{aikataulu2.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu2.trainNumber}}">{{aikataulu2.trainNumber}} {{aikataulu2.trainType}}</a></td>
             <td>{{aikataulu2.departureScheduledTime | date:'dd.MM H:mm'}}</td>
           </tr>
         </tbody>
@@ -74,7 +74,7 @@
         </thead>
         <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
           <tr *ngIf="aikataulu2.departureScheduledTime">
-            <td>{{aikataulu2.trainNumber}} {{aikataulu2.trainType}}</td>
+            <td><a routerLink="/juna/aikataulu/{{aikataulu2.arrivalScheduledTime | date:'yyyy-MM-dd'}}/{{aikataulu2.trainNumber}}">{{aikataulu2.trainNumber}} {{aikataulu2.trainType}}</a></td>
             <td>{{aikataulu2.departureScheduledTime | date:'dd.MM H:mm'}}</td>
           </tr>
         </tbody>

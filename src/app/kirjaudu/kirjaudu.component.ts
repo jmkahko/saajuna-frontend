@@ -28,7 +28,12 @@ export class KirjauduComponent implements OnInit {
     this.authService.login(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/']);
+          // Tarkistaan, että onko admin kirjautuminen, jos on mennään omat tiedot sivustolle ja muuten etusivulle
+          if(formData.tunnus === 'admin') {
+            this.router.navigate(['/omattiedot']);
+          } else {
+            this.router.navigate(['/']);
+          }
         } else {
           this.error = 'Tunnus tai salasana väärä';
         }
