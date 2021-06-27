@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt'; // kirjasto jwt:n käsittelyyn
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Kayttaja } from './kayttaja';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +19,9 @@ export class AuthService {
   private id: string;
   public username: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router) {
     // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
     const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
     this.token = currentUser && currentUser.token;
@@ -25,6 +29,19 @@ export class AuthService {
     // Jos token on jo sessionStoragessa, otetaan sieltä muistiin id tieto
     const currentId = JSON.parse(sessionStorage.getItem('accesstoken'));
     this.id = currentId && currentId.id;
+  }
+
+  haeKaikkiKayttajat(): Observable<Kayttaja[]> {
+    // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
+    const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+
+    // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
+    const tokenheaders = {
+      headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
+    };
+
+    return this.http
+      .get<Kayttaja[]>(`${this.apiUrl}/`, tokenheaders)
   }
 
 
@@ -43,7 +60,7 @@ export class AuthService {
             this.token = token;
             /* Tässä tutkitaan onko tokenin payloadin sisältö oikea.
              Jos on, laitetaan token sessionStorageen ja palautetaan true
-             jolloin käyttäjä pääsee Admin-sivulle
+             jolloin käyttäjä pääsee sivustolle
           */
             try {
               // dekoodataan token
@@ -116,7 +133,7 @@ export class AuthService {
           this.token = token;
           /* Tässä tutkitaan onko tokenin payloadin sisältö oikea.
            Jos on, laitetaan token sessionStorageen ja palautetaan true
-           jolloin käyttäjä pääsee Admin-sivulle
+           jolloin käyttäjä pääsee sivulle
         */
           try {
             // dekoodataan token
@@ -129,11 +146,11 @@ export class AuthService {
                 'accesstoken',
                 JSON.stringify({ username: username, adminlogin: false, token: token })
               );
-              console.log('käyttäjä kirjautuminen onnistui');
-              this.rekisterointiOnnistui();
+              console.log('käyttäjä rekisteröinti onnistui');
+              this.router.navigate(['/kirjaudu']);
               return true; // saatiin token
             } else {
-              console.log('login epäonnistui');
+              console.log('rekisteröinti epäonnistui');
               return false; // ei saatu tokenia
             }
           } catch (err) {
@@ -156,6 +173,7 @@ export class AuthService {
     const tokenheaders = {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
+
     console.log(this.id);
     const url = `${this.apiUrl}/changepassword/${this.id}`;
     console.log(url);
@@ -165,13 +183,43 @@ export class AuthService {
       .pipe(
         map((res) => {
           console.log(res);
-          console.log('Salasanan vaihto onnistui');
+          console.log(res); // loggaa alla olevan tyylisen vastauksen
+        const token = res['token']; // otetaan vastauksesta token
+        if (token) {
+          this.token = token;
+          /* Tässä tutkitaan onko tokenin payloadin sisältö oikea.
+           Jos on, laitetaan token sessionStorageen ja palautetaan true
+           jolloin käyttäjä pääsee sivulle
+        */
+          try {
+            // dekoodataan token
+            const payload = this.jwtHelp.decodeToken(token);
+            console.log(payload);
+            // Tässä voidaan tarkistaa tokenin oikeellisuus
+            if (payload.username === this.username && payload.isadmin === false) {
+              // token sessionStorageen
+              sessionStorage.setItem(
+                'accesstoken',
+                JSON.stringify({ username: this.username, adminlogin: false, token: token })
+              );
+              this.router.navigate(['/omatsivut']);
+              return true; // saatiin token
+            } else {
+              console.log('salasanan vaihto epäonnisuti');
+              return false; // ei saatu tokenia
+            }
+          } catch (err) {
+            return false;
+          }
+        } else {
+          console.log('salana vaihdettu');
           return false;
+        }
         })
       );
   } 
 
-  // Käyttäjätunnuksen poisto
+  // Käyttäjätunnuksen poisto Omat tiedot -sivujen kautta
   poistaTunnus(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -194,4 +242,21 @@ export class AuthService {
         })
       );
   }
+
+  // Käyttäjätunnuksen poisto Admin -sivun kautta
+  poistaTunnusId(iduser: string): Observable<Kayttaja> {
+    // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
+    const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+  
+    // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
+     const tokenheaders = {
+      headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
+    };
+    console.log(iduser);
+    const url = `${this.apiUrl}/deleteuser/${iduser}`;
+    console.log(url);
+  
+    return this.http
+      .delete<Kayttaja>(url, tokenheaders)
+    }
 }

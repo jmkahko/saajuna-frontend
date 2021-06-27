@@ -1,4 +1,7 @@
 <div class="container">
+  <div *ngIf="error1" class="alert alert-danger">
+    <strong>Rekisteröinti epäonnistui!</strong> käyttäjätunnus käytössä.
+  </div>
   <h2>Rekisteröidy Sääjuna -sovelluksen käyttäjäksi</h2>
   <div class="d-flex mt-3 mb-3">
     Rekisteröinti mahdollistaa omien säähavaintojen ja juna-asemien
@@ -53,6 +56,17 @@
           <strong>Varoitus!</strong> Salasana on liian lyhyt
         </div>
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
+      <input type="text" class="form-control" id="favoritesJuna1" name="favoritesJuna1" placeholder="Syötä rautatieasema suosikki"  ngModel required/>
+      <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
+      <input type="text" class="form-control" id="favoritesJuna2" name="favoritesJuna2"placeholder="Syötä rautatieasema suosikki" ngModel required/>
+      <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
+      <input type="text" class="form-control" id="favoritesSaa1" name="favoritesSaa1" placeholder="Syötä sääasema suosikki" ngModel required/>
+      <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
+      <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2" placeholder="Syötä sääasema suosikki" ngModel required/>
     </div>
 
     <br />
