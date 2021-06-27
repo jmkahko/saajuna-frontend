@@ -1,8 +1,4 @@
 <div class="container-md">
-  <!-- Jos JSON sanomassa palautuu tyhjä taulukko näytetään virhe ilmoitus-->
-  <!-- <div class="alert alert-warning" *ngIf="!aikataulu?.length">
-      <strong>Varoitus!</strong> Paikalta ei saatu juna tietoja.
-    </div> -->
   <div class="tiedot">
     <div *ngIf="havaintoasema">
       <h2>{{ havaintoasema.name }}</h2>
@@ -104,6 +100,8 @@
           <tr>
             <!-- <th>Aika</th> -->
             <th *ngIf="saaennuste.Temperature !== null">Lämpötila</th>
+            <th *ngIf="saaennuste.WindSpeedMS !== null">Tuulen nopeus</th>
+            <th *ngIf="saaennuste.WindDirection !== null">Tuulen suunta</th>
 
             <th *ngIf="saaennuste.WeatherSymbol3 !== null"></th>
           </tr>
@@ -113,6 +111,20 @@
             <!-- <td></td> -->
             <td *ngIf="saaennuste.Temperature !== null">
               {{ saaennuste.Temperature | number: '1.0-0' }} ℃
+            </td>
+            <td *ngIf="saaennuste.WindSpeedMS !== null">
+              {{ saaennuste.WindSpeedMS | number: '1.0-0' }} m/s
+              {{ tuulenNopeus(saaennuste.WindSpeedMS) }}
+            </td>
+            <td *ngIf="saaennuste.WindDirection !== null">
+              {{ tuulenSuunta(saaennuste.WindDirection) }}
+
+              <img
+                src="../../assets/symbols/{{
+                  tuulenSuuntaKuva(saaennuste.WindDirection)
+                }}.png"
+                style="height: 25px; width: 25px"
+              />
             </td>
             <td *ngIf="saaennuste.WeatherSymbol3 !== null">
               <img

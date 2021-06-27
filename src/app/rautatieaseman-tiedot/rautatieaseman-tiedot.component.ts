@@ -64,15 +64,6 @@ export class RautatieasemanTiedotComponent implements OnInit {
     });
   }
 
-  haeSaaEnnusteXXXX(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.HavaintoAsematService.haeHavaintoAsema(id).subscribe((data: any) => {
-      this.SaaService.haeSaaEnnuste(
-        data.latitude + ',' + data.longitude
-      ).subscribe((saaennuste) => (this.saaennuste = saaennuste));
-    });
-  }
-
   haeSaaEnnuste(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
@@ -81,5 +72,67 @@ export class RautatieasemanTiedotComponent implements OnInit {
         data.latitude + ',' + data.longitude
       ).subscribe((saaennuste) => (this.saaennuste = saaennuste));
     });
+  }
+
+  tuulenSuunta(tsuuntanro: number) {
+    if (tsuuntanro >= 23 && tsuuntanro <= 68) {
+      return 'koillistuulta';
+    } else if (tsuuntanro >= 69 && tsuuntanro <= 112) {
+      return 'itätuulta';
+    } else if (tsuuntanro >= 113 && tsuuntanro <= 158) {
+      return 'kaakkoistuulta';
+    } else if (tsuuntanro >= 159 && tsuuntanro <= 202) {
+      return 'etelätuulta';
+    } else if (tsuuntanro >= 203 && tsuuntanro <= 248) {
+      return 'lounaistuulta';
+    } else if (tsuuntanro >= 249 && tsuuntanro <= 292) {
+      return 'länsituulta';
+    } else if (tsuuntanro >= 293 && tsuuntanro <= 337) {
+      return 'luoteistuulta';
+    } else if (tsuuntanro >= 338 && tsuuntanro <= 360) {
+      return 'pohjoistuulta';
+    } else if (tsuuntanro >= 0 && tsuuntanro <= 22) {
+      return 'pohjoistuulta';
+    }
+  }
+
+  tuulenSuuntaKuva(tsuuntanro: number) {
+    if (tsuuntanro >= 23 && tsuuntanro <= 68) {
+      return 'north-west';
+    } else if (tsuuntanro >= 69 && tsuuntanro <= 112) {
+      return 'east';
+    } else if (tsuuntanro >= 113 && tsuuntanro <= 158) {
+      return 'south-east';
+    } else if (tsuuntanro >= 159 && tsuuntanro <= 202) {
+      return 'south';
+    } else if (tsuuntanro >= 203 && tsuuntanro <= 248) {
+      return 'south-west';
+    } else if (tsuuntanro >= 249 && tsuuntanro <= 292) {
+      return 'west';
+    } else if (tsuuntanro >= 293 && tsuuntanro <= 337) {
+      return 'north-west';
+    } else if (tsuuntanro >= 338 && tsuuntanro <= 360) {
+      return 'north';
+    } else if (tsuuntanro >= 0 && tsuuntanro <= 22) {
+      return 'north';
+    }
+  }
+
+  tuulenNopeus(tnopeusnro: number) {
+    if (tnopeusnro < 1) {
+      return 'tyyntä';
+    } else if (tnopeusnro >= 1 && tnopeusnro < 4) {
+      return 'heikkoa';
+    } else if (tnopeusnro >= 4 && tnopeusnro < 8) {
+      return 'kohtalaista';
+    } else if (tnopeusnro >= 8 && tnopeusnro < 14) {
+      return 'navakkaa';
+    } else if (tnopeusnro >= 14 && tnopeusnro < 21) {
+      return 'kovaa';
+    } else if (tnopeusnro >= 21 && tnopeusnro <= 32) {
+      return 'myrskyä';
+    } else if (tnopeusnro > 32) {
+      return 'hirmumyrsky';
+    }
   }
 }
