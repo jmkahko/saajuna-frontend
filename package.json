@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build"
+    "build": "ng build",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
