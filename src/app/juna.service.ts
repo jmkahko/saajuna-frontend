@@ -8,7 +8,8 @@ import { Juna } from './juna';
   providedIn: 'root'
 })
 export class JunaService {
-  private apiUrl = 'http://localhost:3000/junat'; // Asemien pää url
+  //private apiUrl = 'http://localhost:3000/junat'; // Asemien pää url
+  private apiUrl = 'https://saajuna-backend.herokuapp.com/junat'; // Asemien pää url
   public token: string;
 
   constructor(private http: HttpClient) {

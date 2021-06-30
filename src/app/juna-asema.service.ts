@@ -10,7 +10,8 @@ import { RautatieAsemaAikataulu } from './rautatieasemaAikataulu';
   providedIn: 'root'
 })
 export class JunaAsemaService {
-  private apiUrl = 'http://localhost:3000/asemat'; // Asemien pää url
+  //private apiUrl = 'http://localhost:3000/asemat'; // Asemien pää url
+  private apiUrl = 'https://saajuna-backend.herokuapp.com/asemat'; // Asemien pää url
   public token: string;
 
   constructor(private http: HttpClient) {

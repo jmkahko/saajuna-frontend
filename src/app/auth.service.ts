@@ -12,7 +12,8 @@ import { Kayttaja } from './kayttaja';
 })
 @Injectable()
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users'; // Pää user url
+  //private apiUrl = 'http://localhost:3000/users'; // Pää user url
+  private apiUrl = 'https://saajuna-backend.herokuapp.com/users'; // Pää user url
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut

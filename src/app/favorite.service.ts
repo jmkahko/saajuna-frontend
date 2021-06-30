@@ -8,7 +8,8 @@ import { Favorite } from './favorite';
   providedIn: 'root'
 })
 export class FavoriteService {
-  private apiUrl = 'http://localhost:3000/favorites'; // Pää url
+  //private apiUrl = 'http://localhost:3000/favorites'; // Pää url
+  private apiUrl = 'https://saajuna-backend.herokuapp.com/favorites'; // Pää user url
   public username: string;
   public token: string;
   public favoriteid: string
