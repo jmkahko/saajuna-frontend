@@ -1,6 +1,6 @@
 # JAMK Web-kehittäjä-kurssin lopputyön SääJuna frontend
 
-Backend löytyy projektista https://github.com/jmkahko/saajuna-backend
+Backend löytyy [projektista](https://github.com/jmkahko/saajuna-backend)
 
 Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistuneet sekä backendin että frontendin kehittämiseen.
 
@@ -8,7 +8,7 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistune
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteenlaitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
+Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
 
 ## Kuvaus teknologioista
 
@@ -41,16 +41,16 @@ Aikaa on käytetty backendiin ainakin 50-60 h ja frontendiin 40-50 h.
 Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
 Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
-Tour of Heroes https://angular.io/tutorial frontendissä.
+[Tour of Heroes](https://angular.io/tutorial) frontendissä.
 
 Koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
 
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin yksittäisiä ohjeita StackOverFlow:sta.
 
-Junakartan tekemiseen käytetty tätä tutoriaalia https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet ja Node.js-kurssilla käytyä esimerkkiä
+Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä
 
 ## Linkit
 
-http://snowfence.umn.edu/Components/winddirectionanddegrees.htm Tuulen suunnat asteikko
-https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje Sääsymbolien selitykset FMI
-https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/ Pääsivun junan kuva
+[Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm)
+[Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
+[Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/)
