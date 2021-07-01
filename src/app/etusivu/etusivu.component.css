@@ -1,1 +1,56 @@
+.container {
+  padding: 3%;
+}
 
+th {
+  background-color: grey;
+}
+.card {
+  padding: 1rem;
+  margin: 1.5rem 4vw;
+  border-radius: 1rem;
+  background-color: rgba(238, 237, 237, 0.22);
+  border-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  text-align: center;
+}
+.tiedot {
+  padding: 1rem;
+  margin: 1.5rem 4vw;
+  border-radius: 1rem;
+  background-color: rgba(238, 237, 237, 0.22);
+  border-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-container > div {
+  text-align: center;
+}
+
+.suosikkisaa1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.suosikkisaa2 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.suosikkirautatie1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.suosikkirautatie2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
