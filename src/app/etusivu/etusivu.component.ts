@@ -24,23 +24,14 @@ export class EtusivuComponent implements OnInit {
   login: boolean; //tarkistetaan onko käyttäjä kirjautuneena sisään
 
   constructor(
-    private route: ActivatedRoute,
     private favoriteService: FavoriteService,
     private SaaService: SaaService,
-    private HavaintoAsematService: HavaintoasemaService,
     private junaAsematService: JunaAsemaService
   ) {
     // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
     const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
     this.username = currentUser && currentUser.username;
 
-    // if (this.username !== null)
-    if (this.login == true) {
-      this.haeSuosikitRautatie1(this.username);
-      this.haeSuosikitRautatie2(this.username);
-      this.haeSuosikitSää1(this.username);
-      this.haeSuosikitSää2(this.username);
-    }
     /* varmistetaan että login -tila säilyy myös kun sivu päivitetään
        varmistus tehdään katsomalla onko token sessionstoragessa.
        Yllä oleva observablen tilaus silti tarvitaan, sillä sessionstoragen
@@ -50,6 +41,14 @@ export class EtusivuComponent implements OnInit {
       this.login = true;
     } else {
       this.login = false;
+    }
+
+    // Jos login on true haetaan suosikki tiedot
+    if (this.login === true) {
+      this.haeSuosikitRautatie1(this.username);
+      this.haeSuosikitRautatie2(this.username);
+      this.haeSuosikitSaa1(this.username);
+      this.haeSuosikitSaa2(this.username);
     }
   }
 
@@ -72,7 +71,7 @@ export class EtusivuComponent implements OnInit {
     });
   }
 
-  haeSuosikitSää1(username) {
+  haeSuosikitSaa1(username) {
     this.favoriteService.haeSuosikit(username).subscribe((data: any) => {
       this.SaaService.haeSaaNyt(data.favoritesSaa1).subscribe(
         (saanyt) => (this.suosikkisaa1 = saanyt)
@@ -80,7 +79,7 @@ export class EtusivuComponent implements OnInit {
     });
   }
 
-  haeSuosikitSää2(username) {
+  haeSuosikitSaa2(username) {
     this.favoriteService.haeSuosikit(username).subscribe((data: any) => {
       this.SaaService.haeSaaNyt(data.favoritesSaa2).subscribe(
         (saanyt) => (this.suosikkisaa2 = saanyt)

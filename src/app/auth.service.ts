@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt'; // kirjasto jwt:n käsittelyyn
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Kayttaja } from './kayttaja';
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 @Injectable({
   providedIn: 'root',
 })
 @Injectable()
 export class AuthService {
-  //private apiUrl = 'http://localhost:3000/users'; // Pää user url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/users'; // Pää user url
+  private apiUrl = environment.apiUrlEnv + '/users'; // Pää user url
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut

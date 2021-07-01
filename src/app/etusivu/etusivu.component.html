@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="login" *ngIf="login">
+  <div class="login" *ngIf="login && username !== 'admin'">
     <h1>Sää</h1>
 
     <p>Suosikki havaintoaseman 1 lämpötila: {{ suosikkisaa1.t2m }}</p>

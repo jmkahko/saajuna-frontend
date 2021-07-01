@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Favorite } from './favorite';
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  //private apiUrl = 'http://localhost:3000/favorites'; // Pää url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/favorites'; // Pää user url
+  private apiUrl = environment.apiUrlEnv + '/favorites'; // Pää user url
   public username: string;
   public token: string;
   public favoriteid: string

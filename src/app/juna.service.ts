@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Juna } from './juna';
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 @Injectable({
   providedIn: 'root'
 })
 export class JunaService {
-  //private apiUrl = 'http://localhost:3000/junat'; // Asemien pää url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/junat'; // Asemien pää url
+  private apiUrl = environment.apiUrlEnv + '/junat'; // Asemien pää url
   public token: string;
 
   constructor(private http: HttpClient) {

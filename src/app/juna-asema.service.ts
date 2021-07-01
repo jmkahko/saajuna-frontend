@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { RautatieAsemat } from './rautatieAsemat'; // Tuodaan rautatieasemien tieto
 import { RautatieAsemaAikataulu } from './rautatieasemaAikataulu';
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class JunaAsemaService {
-  //private apiUrl = 'http://localhost:3000/asemat'; // Asemien pää url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/asemat'; // Asemien pää url
+  private apiUrl = environment.apiUrlEnv + '/asemat'; // Asemien pää url
   public token: string;
 
   constructor(private http: HttpClient) {
