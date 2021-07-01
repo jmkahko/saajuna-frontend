@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EtusivuComponent } from './etusivu/etusivu.component';
 import { HavaintoasematComponent } from './havaintoasemat/havaintoasemat.component';
 import { HavaintoasematiedotComponent } from './havaintoasematiedot/havaintoasematiedot.component';
+import { InfoComponent } from './info/info.component';
 import { JunaasematComponent } from './junaasemat/junaasemat.component';
 import { JunantiedotComponent } from './junantiedot/junantiedot.component';
 import { KirjauduComponent } from './kirjaudu/kirjaudu.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'rautatieasema/:id', component: RautatieasemanTiedotComponent },
   { path: 'juna/aikataulu/:aika/:junanumero', component: JunantiedotComponent },
   { path: 'havaintoasematiedot/:id', component: HavaintoasematiedotComponent },
+  { path: 'info', component: InfoComponent },
   { path: '', redirectTo: '/etusivu', pathMatch: 'full' },
 ];
 
