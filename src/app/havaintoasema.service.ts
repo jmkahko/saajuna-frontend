@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HavaintoAsemat } from './havaintoasemat'; // Tuodaan havaintoasemien tieto
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 @Injectable({
   providedIn: 'root',
 })
 export class HavaintoasemaService {
-  //private apiUrl = 'http://localhost:3000/saaasemat'; // Havaintoasemien pää url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/saaasemat'; // Havaintoasemien pää url
+  private apiUrl = environment.apiUrlEnv + '/saaasemat'; // Havaintoasemien pää url
   public token: string;
   log: any;
 

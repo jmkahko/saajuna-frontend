@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SaaEnnuste } from './saaennuste';
 import { SaaNyt } from './saanyt';
+import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
 
 @Injectable({
   providedIn: 'root',
 })
 export class SaaService {
-  //private apiUrl = 'http://localhost:3000/saaasemat'; // Havaintoasemien pää url
-  private apiUrl = 'https://saajuna-backend.herokuapp.com/saaasemat'; // Havaintoasemien pää url
+  private apiUrl = environment.apiUrlEnv + '/saaasemat'; // Havaintoasemien pää url
   public token: string;
 
   constructor(private http: HttpClient) {

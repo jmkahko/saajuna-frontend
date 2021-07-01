@@ -129,7 +129,7 @@
     </form>
   </div>
 
-  <!-- Estetään käyttäjän poistaminen. Kun käyttäjä ei voi poistaa heti itseään
+  <!-- Käyttäjä tiedon poistaminen -->
   <div *ngIf="username !== 'admin'">
     <h4>Käyttäjätunnuksen poisto</h4>
     <button type="button" class="btn btn-danger" (click)="poistaTunnus()">
@@ -138,7 +138,7 @@
   </div>
   <br />
 
-  -->
+  
 
   <!-- Näytetään admin käyttäjälle rautatieasemien ja käyttäjien ylläpito -->
   <div *ngIf="username === 'admin'">

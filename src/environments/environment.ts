@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrlEnv: 'https://saajuna-backend.herokuapp.com' // Muuttaa tähän lopuksi 'http://localhost:3000', että tiedot haetaan paikallisesta
 };
 
 /*
