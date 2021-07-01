@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <a class="navbar-brand" href="#">Sääjuna</a>
 
   <!-- Toggler/collapsibe Button -->
@@ -21,18 +21,24 @@
         <a class="nav-link" routerLink="junaasemat">Juna-asemat</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="havaintoasemat">Säähavaintoasemat</a>
+        <a class="nav-link" routerLink="havaintoasemat">Säätiedot</a>
       </li>
-      <li *ngIf="!login" class="nav-item">
+      <li class="navbar-item">
+        <a class="nav-link" routerLink="info">Info</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto">
+      <li *ngIf="!login" class="nav-item navbar-right">
         <a class="nav-link" routerLink="rekisteroidy">Rekisteröidy</a>
       </li>
-      <li *ngIf="!login" class="nav-item">
+      <li *ngIf="!login" class="nav-item navbar-right">
         <a class="nav-link" routerLink="kirjaudu">Kirjaudu</a>
       </li>
-      <li *ngIf="login" class="nav-item">
+      <li *ngIf="login" class="nav-item navbar-right">
         <a class="nav-link" routerLink="omattiedot">Omat tiedot</a>
       </li>
-      <li *ngIf="login" class="nav-item">
+      <li *ngIf="login" class="nav-item navbar-right">
         <a class="nav-link" routerLink="kirjaudu" (click)="doLogout()"
           >Kirjaudu ulos</a
         >

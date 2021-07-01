@@ -17,6 +17,7 @@ import { EtusivuComponent } from './etusivu/etusivu.component';
 import { RautatieasemanTiedotComponent } from './rautatieaseman-tiedot/rautatieaseman-tiedot.component';
 import { HavaintoasematiedotComponent } from './havaintoasematiedot/havaintoasematiedot.component';
 import { JunantiedotComponent } from './junantiedot/junantiedot.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { JunantiedotComponent } from './junantiedot/junantiedot.component';
     RautatieasemanTiedotComponent,
     HavaintoasematiedotComponent,
     JunantiedotComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

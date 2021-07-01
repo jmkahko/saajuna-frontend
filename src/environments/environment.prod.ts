@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrlEnv: 'https://saajuna-backend.herokuapp.com'
+  apiUrlEnv: 'https://saajuna-backend.herokuapp.com',
 };

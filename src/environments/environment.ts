@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrlEnv: 'https://saajuna-backend.herokuapp.com' // Muuttaa tähän lopuksi 'http://localhost:3000', että tiedot haetaan paikallisesta
+  apiUrlEnv: 'https://saajuna-backend.herokuapp.com',
 };
 
 /*
