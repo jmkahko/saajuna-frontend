@@ -51,6 +51,7 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 
 ## Linkit
 
-[Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm)
-[Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
-[Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/)
+[Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
+[Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
+[Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
+[Navbarin logo](https://www.freelogodesign.org) \
