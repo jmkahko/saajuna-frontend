@@ -51,22 +51,24 @@ export class EtusivuComponent implements OnInit {
 
     // Jos login on true haetaan suosikki tiedot
     if (this.login === true) {
-      this.haeSuosikitRautatie(this.username);
-      this.haeSuosikitSaa(this.username);
+      this.haeSuosikit(this.username);
     }
   }
 
   ngOnInit(): void {}
 
   // Hae suosikki sää- ja rautatieasemat
-  haeSuosikitRautatie(username) {
+  haeSuosikit(username) {
+
+    // Haetaan suosikit
     this.favoriteService.haeSuosikit(username).subscribe((data: any) => {
 
       // Suosikki 1 rautatieasema
       this.junaAsematService
         .haeAsemanAikataulu(data.favoritesJuna1, 0, 1, 0, 1)
         .subscribe((aikataulu) => (this.suosikkirautatie1 = aikataulu)),
-        
+      
+      // Haetaan suosikki rautatieaseman lyhytkoodi  
       this.junaAsematService.haeAsemaLyhytKoodi(data.favoritesJuna1)
         .subscribe((asema) => (this.junaasema1 = asema)),
 
@@ -74,33 +76,34 @@ export class EtusivuComponent implements OnInit {
       this.junaAsematService
         .haeAsemanAikataulu(data.favoritesJuna2, 0, 1, 0, 1)
         .subscribe((aikataulu) => (this.suosikkirautatie2 = aikataulu)),
-        
+      
+      // Haetaan suosikki rautatieaseman lyhytkoodi    
       this.junaAsematService.haeAsemaLyhytKoodi(data.favoritesJuna2)
         .subscribe((asema) => (this.junaasema2 = asema))
-    });
-  }
 
-  haeSuosikitSaa(username) {
-    this.favoriteService.haeSuosikit(username).subscribe((data: any) => {
-
-    // Suosikki 1 sääasema
-    this.SaaService.haeSaaNyt(data.favoritesSaa1)
-      .subscribe((saanyt) => (this.suosikkisaa1 = saanyt)),
-    
-    // Suosikki 2 sääasema
-    this.SaaService.haeSaaNyt(data.favoritesSaa2)
-      .subscribe((saanyt) => (this.suosikkisaa2 = saanyt))
+      // Suosikki 1 sääasema
+      this.SaaService.haeSaaNyt(data.favoritesSaa1)
+        .subscribe((saanyt) => (this.suosikkisaa1 = saanyt)),
+          
+      // Suosikki 2 sääasema
+      this.SaaService.haeSaaNyt(data.favoritesSaa2)
+        .subscribe((saanyt) => (this.suosikkisaa2 = saanyt))
+      
     });
 
     // Haetaan säähavaintoasemat
     this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
 
+    // Haetaan suosikki säähavaintoasemien fmisid numeroille havaintoaseman kokonimet
     this.favoriteService.haeSuosikit(username).subscribe((data:any) => {
       for (let x = 0; x < this.havaintoasemat.length; x++) {
+
+        // Haetaan suosikki 1 säähavaintoaseman kokonimi
         if (this.havaintoasemat[x].fmisid === data.favoritesSaa1) {
           this.suosikkisaaasema1 = this.havaintoasemat[x].name;
         }
-
+      
+        // Haetaan suosikki 2 säähavaintoaseman kokonimi
         if (this.havaintoasemat[x].fmisid === data.favoritesSaa2) {
           this.suosikkisaaasema2 = this.havaintoasemat[x].name;
         }
