@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" *ngIf="login && username !== 'admin'">
   <div class="grid-container" *ngIf="login && username !== 'admin'">
     <h2>Suosikki sää- ja rautatieasemat</h2>
   </div>
