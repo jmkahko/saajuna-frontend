@@ -1,6 +1,6 @@
 <div class="container">
     <h4>Rautatieasemat</h4>
-    <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Etsi asema" />
+    <input class="form-control" #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Etsi asema" />
   
     <ul>
       <li *ngFor="let asema of stations">

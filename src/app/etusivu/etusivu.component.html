@@ -1,14 +1,90 @@
-<div class="container">
-  <div class="login" *ngIf="login && username !== 'admin'">
-    <h1>Sää</h1>
+<!-- Jos ei olla kirjauduttu -->
+<div class="container-md" *ngIf="!login">
+  <div class="aloituskuva">
+    <img src="../../assets/train.jpg" style="width: 100%; height: auto" />
+  </div>
+</div>
 
-    <p>Suosikki havaintoaseman 1 lämpötila: {{ suosikkisaa1.t2m }}</p>
-    <p>Suosikki havaintoaseman 2 lämpötila: {{ suosikkisaa2.t2m }}</p>
 
-    <h1>Suosikki rautatie 1</h1>
-    <h3>Saapuvat junat</h3>
-    <div>
-      <table class="table table-striped">
+<div class="grid-container" *ngIf="login && username !== 'admin'">
+  <h2>Suosikki sää- ja rautatieasemat</h2>
+  <!-- Sää suosikkki 1-->
+  <div class="suosikkisaa1">
+    <div class="card">
+      <h4 class="card-title">Sää {{suosikkisaaasema1}} {{suosikkisaa1.time | date: 'H:mm'}}</h4>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th *ngIf="suosikkisaa1.t2m !== null">Lämpötila</th>
+            <th *ngIf="suosikkisaa1.ws_10min !== null">Tuulen nopeus</th>
+            <th *ngIf="suosikkisaa1.snow_aws !== null && suosikkisaa1.snow_aws > 0">Lumen syvyys</th>
+            <th *ngIf="suosikkisaa1.p_sea !== null">Ilmanpaine</th>
+            <th *ngIf="suosikkisaa1.vis !== null">Näkyvyys</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngIf="suosikkisaa1.t2m !== null">
+              {{ suosikkisaa1.t2m | number: '1.0-0' }} ℃
+            </td>
+            <td *ngIf="suosikkisaa1.ws_10min !== null">
+              {{ suosikkisaa1.ws_10min | number: '1.0-0' }} m/s
+              {{ tuulenNopeus(suosikkisaa1.ws_10min) }}
+            </td>
+            <td *ngIf="suosikkisaa1.snow_aws !== null && suosikkisaa1.snow_aws > 0">
+              {{ suosikkisaa1.snow_aws }}
+            </td>
+            <td *ngIf="suosikkisaa1.p_sea !== null">{{ suosikkisaa1.p_sea }} hPa</td>
+            <td *ngIf="suosikkisaa1.vis !== null">
+              {{ suosikkisaa1.vis / 1000 | number: '1.0-0' }} km
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Sää suosikkki 2-->
+  <div class="suosikkisaa2">
+    <div class="card">
+      <h4 class="card-title">Sää {{suosikkisaaasema2}} {{suosikkisaa2.time | date: 'H:mm'}}</h4>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th *ngIf="suosikkisaa2.t2m !== null">Lämpötila</th>
+            <th *ngIf="suosikkisaa2.ws_10min !== null">Tuulen nopeus</th>
+            <th *ngIf="suosikkisaa2.snow_aws !== null && suosikkisaa2.snow_aws > 0">Lumen syvyys</th>
+            <th *ngIf="suosikkisaa1.p_sea !== null">Ilmanpaine</th>
+            <th *ngIf="suosikkisaa2.vis !== null">Näkyvyys</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngIf="suosikkisaa2.t2m !== null">
+              {{ suosikkisaa2.t2m | number: '1.0-0' }} ℃
+            </td>
+            <td *ngIf="suosikkisaa2.ws_10min !== null">
+              {{ suosikkisaa2.ws_10min | number: '1.0-0' }} m/s
+              {{ tuulenNopeus(suosikkisaa1.ws_10min) }}
+            </td>
+            <td *ngIf="suosikkisaa2.snow_aws !== null && suosikkisaa2.snow_aws > 0">
+              {{ suosikkisaa2.snow_aws }}
+            </td>
+            <td *ngIf="suosikkisaa2.p_sea !== null">{{ suosikkisaa2.p_sea }} hPa</td>
+            <td *ngIf="suosikkisaa2.vis !== null">
+              {{ suosikkisaa2.vis / 1000 | number: '1.0-0' }} km
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Rautatie suosikkki 1-->
+  <div class="suosikkirautatie1">
+    <div class="card">
+      <h4 class="card-title">Rautatie {{junaasema1.stationName}}</h4>
+      <table class="table-responsive-lg">
         <thead>
           <tr>
             <th>Juna</th>
@@ -18,24 +94,27 @@
         <tbody *ngFor="let aikataulu of suosikkirautatie1">
           <tr *ngIf="aikataulu.arrivalScheduledTime">
             <td>
-              <a
-                routerLink="/juna/aikataulu/{{
-                  aikataulu.arrivalScheduledTime | date: 'yyyy-MM-dd'
-                }}/{{ aikataulu.trainNumber }}"
-                >{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a
-              >
+              <a routerLink="/juna/aikataulu/{{
+                    aikataulu.arrivalScheduledTime | date: 'yyyy-MM-dd'
+                  }}/{{ aikataulu.trainNumber }}">{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a>
             </td>
-            <td>
-              {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm' }}
+            <td *ngIf="
+                aikataulu.arrivalDifferenceInMinutes > 0 ||
+                aikataulu.arrivalDifferenceInMinutes < 0
+              ">
+              <del>{{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}</del>
+              {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm' }}
+            </td>
+            <td *ngIf="
+                aikataulu.arrivalDifferenceInMinutes === 0 ||
+                aikataulu.arrivalDifferenceInMinutes === undefined
+              ">
+              {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <h3>Lähtevät junat</h3>
-    <div>
-      <table class="table table-striped">
+      <table class="table-responsive-lg">
         <thead>
           <tr>
             <th>Juna</th>
@@ -45,121 +124,97 @@
         <tbody *ngFor="let aikataulu of suosikkirautatie1">
           <tr *ngIf="aikataulu.departureScheduledTime">
             <td>
-              <a
-                routerLink="/juna/aikataulu/{{
-                  aikataulu.arrivalScheduledTime | date: 'yyyy-MM-dd'
-                }}/{{ aikataulu.trainNumber }}"
-                >{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a
-              >
+              <a routerLink="/juna/aikataulu/{{
+                    aikataulu.departureScheduledTime | date: 'yyyy-MM-dd'
+                  }}/{{ aikataulu.trainNumber }}">{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a>
             </td>
-            <td>
+            <td *ngIf="
+                aikataulu.departureDifferenceInMinutes > 0 ||
+                aikataulu.departureDifferenceInMinutes < 0
+              ">
+              <del>{{
+                aikataulu.departureScheduledTime | date: 'dd.MM H:mm'
+                }}</del>
+              {{ aikataulu.departureLiveEstimateTime | date: 'H:mm' }}
+            </td>
+            <td *ngIf="
+                aikataulu.departureDifferenceInMinutes === 0 ||
+                aikataulu.departureDifferenceInMinutes === undefined
+              ">
               {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm' }}
             </td>
           </tr>
         </tbody>
       </table>
-
-      <h1>Suosikkirautatie 2</h1>
-
-      <h1>Suosikki rautatie 1</h1>
-      <h3>Saapuvat junat</h3>
-      <div>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Juna</th>
-              <th>Saapuu</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
-            <tr *ngIf="aikataulu2.arrivalScheduledTime">
-              <td>
-                <a
-                  routerLink="/juna/aikataulu/{{
-                    aikataulu2.arrivalScheduledTime | date: 'yyyy-MM-dd'
-                  }}/{{ aikataulu2.trainNumber }}"
-                  >{{ aikataulu2.trainNumber }} {{ aikataulu2.trainType }}</a
-                >
-              </td>
-              <td>
-                {{ aikataulu2.departureScheduledTime | date: 'dd.MM H:mm' }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Lähtevät junat</h3>
-      <div>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Juna</th>
-              <th>Lähtee</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
-            <tr *ngIf="aikataulu2.departureScheduledTime">
-              <td>
-                <a
-                  routerLink="/juna/aikataulu/{{
-                    aikataulu2.arrivalScheduledTime | date: 'yyyy-MM-dd'
-                  }}/{{ aikataulu2.trainNumber }}"
-                  >{{ aikataulu2.trainNumber }} {{ aikataulu2.trainType }}</a
-                >
-              </td>
-              <td>
-                {{ aikataulu2.departureScheduledTime | date: 'dd.MM H:mm' }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h1>Suosikkirautatie 2</h1>
-
-        <h3>Saapuvat junat</h3>
-        <div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Juna</th>
-                <th>Saapuu</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
-              <tr *ngIf="aikataulu2.arrivalScheduledTime">
-                <td>{{ aikataulu2.trainNumber }} {{ aikataulu2.trainType }}</td>
-                <td>
-                  {{ aikataulu2.departureScheduledTime | date: 'dd.MM H:mm' }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Lähtevät junat</h3>
-        <div>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Juna</th>
-                <th>Lähtee</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let aikataulu2 of suosikkirautatie2">
-              <tr *ngIf="aikataulu2.departureScheduledTime">
-                <td>{{ aikataulu2.trainNumber }} {{ aikataulu2.trainType }}</td>
-                <td>
-                  {{ aikataulu2.departureScheduledTime | date: 'dd.MM H:mm' }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
-  <div>
-    <img src="../../assets/train.jpg" style="width: 100%; height: auto" />
+
+  <!-- Rautatie suosikkki 2-->
+  <div class="suosikkirautatie2">
+    <div class="card">
+      <h4 class="card-title">Rautatie {{junaasema2.stationName}}</h4>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th>Juna</th>
+            <th>Saapuu</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let aikataulu of suosikkirautatie2">
+          <tr *ngIf="aikataulu.arrivalScheduledTime">
+            <td>
+              <a routerLink="/juna/aikataulu/{{
+                    aikataulu.arrivalScheduledTime | date: 'yyyy-MM-dd'
+                  }}/{{ aikataulu.trainNumber }}">{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a>
+            </td>
+            <td *ngIf="
+                aikataulu.arrivalDifferenceInMinutes > 0 ||
+                aikataulu.arrivalDifferenceInMinutes < 0
+              ">
+              <del>{{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}</del>
+              {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm' }}
+            </td>
+            <td *ngIf="
+                aikataulu.arrivalDifferenceInMinutes === 0 ||
+                aikataulu.arrivalDifferenceInMinutes === undefined
+              ">
+              {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th>Juna</th>
+            <th>Lähtee</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let aikataulu of suosikkirautatie2">
+          <tr *ngIf="aikataulu.departureScheduledTime">
+            <td>
+              <a routerLink="/juna/aikataulu/{{
+                    aikataulu.arrivalScheduledTime | date: 'yyyy-MM-dd'
+                  }}/{{ aikataulu.trainNumber }}">{{ aikataulu.trainNumber }} {{ aikataulu.trainType }}</a>
+            </td>
+            <td *ngIf="
+                aikataulu.departureDifferenceInMinutes > 0 ||
+                aikataulu.departureDifferenceInMinutes < 0
+              ">
+              <del>{{
+                aikataulu.departureScheduledTime | date: 'dd.MM H:mm'
+                }}</del>
+              {{ aikataulu.departureLiveEstimateTime | date: 'H:mm' }}
+            </td>
+            <td *ngIf="
+                aikataulu.departureDifferenceInMinutes === 0 ||
+                aikataulu.departureDifferenceInMinutes === undefined
+              ">
+              {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
