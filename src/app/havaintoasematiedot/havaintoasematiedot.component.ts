@@ -1,10 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HavaintoasemaService } from '../havaintoasema.service';
 import { HavaintoAsemat } from '../havaintoasemat';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
 import { SaaService } from '../saa.service';
+
+import * as L from 'leaflet'; // Kartta jutut tuodaan
+
+// Nämä tuodaan karttatietoja varten
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
+L.Marker.prototype.options.icon = iconDefault;
+// Tähän asti tuodaan karttatietoja varten
 
 @Component({
   selector: 'app-havaintoasematiedot',
@@ -16,16 +35,30 @@ export class HavaintoasematiedotComponent implements OnInit {
   saanyt;
   saaennuste;
 
+  private map: any;
+  latlng: L.LatLng;
+  lat: number;
+  lon: number;
+  name: string;
+  asema;
+
   constructor(
     private route: ActivatedRoute,
     private HavaintoAsematService: HavaintoasemaService,
     private SaaService: SaaService
-  ) {}
+  ) {
+    this.lat = 0;
+    this.lon = 0;
+    this.latlng = new L.LatLng(this.lat, this.lon);
+  }
 
   ngOnInit(): void {
     this.haeHavaintoAsema();
     this.haeSaaNyt();
     this.haeSaaEnnuste();
+  }
+  ngAfterViewInit() {
+    this.haeAsemanSijaintiKartalla();
   }
 
   haeHavaintoAsema(): void {
@@ -53,9 +86,32 @@ export class HavaintoasematiedotComponent implements OnInit {
     });
   }
 
-  //   var img = document.createElement('img');
-  // img.src = 'img/eqp/' + this.apparel + '/' + this.facing + '_idle.png';
-  // document.getElementById('gamediv').appendChild(img)
+  haeAsemanSijaintiKartalla(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    this.HavaintoAsematService.haeHavaintoAsema(id).subscribe(
+      (data) => {
+        this.lon = Number(data.longitude);
+        this.lat = Number(data.latitude);
+        this.latlng = new L.LatLng(this.lat, this.lon);
+        this.map = L.map('kartta').setView(this.latlng, 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+          maxZoom: 18,
+          minZoom: 3,
+        }).addTo(this.map);
+
+        L.control.scale().addTo(this.map);
+        L.marker(this.latlng).bindPopup('Asema: ').addTo(this.map);
+      },
+
+      // Jos tulee virheitä
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
   tuulenSuunta(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {

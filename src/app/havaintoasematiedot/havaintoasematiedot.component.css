@@ -14,3 +14,9 @@ th {
   box-shadow: 5px 6px 6px 2px #e9ecef;
   text-align: center;
 }
+#kartta {
+  height: 300px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
