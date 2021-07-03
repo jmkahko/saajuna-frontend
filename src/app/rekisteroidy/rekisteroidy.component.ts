@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FavoriteService } from '../favorite.service';
+import { HavaintoasemaService } from '../havaintoasema.service';
+import { HavaintoAsemat } from '../havaintoasemat';
+import { JunaAsemaService } from '../juna-asema.service';
+import { RautatieAsemat } from '../rautatieAsemat';
+import { FormBuilder } from '@angular/forms';
+import {Observable, OperatorFunction} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-rekisteroidy',
@@ -9,22 +17,56 @@ import { FavoriteService } from '../favorite.service';
   styleUrls: ['./rekisteroidy.component.css']
 })
 export class RekisteroidyComponent implements OnInit {
+  // Virheiden näyttämiseen
   error1 = '';
   error = '';
+
+  /* Käytetty
+
+  https://material.angular.io/components/autocomplete/overview
+  https://material.angular.io/components/form-field/overview
+  https://stackblitz.com/edit/example-angular-material-reactive-form?file=app%2Fapp.component.html
+
+  */
+
+
+  rautatieasemat: Array<RautatieAsemat> = []; // Rautatieasemat taulukko
+  havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat taulukko
+
+
   // injektoidaan router ja authService
   constructor(
     private router: Router,
     private favoriteService: FavoriteService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private junaAsematService: JunaAsemaService,
+    private havaintoAsemaService: HavaintoasemaService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
+    // Haetaan kun sivu latautuu säähavainto- ja rautatieasemat
+    this.junaAsematService.haeAsemat().subscribe(data => this.rautatieasemat = data);
+    this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
   }
 
+
+
   // lomakkeen lähetys
-  // authService palauttaa observablen jossa on joko true tai false
   onSubmit(formData, isFormValid: boolean) {
-    this.authService.rekisteroidy(formData.tunnus, formData.salasana)
+
+    console.log(formData);
+
+    console.log('YKSITELLEN TIEDOT SEURAAVAKSI')
+
+    console.log('käyttäjätunnus: ' + formData.tunnus)
+    console.log('salasana: ' + formData.salasana)
+    console.log('favoritesSaa1: ' + formData.favoritesSaa1)
+    console.log('favoritesSaa2: ' + formData.favoritesSaa2)
+    console.log('favoritesJuna1: ' + formData.favoritesJuna1)
+    console.log('favoritesSaa2: ' + formData.favoritesSaa2)
+
+
+/*     this.authService.rekisteroidy(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
           this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1, formData.favoritesSaa2, formData.favoritesJuna1, formData.favoritesJuna2)
@@ -43,7 +85,7 @@ export class RekisteroidyComponent implements OnInit {
       (error) => {
         this.error1 = 'Rekisteröinti epäonnistui'
         console.log('Rekisteröinti epäonnistui')
-      });
+      }); */
     
 
   }
