@@ -1,10 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
 import { JunaAsemaService } from '../juna-asema.service';
 import { HavaintoasemaService } from '../havaintoasema.service';
 import { SaaService } from '../saa.service';
+
+import * as L from 'leaflet'; // Kartta jutut tuodaan
+
+// Nämä tuodaan karttatietoja varten
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
+L.Marker.prototype.options.icon = iconDefault;
+// Tähän asti tuodaan karttatietoja varten
 
 @Component({
   selector: 'app-rautatieaseman-tiedot',
@@ -18,18 +37,34 @@ export class RautatieasemanTiedotComponent implements OnInit {
   aika; // Aikatieto html sivustolle
   saaennuste; //Sääennuste html sivustolle
 
+  private map: any;
+  latlng: L.LatLng;
+  lat: number;
+  lon: number;
+  name: string;
+  asema;
+
   constructor(
     private route: ActivatedRoute,
     private junaAsematService: JunaAsemaService,
     private HavaintoAsematService: HavaintoasemaService,
     private SaaService: SaaService
-  ) {}
+  ) {
+    this.lat = 0;
+    this.lon = 0;
+    this.latlng = new L.LatLng(this.lat, this.lon);
+  }
 
   // Kun komponentti syntyy muistiin, rautatieaseman tiedot tulevat komponenttiin id:n perusteella
   ngOnInit(): void {
     this.haeAsema();
     this.haeAsemanAikataulu();
     this.haeSaaEnnuste();
+  }
+
+  // Jutut jotka tehdään sitten kun templaatti eli html-osa on latautunut muistiin
+  ngAfterViewInit() {
+    this.haeAsemanSijaintiKartalla();
   }
 
   // Haetaan rautatieaseman tiedot id:n perusteella
@@ -134,5 +169,34 @@ export class RautatieasemanTiedotComponent implements OnInit {
     } else if (tnopeusnro > 32) {
       return 'hirmumyrsky';
     }
+  }
+
+  // Aseman sijainti kartalla
+
+  haeAsemanSijaintiKartalla(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    this.junaAsematService.haeAsema(id).subscribe(
+      (data) => {
+        this.lon = Number(data.longitude);
+        this.lat = Number(data.latitude);
+        this.latlng = new L.LatLng(this.lat, this.lon);
+        this.map = L.map('kartta').setView(this.latlng, 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+          maxZoom: 18,
+          minZoom: 3,
+        }).addTo(this.map);
+
+        L.control.scale().addTo(this.map);
+        L.marker(this.latlng).bindPopup('Asema: ').addTo(this.map);
+      },
+
+      // Jos tulee virheitä
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

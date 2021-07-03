@@ -33,9 +33,11 @@
       >
         Aseman tyyppi on Linjavaihde ja se ei ole käytössä.
       </p>
-      <!-- <p *ngIf="!station.passengerTraffic">Aseman tila: Ei käytössä</p>
-      <p *ngIf="station.passengerTraffic">Aseman tila: Käytössä</p>
-    </div> -->
+    </div>
+
+    <!-- Aseman sijainti kartalla -->
+    <div class="kartta-sijainti" *ngIf="latlng?.length !== 0">
+      <div id="kartta"></div>
     </div>
 
     <div class="card">
