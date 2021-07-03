@@ -1,12 +1,21 @@
 <div class="container">
-    <h4>Rautatieasemat</h4>
-    <input class="form-control" #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Etsi asema" />
-  
+  <h4>Rautatieasemat</h4>
+  <p>Kirjoita juna-aseman nimi hakukenttään.</p>
+  <div class="form-group">
+    <input
+      class="form-control"
+      #searchBox
+      id="search-box"
+      (input)="search(searchBox.value)"
+      placeholder="Etsi asema"
+    />
+
     <ul>
       <li *ngFor="let asema of stations">
-        <a routerLink="/rautatieasema/{{asema._id}}">
-          {{asema.stationName}}
+        <a routerLink="/rautatieasema/{{ asema._id }}">
+          {{ asema.stationName }}
         </a>
       </li>
     </ul>
+  </div>
 </div>
