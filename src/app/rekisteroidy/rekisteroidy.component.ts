@@ -6,29 +6,25 @@ import { HavaintoasemaService } from '../havaintoasema.service';
 import { HavaintoAsemat } from '../havaintoasemat';
 import { JunaAsemaService } from '../juna-asema.service';
 import { RautatieAsemat } from '../rautatieAsemat';
-import { FormBuilder } from '@angular/forms';
-import {Observable, OperatorFunction} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
+import { Observable, OperatorFunction } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-rekisteroidy',
   templateUrl: './rekisteroidy.component.html',
-  styleUrls: ['./rekisteroidy.component.css']
+  styleUrls: ['./rekisteroidy.component.css'],
+  providers: [NgbTypeaheadConfig] // add NgbTypeaheadConfig to the component providers
 })
 export class RekisteroidyComponent implements OnInit {
   // Virheiden näyttämiseen
   error1 = '';
   error = '';
 
-  /* Käytetty
-
-  https://material.angular.io/components/autocomplete/overview
-  https://material.angular.io/components/form-field/overview
-  https://stackblitz.com/edit/example-angular-material-reactive-form?file=app%2Fapp.component.html
-
-  */
-
+  // Rautatie- ja säähavaintoasemien hakuun nettisivulla
+  formatterRauta = (rauta: RautatieAsemat) => rauta.stationName;
+  formatterSaa = (saa: HavaintoAsemat) => saa.name;
 
   rautatieasemat: Array<RautatieAsemat> = []; // Rautatieasemat taulukko
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat taulukko
@@ -41,7 +37,7 @@ export class RekisteroidyComponent implements OnInit {
     private authService: AuthService,
     private junaAsematService: JunaAsemaService,
     private havaintoAsemaService: HavaintoasemaService,
-    private formBuilder: FormBuilder) { }
+    ) {}
 
   ngOnInit() {
     // Haetaan kun sivu latautuu säähavainto- ja rautatieasemat
@@ -49,34 +45,42 @@ export class RekisteroidyComponent implements OnInit {
     this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
   }
 
-  search(term: string): void {
-    // subject vastaanottaa hakutermin
-    // this.searchTerms.next(term);
-    this.havaintoasemat = this.havaintoasemat.filter((str) => {
-      return str.name.toLocaleLowerCase().indexOf(term.toLowerCase()) >= 0;
-    });
-  }
 
+  // Säähavainto- ja rautatieasemien haku kentät
+  searchRautatie1: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
+  )
+
+  searchRautatie2: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
+  )
+
+  searchSaa1: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
+  )
+
+  searchSaa2: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
+  )
 
   // lomakkeen lähetys
   onSubmit(formData, isFormValid: boolean) {
-
-    console.log(formData);
-
-    console.log('YKSITELLEN TIEDOT SEURAAVAKSI')
-
-    console.log('käyttäjätunnus: ' + formData.tunnus)
-    console.log('salasana: ' + formData.salasana)
-    console.log('favoritesSaa1: ' + formData.favoritesSaa1)
-    console.log('favoritesSaa2: ' + formData.favoritesSaa2)
-    console.log('favoritesJuna1: ' + formData.favoritesJuna1)
-    console.log('favoritesSaa2: ' + formData.favoritesSaa2)
-
-
-/*     this.authService.rekisteroidy(formData.tunnus, formData.salasana)
+    this.authService.rekisteroidy(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
-          this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1, formData.favoritesSaa2, formData.favoritesJuna1, formData.favoritesJuna2)
+          this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1.fmisid, formData.favoritesSaa2.fmisid, formData.favoritesJuna1.stationShortCode, formData.favoritesJuna2.stationShortCode)
           .subscribe(result => {
             if (result === true) {
               this.error = 'Rekisteröinti onnistui'
@@ -92,9 +96,7 @@ export class RekisteroidyComponent implements OnInit {
       (error) => {
         this.error1 = 'Rekisteröinti epäonnistui'
         console.log('Rekisteröinti epäonnistui')
-      }); */
-    
-
+      });
   }
 
 }
