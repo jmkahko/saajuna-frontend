@@ -2,32 +2,85 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FavoriteService } from '../favorite.service';
+import { HavaintoasemaService } from '../havaintoasema.service';
+import { HavaintoAsemat } from '../havaintoasemat';
+import { JunaAsemaService } from '../juna-asema.service';
+import { RautatieAsemat } from '../rautatieAsemat';
+import { Observable, OperatorFunction } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-rekisteroidy',
   templateUrl: './rekisteroidy.component.html',
-  styleUrls: ['./rekisteroidy.component.css']
+  styleUrls: ['./rekisteroidy.component.css'],
+  providers: [NgbTypeaheadConfig] // add NgbTypeaheadConfig to the component providers
 })
 export class RekisteroidyComponent implements OnInit {
+  // Virheiden näyttämiseen
   error1 = '';
   error = '';
+
+  // Rautatie- ja säähavaintoasemien hakuun nettisivulla
+  formatterRauta = (rauta: RautatieAsemat) => rauta.stationName;
+  formatterSaa = (saa: HavaintoAsemat) => saa.name;
+
+  rautatieasemat: Array<RautatieAsemat> = []; // Rautatieasemat taulukko
+  havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat taulukko
+
+
   // injektoidaan router ja authService
   constructor(
     private router: Router,
     private favoriteService: FavoriteService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private junaAsematService: JunaAsemaService,
+    private havaintoAsemaService: HavaintoasemaService,
+    ) {}
 
   ngOnInit() {
-
+    // Haetaan kun sivu latautuu säähavainto- ja rautatieasemat
+    this.junaAsematService.haeAsemat().subscribe(data => this.rautatieasemat = data);
+    this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
   }
 
+
+  // Säähavainto- ja rautatieasemien haku kentät
+  searchRautatie1: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
+  )
+
+  searchRautatie2: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
+  )
+
+  searchSaa1: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
+  )
+
+  searchSaa2: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
+  )
+
   // lomakkeen lähetys
-  // authService palauttaa observablen jossa on joko true tai false
   onSubmit(formData, isFormValid: boolean) {
     this.authService.rekisteroidy(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
-          this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1, formData.favoritesSaa2, formData.favoritesJuna1, formData.favoritesJuna2)
+          this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1.fmisid, formData.favoritesSaa2.fmisid, formData.favoritesJuna1.stationShortCode, formData.favoritesJuna2.stationShortCode)
           .subscribe(result => {
             if (result === true) {
               this.error = 'Rekisteröinti onnistui'
@@ -44,8 +97,6 @@ export class RekisteroidyComponent implements OnInit {
         this.error1 = 'Rekisteröinti epäonnistui'
         console.log('Rekisteröinti epäonnistui')
       });
-    
-
   }
 
 }
