@@ -49,6 +49,13 @@ export class RekisteroidyComponent implements OnInit {
     this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
   }
 
+  search(term: string): void {
+    // subject vastaanottaa hakutermin
+    // this.searchTerms.next(term);
+    this.havaintoasemat = this.havaintoasemat.filter((str) => {
+      return str.name.toLocaleLowerCase().indexOf(term.toLowerCase()) >= 0;
+    });
+  }
 
 
   // lomakkeen lähetys

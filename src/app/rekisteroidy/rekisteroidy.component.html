@@ -69,6 +69,27 @@
       <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2" placeholder="Syötä sääasema suosikki" ngModel required/>
     </div>
 
+
+    <div>
+      <input
+        #searchBox
+        id="search-box"
+        class="form-control"
+        (input)="search(searchBox.value)"
+        placeholder="Etsi säähavaintoasema"
+      />
+  
+      <ul class="search-result">
+        <li *ngFor="let havaintoasema of havaintoasemat">
+          <a routerLink="/havaintoasematiedot/{{ havaintoasema._id }}">
+            {{ havaintoasema.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+
     <br />
     <div class="form-group">
       <!-- Lähetetään lomake eteenpäin -->
