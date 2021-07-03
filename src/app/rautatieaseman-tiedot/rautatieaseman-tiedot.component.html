@@ -1,20 +1,22 @@
 <div class="container">
-  <!-- Jos JSON sanomassa palautuu tyhjä taulukko näytetään virhe ilmoitus-->
-  <div class="alert alert-warning" *ngIf="!aikataulu?.length">
-    <strong>Varoitus!</strong> Paikalta ei saatu juna-tietoja.
-  </div>
-  <div *ngIf="station">
-    <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
-    <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
-    <h4 *ngIf="station.type == 'TURNOUT_IN_THE_OPEN_LINE'">Linjavaihde</h4>
-    <h4>{{ station.stationName }}</h4>
-    <h4 *ngIf="!station.passengerTraffic">Ei käytössä</h4>
-    <h4 *ngIf="station.passengerTraffic">Käytössä</h4>
+  <div class="card">
+    <!-- Jos JSON sanomassa palautuu tyhjä taulukko näytetään virhe ilmoitus-->
+    <div class="alert alert-warning" *ngIf="!aikataulu?.length">
+      <strong>Varoitus!</strong> Paikalta ei saatu juna-tietoja.
+    </div>
+    <div *ngIf="station">
+      <h4 *ngIf="station.type == 'STOPPING_POINT'">Seisake</h4>
+      <h4 *ngIf="station.type == 'STATION'">Rautatieasema</h4>
+      <h4 *ngIf="station.type == 'TURNOUT_IN_THE_OPEN_LINE'">Linjavaihde</h4>
+      <h4>{{ station.stationName }}</h4>
+      <h4 *ngIf="!station.passengerTraffic">Ei käytössä</h4>
+      <h4 *ngIf="station.passengerTraffic">Käytössä</h4>
+    </div>
   </div>
 
-  <div>
+  <div class="card">
     <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm' }}</h4>
-    <table class="table-striped">
+    <table class="table-responsive-lg">
       <thead>
         <tr>
           <!-- <th>Aika</th> -->
@@ -56,9 +58,9 @@
     </table>
   </div>
 
-  <h3>Saapuvat junat</h3>
-  <div>
-    <table class="table table-striped">
+  <div class="card">
+    <h3>Saapuvat junat</h3>
+    <table class="table-responsive-lg">
       <thead>
         <tr>
           <th>Juna</th>
@@ -103,9 +105,9 @@
     </table>
   </div>
 
-  <h3>Lähtevät junat</h3>
-  <div>
-    <table class="table table-striped">
+  <div class="card">
+    <h3>Lähtevät junat</h3>
+    <table class="table-responsive-lg">
       <thead>
         <tr>
           <th>Juna</th>
