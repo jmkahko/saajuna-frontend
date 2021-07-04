@@ -6,7 +6,7 @@
     "start": "ng serve -o",
     "build": "ng build",
     "postinstall": "ng build --aot --prod",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
