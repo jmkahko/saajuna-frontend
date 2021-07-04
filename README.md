@@ -1,51 +1,46 @@
 # JAMK Web-kehittäjä-kurssin lopputyön SääJuna frontend
 
-Backend löytyy [projektista](https://github.com/jmkahko/saajuna-backend)
+Backend löytyy [projektista](https://github.com/jmkahko/saajuna-backend).
 
 Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistuneet sekä backendin että frontendin kehittämiseen.
 
 ## Yleisesittely
 
+[Sääjuna-frontend](https://saajuna-frontend.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [Sääjuna-backend](https://saajuna-backend.herokuapp.com/) sivustolle.
+Tarjottavia frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
+
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
+SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja eli 4 yhteensä (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan, poistaa käyttäjätunnuksia ja näkee kuinka paljon tietoja on tallennettu tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
 
 ## Kuvaus teknologioista
 
-Lyhyehkö kuvaus eri teknologioiden käyttämisestä työssä.
-Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan.
-
-Lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on frontend ja backend ja sen taustalla on tietokanta.
-Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Työ on julkaistu Heroku:hun.
+Lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on sekä frontend että backend ja sen taustalla on tietokanta.
+Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Sekä frontend että backend on julkaistu Heroku:hun.
 
 Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käyttäjätunnusten luonti, muokkaus ja poisto sekä suosikkien lisäys, muokkaus ja poistaminen).
 
 ### Komennot
 
-xxx
+Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
 ## Reflektio ja ajankäyttö
 
-Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa? Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen? Mitä tietoja/taitoja sinun tulee vielä kehittää?
+Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON-muotoon vei paljon aikaa.
 
-Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON muotoon vei paljon aikaa.
+Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen ei onnistu, jos käyttäjä on rekisteröitynyt ja yrittää heti tehdä muutosta. Käyttäjätunnuksen poistaminen ja suosikkisää- ja rautatieasemien muuttaminen onnistuu, kun käyttäjä on kirjautunut ulos ja kirjautunut takaisin sisälle. Tähän meni paljon aikaa, mutta se on nyt muutettu niin, että Admin käyttäjällä on oikeus poistaa käyttäjiä.
 
-Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen ei onnistu, jos käyttäjä on rekisteröitynyt ja yrittää heti tehdä muutosta. Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen onnistuu, kun käyttäjä on kirjautunut ulos ja kirjautunut takaisin sisälle. Tähän meni useampi rupeama aikaa, muutettu, että Admin käyttäjällä on oikeus poistaa käyttäjiä.
+Junien ja rautatieasemien parserointi JSON sanomasta meni aikaa.Varsinkin alussa ennen kuin huomasi, että ajan muutoksia voi tehdä helpostikin.
 
-Junien ja rautatieasemien parserointi JSON sanomasta meni aikaa, myös ajan muutokseen, ennen kuin huomasi, että aika muuttuu helposti...
-
-Aikaa on käytetty backendiin ainakin 50-60 h ja frontendiin 40-50 h.
+Aikaa on käytetty frontendiin 40-50 h.
 
 ## Työssä hyödynnetyt tutoriaalit
-
-Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
-Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
 [Tour of Heroes](https://angular.io/tutorial) tutoriaalia on käytetty apuna frontendissä.
 
 Web-kehittäjä koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
 
-Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin yksittäisiä ohjeita StackOverFlow:sta.
+Lisäksi on käytetty myös Rautatieliikenteen ja Ilmatieteen laitoksen omia ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
 
 Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä.
 
@@ -53,7 +48,7 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 
 - [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
 - [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
-- [Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
+- [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
 - [Navbarin logo](https://www.freelogodesign.org)\
 - [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
 - [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
