@@ -23,30 +23,62 @@
 
   <!-- Suosikki rautatieaseman ja säähavaintoaseman määrittely-->
   <div *ngIf="username !== 'admin'">
-  <h4>Suosikki rautatieasemien ja säähavaintoasemien määrittely</h4>
-  <form #f="ngForm" (ngSubmit)="suosikkienPaivitys(f.value)" novalidate>
-    <div class="form-group">
-      <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
-      <input type="text" class="form-control" id="favoritesJuna1" name="favoritesJuna1" placeholder={{suosikit.favoritesJuna1}} [(ngModel)]="favoritesJuna1" ngModel required/>
-      <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
-      <input type="text" class="form-control" id="favoritesJuna2" name="favoritesJuna2"placeholder={{suosikit.favoritesJuna2}}  [(ngModel)]="favoritesJuna2" ngModel required/>
-      <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
-      <input type="text" class="form-control" id="favoritesSaa1" name="favoritesSaa1" placeholder={{suosikit.favoritesSaa1}} [(ngModel)]="favoritesSaa1" ngModel required/>
-      <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
-      <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2" placeholder={{suosikit.favoritesSaa2}} [(ngModel)]="favoritesSaa2" ngModel required/>
-    </div>
+    <h4>Suosikki rautatieasemien ja säähavaintoasemien määrittely</h4>
+    <form #f="ngForm" (ngSubmit)="suosikkienPaivitys(f.value)" novalidate>
+      <div class="form-group">
+        <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="favoritesJuna1"
+          name="favoritesJuna1"
+          placeholder="{{ suosikit.favoritesJuna1 }}"
+          [(ngModel)]="favoritesJuna1"
+          ngModel
+          required
+        />
+        <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="favoritesJuna2"
+          name="favoritesJuna2"
+          placeholder="{{ suosikit.favoritesJuna2 }}"
+          [(ngModel)]="favoritesJuna2"
+          ngModel
+          required
+        />
+        <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="favoritesSaa1"
+          name="favoritesSaa1"
+          placeholder="{{ suosikit.favoritesSaa1 }}"
+          [(ngModel)]="favoritesSaa1"
+          ngModel
+          required
+        />
+        <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="favoritesSaa2"
+          name="favoritesSaa2"
+          placeholder="{{ suosikit.favoritesSaa2 }}"
+          [(ngModel)]="favoritesSaa2"
+          ngModel
+          required
+        />
+      </div>
 
-    <br />
-    <div class="form-group">
-      <!-- Lähetetään lomake eteenpäin -->
-      <button type="submit" class="btn btn-success">Päivitä suosikit</button>
-    </div>
-  </form>
-
-</div>
-
-
-
+      <br />
+      <div class="form-group">
+        <!-- Lähetetään lomake eteenpäin -->
+        <button type="submit" class="btn btn-success">Päivitä suosikit</button>
+      </div>
+    </form>
+  </div>
 
   <div *ngIf="username !== 'admin'">
     <div class="d-flex mt-3 mb-3">
@@ -111,7 +143,6 @@
           <strong>Varoitus!</strong> Salasanasi on liian lyhyt.
         </div>
       </div>
-
       <br />
       <div class="form-group">
         <!-- Lähetetään lomake eteenpäin -->
@@ -138,14 +169,11 @@
   </div>
   <br />
 
-  
-
   <!-- Näytetään admin käyttäjälle rautatieasemien ja käyttäjien ylläpito -->
   <div *ngIf="username === 'admin'">
     <h4>Rautatieasemien ylläpito</h4>
     <p>Asemia tietokannassa: {{ rautatietasemat.length }}</p>
     <p>Säähavaintoasemia tietokannassa: {{ havaintoasemat.length }}</p>
-
 
     <h2>Käyttäjätunnuksien ylläpito</h2>
     <div>
@@ -159,14 +187,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let k of kayttajat">
-            <td *ngIf="k.username !== 'admin'">{{k.username}}</td>
-            <td *ngIf="k.username !== 'admin'">{{k._id}}</td>
-            <td *ngIf="k.username !== 'admin'"><span id="del" class="btn" (click)="poistaKayttaja(k)">Poista</span></td>
+            <td *ngIf="k.username !== 'admin'">{{ k.username }}</td>
+            <td *ngIf="k.username !== 'admin'">{{ k._id }}</td>
+            <td *ngIf="k.username !== 'admin'">
+              <span id="del" class="btn" (click)="poistaKayttaja(k)"
+                >Poista</span
+              >
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-
 
     <h2>Asematietojen ylläpito</h2>
     <p>
