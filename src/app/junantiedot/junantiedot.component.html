@@ -11,7 +11,10 @@
     <div class="card">
       <!-- Junan nopeus ym. tietoja -->
       <div class="sijainti" *ngIf="junanpaikka?.length !== 0">
-        <h1>Junan sijainti</h1>
+        <h1>
+          Junan {{ junaaikataulu.trainNumber }}
+          {{ junaaikataulu.trainType }} sijainti
+        </h1>
         <p>Junan nopeus tällä hetkellä {{ junanpaikka.speed }} km/h.</p>
 
         <p>
