@@ -56,4 +56,5 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 [Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
 [Navbarin logo](https://www.freelogodesign.org)\
 [Footer ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)
-[Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)
+[Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
+[Ulkoasu CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)

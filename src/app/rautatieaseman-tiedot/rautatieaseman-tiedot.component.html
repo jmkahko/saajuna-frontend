@@ -5,7 +5,7 @@
       <strong>Varoitus!</strong> Asemalta ei saatu juna-tietoja.
     </div>
     <div *ngIf="station">
-      <h4>{{ station.stationName }}</h4>
+      <h1>{{ station.stationName }}</h1>
       <p *ngIf="station.type == 'STOPPING_POINT' && !station.passengerTraffic">
         Aseman tyyppi on Seisake ja se ei ole käytössä.
       </p>
