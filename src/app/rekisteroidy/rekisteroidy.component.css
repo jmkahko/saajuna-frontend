@@ -13,6 +13,7 @@ button {
   box-shadow: 5px 6px 6px 2px #e9ecef;
   text-align: center;
 }
+
 ngb-accordion ::ng-deep .card-header button {
   width: 100%;
   padding: 1.125rem 2rem;
