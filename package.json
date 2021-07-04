@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build",
+    "postinstall": "ng build --aot --prod",
     "heroku-postbuild": "ng build --prod"
   },
   "private": true,
