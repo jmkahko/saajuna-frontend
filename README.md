@@ -41,20 +41,20 @@ Aikaa on käytetty backendiin ainakin 50-60 h ja frontendiin 40-50 h.
 Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
 Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
-[Tour of Heroes](https://angular.io/tutorial) frontendissä.
+[Tour of Heroes](https://angular.io/tutorial) tutoriaalia on käytetty apuna frontendissä.
 
-Koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
+Web-kehittäjä koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
 
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin yksittäisiä ohjeita StackOverFlow:sta.
 
-Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä
+Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä.
 
 ## Linkit
 
-[Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
-[Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
-[Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
-[Navbarin logo](https://www.freelogodesign.org)\
-[Footer ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
-[Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
-[Ulkoasu CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)\
+- [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
+- [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
+- [Pääsivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
+- [Navbarin logo](https://www.freelogodesign.org)\
+- [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
+- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
+- [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)\
