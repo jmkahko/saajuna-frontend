@@ -77,10 +77,39 @@ export class RekisteroidyComponent implements OnInit {
 
   // lomakkeen lähetys
   onSubmit(formData, isFormValid: boolean) {
+    // Esitellään sää- ja junaasemien muuttujat
+    let lsaa1, lsaa2, ljuna1, ljuna2;
+
+    // Tarkistaan onko tuleva tieto undefined tai tyhjä, jos on niin viedään tieto null. Muuten tallennetaan tuleva data
+    if (formData.favoritesSaa1 === undefined || formData.favoritesSaa1 === '') {
+      lsaa1 = null;
+    } else {
+      lsaa1 = formData.favoritesSaa1.fmisid;
+    }
+
+    if (formData.favoritesSaa2 === undefined || formData.favoritesSaa2 === '') {
+      lsaa2 = null;
+    } else {
+      lsaa2 = formData.favoritesSaa2.fmisid;
+    }
+
+    if (formData.favoritesJuna1 === undefined || formData.favoritesJuna1 === '') {
+      ljuna1 = null;
+    } else {
+      ljuna1 = formData.favoritesJuna1.stationShortCode;
+    }
+
+    if (formData.favoritesJuna2 === undefined || formData.favoritesJuna2 === '') {
+      ljuna2 = null;
+    } else {
+      ljuna2 = formData.favoritesJuna2.stationShortCode;
+    }
+
+    // Tiedon tallennus
     this.authService.rekisteroidy(formData.tunnus, formData.salasana)
       .subscribe(result => {
         if (result === true) {
-          this.favoriteService.lisaaSuosikit(formData.tunnus, formData.favoritesSaa1.fmisid, formData.favoritesSaa2.fmisid, formData.favoritesJuna1.stationShortCode, formData.favoritesJuna2.stationShortCode)
+          this.favoriteService.lisaaSuosikit(formData.tunnus, lsaa1, lsaa2, ljuna1, ljuna2)
           .subscribe(result => {
             if (result === true) {
               this.error = 'Rekisteröinti onnistui'
