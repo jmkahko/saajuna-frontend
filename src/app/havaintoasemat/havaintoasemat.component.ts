@@ -17,14 +17,24 @@ export class HavaintoasematComponent implements OnInit {
       .haeHavaintoAsemat()
       .subscribe((data) => (this.havaintoasemat = data));
   }
-  // Push a search term into the observable stream.
+
+  // Haetaan säähavaintoasema
   search(term: string): void {
-    // subject vastaanottaa hakutermin
-    // this.searchTerms.next(term);
-    this.hasemat = this.havaintoasemat.filter((str) => {
-      return str.name.toLocaleLowerCase().indexOf(term.toLowerCase()) >= 0;
-    });
+    // Kun kirjaimia on syötetty 2 tai enemmän, näytetään maksimissaan 10 hakutulosta
+    if (term.length > 1) {
+      this.hasemat = this.havaintoasemat.filter((str) => {
+        return str.name.toLocaleLowerCase().indexOf(term.toLowerCase()) >= 0;
+      }).slice(0,10);
+    }
+
+    // Kun kirjaimia on syötetty 0 niin ei näytetä yhtään hakutulosta listasta
+    if (term.length === 0) {
+      this.hasemat = this.havaintoasemat.filter((str) => {
+        return str.name.toLocaleLowerCase().indexOf(term.toLowerCase()) >= 0;
+      }).slice(0,0);
+    }
   }
 
   ngOnInit(): void {}
 }
+
