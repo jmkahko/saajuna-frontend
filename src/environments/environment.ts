@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrlEnv: 'http://localhost:3000',
+  apiUrlEnv: 'https://saajuna-backend.herokuapp.com',
 };
 
 /*
