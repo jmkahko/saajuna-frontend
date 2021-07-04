@@ -3,3 +3,23 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.card {
+  padding: 1rem;
+  margin: 1.5rem 4vw;
+  border-radius: 1rem;
+  background-color: rgba(238, 237, 237, 0.22);
+  border-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  text-align: center;
+}
+ngb-accordion ::ng-deep .card-header button {
+  width: 100%;
+  padding: 1.125rem 2rem;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+/* Rivin linkitys koodi löytyi täältä
+https://stackoverflow.com/questions/63289105/ngb-accordion-expand-when-click-on-row
+ */
