@@ -7,7 +7,7 @@
 <div class="card" *ngIf="login && username !== 'admin'">
   <div class="grid-container" *ngIf="login && username !== 'admin'">
     <!-- Sää suosikkki 1-->
-    <div class="suosikkisaa1">
+    <div class="suosikkisaa1" *ngIf="suosikkisaa1 !== null">
       <div class="card">
         <h4 class="card-title">
           <h1>Suosikki sää- ja rautatieasemat</h1>
@@ -58,7 +58,7 @@
     </div>
 
     <!-- Sää suosikkki 2-->
-    <div class="suosikkisaa2">
+    <div class="suosikkisaa2" *ngIf="suosikkisaa2 !== null">
       <div class="card">
         <h4 class="card-title">
           Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2.time | date: 'H:mm' }}
@@ -108,7 +108,7 @@
     </div>
 
     <!-- Rautatie suosikkki 1-->
-    <div class="suosikkirautatie1">
+    <div class="suosikkirautatie1" *ngIf="suosikkirautatie1!== null">
       <div class="card">
         <h4 class="card-title">Rautatie {{ junaasema1.stationName }}</h4>
         <table class="table-responsive-lg">
@@ -193,7 +193,7 @@
     </div>
 
     <!-- Rautatie suosikkki 2-->
-    <div class="suosikkirautatie2">
+    <div class="suosikkirautatie2" *ngIf="suosikkirautatie2!== null">
       <div class="card">
         <h4 class="card-title">Rautatie {{ junaasema2.stationName }}</h4>
         <table class="table-responsive-lg">
