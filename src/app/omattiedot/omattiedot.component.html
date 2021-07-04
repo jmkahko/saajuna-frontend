@@ -26,50 +26,50 @@
     <h4>Suosikki rautatieasemien ja säähavaintoasemien määrittely</h4>
     <form #f="ngForm" (ngSubmit)="suosikkienPaivitys(f.value)" novalidate>
       <div class="form-group">
+
         <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="favoritesJuna1"
-          name="favoritesJuna1"
-          placeholder="{{ suosikit.favoritesJuna1 }}"
+        <input type="search" class="form-control" id="favoritesJuna1" name="favoritesJuna1"
+          placeholder="{{ favoritesJuna1Name }}"
           [(ngModel)]="favoritesJuna1"
-          ngModel
-          required
-        />
+          [ngbTypeahead]="searchRautatie1"
+          [inputFormatter]="formatterRauta"
+          [resultFormatter]="formatterRauta"
+          [editable]='false' 
+          ngModel 
+          required/>
+
         <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="favoritesJuna2"
-          name="favoritesJuna2"
-          placeholder="{{ suosikit.favoritesJuna2 }}"
+        <input type="search"  class="form-control"  id="favoritesJuna2" name="favoritesJuna2"
+          placeholder="{{ favoritesJuna2Name }}"
           [(ngModel)]="favoritesJuna2"
-          ngModel
-          required
-        />
+          [ngbTypeahead]="searchRautatie2"
+          [inputFormatter]="formatterRauta"
+          [resultFormatter]="formatterRauta"
+          [editable]='false' 
+          ngModel 
+          required/>
+
         <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="favoritesSaa1"
-          name="favoritesSaa1"
-          placeholder="{{ suosikit.favoritesSaa1 }}"
+        <input type="search" class="form-control" id="favoritesSaa1" name="favoritesSaa1"
+          placeholder="{{ favoritesSaa1Name }}"
           [(ngModel)]="favoritesSaa1"
-          ngModel
-          required
-        />
+          [ngbTypeahead]="searchSaa1"
+          [inputFormatter]="formatterSaa"
+          [resultFormatter]="formatterSaa"
+          [editable]='false' 
+          ngModel 
+          required/>
+
         <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="favoritesSaa2"
-          name="favoritesSaa2"
-          placeholder="{{ suosikit.favoritesSaa2 }}"
+        <input type="search" class="form-control" id="favoritesSaa2" name="favoritesSaa2"
+          placeholder="{{ favoritesSaa2Name }}"
           [(ngModel)]="favoritesSaa2"
-          ngModel
-          required
-        />
+          [ngbTypeahead]="searchSaa2"
+          [inputFormatter]="formatterSaa"
+          [resultFormatter]="formatterSaa"
+          [editable]='false' 
+          ngModel 
+          required/>
       </div>
 
       <br />
