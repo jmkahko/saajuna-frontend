@@ -63,7 +63,8 @@ export class OmattiedotComponent implements OnInit {
       // Haetaan suosikki säähavainto- ja rautatieasemat
       this.junaAsematService.haeAsemat().subscribe(data => this.rautatietasemat = data);
       this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
-      
+      this.haeKaikkiSuosikit(); // Haetaan kaikki suosikit
+
       // Jos admin on kirjautunut, niin haetaan käyttäjät
       if (this.username === 'admin') {
         this.haeKayttajat();
@@ -74,7 +75,6 @@ export class OmattiedotComponent implements OnInit {
     // Jos on joku muu kuin admin-käyttäjä niin haetaan tiedot
     if (this.username !== 'admin') {
       this.haeSuosikit(this.username);
-      this.haeKaikkiSuosikit();
     }
   }
 
