@@ -8,7 +8,7 @@
       <h1>Rekisteröidy SääJuna -sovelluksen käyttäjäksi</h1>
       <p>
         Rekisteröinti mahdollistaa omien säähavaintojen ja juna-asemien
-        tallennuksen.
+        tallennuksen suosikeiksi.
       </p>
     </div>
     <div *ngIf="error" class="alert alert-success">
@@ -20,7 +20,7 @@
           <ngb-panel title="Käyttäjätunnus ja salasana">
             <ng-template ngbPanelContent>
               <div class="form-group">
-                <label for="tunnus">Tunnus:</label>
+                <!-- <label for="tunnus">Tunnus:</label> -->
                 <input
                   #tunnus="ngModel"
                   type="text"
@@ -41,7 +41,7 @@
               </div>
               <div class="form-group">
                 <div>
-                  <label for="salasana">Salasana:</label>
+                  <!-- <label for="salasana">Salasana:</label> -->
                   <input
                     #salasana="ngModel"
                     type="password"
@@ -73,7 +73,7 @@
           <ngb-panel id="static-2" title="Rautatieasemat - suosikit">
             <ng-template ngbPanelContent>
               <div class="form-group">
-                <p>Tallenna suosikkirautatieasemasi.</p>
+                <p>Tallenna suosikkirautatieasemasi</p>
                 <input
                   type="text"
                   class="form-control"
@@ -107,7 +107,7 @@
           <ngb-panel id="static-3" title="Säähavaintoasemat - suosikit">
             <ng-template ngbPanelContent>
               <div class="form-group">
-                <p>Tallenna haluamasi säähavaintoasema suosikiksi.</p>
+                <p>Tallenna haluamasi säähavaintoasema suosikiksi</p>
                 <input
                   type="text"
                   class="form-control"
@@ -140,13 +140,16 @@
           </ngb-panel>
           <ngb-panel id="static-4" title="Tallenna">
             <ng-template ngbPanelContent>
-              <p>Kun tiedot on syötetty, voit rekisteröityä</p>
+              <p>
+                Kun tiedot on syötetty, voit rekisteröityä
+                Rekisteröidy-painikkeella. Lomakkeen tiedot voit tyhjentää
+                Tyhjennä-painikkeella.
+              </p>
               <div class="form-group">
-                Lähetä lomake
                 <button type="submit" class="btn btn-success">
                   Rekisteröidy
                 </button>
-                Tyhjennä lomake
+
                 <button
                   type="button"
                   class="btn btn-danger"
@@ -157,8 +160,9 @@
               </div>
             </ng-template>
           </ngb-panel>
-          <ngb-panel> </ngb-panel
-        ></ngb-accordion>
+
+          ></ngb-accordion
+        >
       </div>
     </form>
   </div>
