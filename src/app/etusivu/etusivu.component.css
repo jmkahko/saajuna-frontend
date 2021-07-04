@@ -14,15 +14,6 @@ th {
   box-shadow: 5px 6px 6px 2px #e9ecef;
   text-align: center;
 }
-.tiedot {
-  padding: 1rem;
-  margin: 1.5rem 4vw;
-  border-radius: 1rem;
-  background-color: rgba(238, 237, 237, 0.22);
-  border-color: rgba(238, 237, 237, 0.22);
-  box-shadow: 5px 6px 6px 2px #e9ecef;
-  text-align: center;
-}
 
 .grid-container {
   display: grid;
