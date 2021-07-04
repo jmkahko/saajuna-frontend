@@ -1,6 +1,6 @@
 <div class="container">
   <div *ngIf="error1" class="alert alert-danger">
-    <strong>Rekisteröinti epäonnistui!</strong> käyttäjätunnus käytössä.
+    <strong>Rekisteröinti epäonnistui!</strong> käyttäjätunnus käytössä tai virheellinen.
   </div>
   <h2>Rekisteröidy Sääjuna -sovelluksen käyttäjäksi</h2>
   <div class="d-flex mt-3 mb-3">
@@ -10,107 +10,175 @@
   <div *ngIf="error" class="alert alert-success">
     <strong>Rekisteröinti onnistui!</strong> Kirjaudu sisään
   </div>
+
+
+  <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1">
+    <ngb-panel id="custom-panel-1">
+      <ng-template ngbPanelHeader let-opened="opened">
+        <div class="d-flex align-items-center justify-content-between">
+          <h5 class="m-0">Käyttäjätunnus ja salasana</h5>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Tekstiä
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-2')">Seuraava</button>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-2">
+      <ng-template ngbPanelHeader>
+        <h5 class="m-0">Suosikki rautatieasemat</h5>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Rautatieasemat tääällä
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-1')">Takaisin</button>
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-3')">Seuraava</button>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-3">
+      <ng-template ngbPanelHeader>
+        <h5 class="m-0">Suosikki paikkakuntien sää</h5>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Sää täällä
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-2')">Takaisin</button>
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-4')">Seuraava</button>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-4">
+      <ng-template ngbPanelHeader>
+        <h5 class="m-0">Valmis</h5>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Nyt on valmis
+        <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-3')">Takaisin</button>
+      </ng-template>
+    </ngb-panel>
+
+  </ngb-accordion>
+
+
+
+
+
+
+
+
+
+
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f.valid)" novalidate>
-    <div class="form-group">
-      <label for="tunnus">Tunnus:</label>
-      <input
-        #tunnus="ngModel"
-        type="text"
-        class="form-control"
-        placeholder="Syötä tunnus"
-        name="tunnus"
-        ngModel
-        required
-      />
-      <div
-        class="alert alert-danger"
-        [hidden]="!f.form.hasError('required', 'tunnus') || f.pristine"
-      >
-        <strong>Varoitus!</strong> Nimi vaaditaan
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div>
-        <label for="salasana">Salasana:</label>
-        <input
-          #salasana="ngModel"
-          type="password"
-          class="form-control"
-          placeholder="Syötä salasana"
-          name="salasana"
-          ngModel
-          required
-          minlength="5"
-        />
-        <div
-          class="alert alert-danger"
-          [hidden]="!f.form.hasError('required', 'salasana') || f.pristine"
-        >
-          <strong>Varoitus!</strong> Salasana vaaditaan
-        </div>
-        <div
-          class="alert alert-danger"
-          [hidden]="!f.form.hasError('minlength', 'salasana')"
-        >
-          <strong>Varoitus!</strong> Salasana on liian lyhyt
-        </div>
-      </div>
-    </div>
-    
-
-    <label>Suosikki rautatieasemat</label>
-    <div class="form-group">
-    <input type="text" class="form-control" id="favoritesJuna1" name="favoritesJuna1"
-      placeholder="Syötä rautatieasema suosikki"
-      [ngbTypeahead]="searchRautatie1"
-      [inputFormatter]="formatterRauta"
-      [resultFormatter]="formatterRauta"
-      [editable]='false' 
-      ngModel 
-      required/>
-
-      <input type="text" class="form-control" id="favoritesJuna2" name="favoritesJuna2"
-      placeholder="Syötä rautatieasema suosikki"
-      [ngbTypeahead]="searchRautatie2"
-      [inputFormatter]="formatterRauta"
-      [resultFormatter]="formatterRauta"
-      [editable]='false' 
-      ngModel 
-      required/>
-
-      <label>Suosikki säähavaintoasemat</label>
-      <input type="text" class="form-control" id="favoritesSaa1" name="favoritesSaa1"
-      placeholder="Syötä sääasema suosikki"
-      [ngbTypeahead]="searchSaa1"
-      [inputFormatter]="formatterSaa"
-      [resultFormatter]="formatterSaa"
-      [editable]='false' 
-      ngModel 
-      required/>
-
-      <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2"
-      placeholder="Syötä sääasema suosikki"
-      [ngbTypeahead]="searchSaa2"
-      [inputFormatter]="formatterSaa"
-      [resultFormatter]="formatterSaa"
-      [editable]='false' 
-      ngModel 
-      required/>
-
-
-
-
-    </div>
-
-    <br />
-    <div class="form-group">
-      <!-- Lähetetään lomake eteenpäin -->
-      <button type="submit" class="btn btn-success">Rekisteröidy</button>
-      <!-- Saadaan tyhjennettyä tiedot -->
-      <button type="button" class="btn btn-danger" (click)="f.resetForm()">
-        Tyhjennä
-      </button>
-    </div>
+    <ngb-accordion #acc="ngbAccordion" activeIds="static-1">
+      <ngb-panel>
+        <ng-template ngbPanelContent>
+          <div class="form-group">
+            <label for="tunnus">Tunnus:</label>
+            <input
+              #tunnus="ngModel"
+              type="text"
+              class="form-control"
+              placeholder="Syötä tunnus"
+              name="tunnus"
+              ngModel
+              required
+              />
+              <div
+                class="alert alert-danger"
+                [hidden]="!f.form.hasError('required', 'tunnus') || f.pristine"
+              >
+              <strong>Varoitus!</strong> Nimi vaaditaan
+              </div>
+          </div>
+      
+          <div class="form-group">
+            <div>
+              <label for="salasana">Salasana:</label>
+              <input
+                #salasana="ngModel"
+                type="password"
+                class="form-control"
+                placeholder="Syötä salasana"
+                name="salasana"
+                ngModel
+                required
+                minlength="5"
+              />
+              <div
+                class="alert alert-danger"
+                [hidden]="!f.form.hasError('required', 'salasana') || f.pristine"
+              >
+                <strong>Varoitus!</strong> Salasana vaaditaan
+              </div>
+              <div
+                class="alert alert-danger"
+                [hidden]="!f.form.hasError('minlength', 'salasana')"
+              >
+                <strong>Varoitus!</strong> Salasana on liian lyhyt
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('static-2')">Seuraava</button>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-2" title="Suosikki rautatieasemat">
+        <ng-template ngbPanelContent>
+          <div class="form-group">
+            <p>Syötä suosikki rautatieasemasi</p>
+            <input type="text" class="form-control" id="favoritesJuna1" name="favoritesJuna1"
+              placeholder="Syötä rautatieasema suosikki"
+              [ngbTypeahead]="searchRautatie1"
+              [inputFormatter]="formatterRauta"
+              [resultFormatter]="formatterRauta"
+              [editable]='false' 
+              ngModel 
+              required/>
+        
+            <input type="text" class="form-control" id="favoritesJuna2" name="favoritesJuna2"
+            placeholder="Syötä rautatieasema suosikki"
+            [ngbTypeahead]="searchRautatie2"
+            [inputFormatter]="formatterRauta"
+            [resultFormatter]="formatterRauta"
+            [editable]='false' 
+            ngModel 
+            required/>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-3" title="Suosikki säähavaintoasemat">
+        <ng-template ngbPanelContent>
+          <div class="form-group">
+            <p>Syötä suosikki paikkakuntasi säähavainto asema</p>
+            <input type="text" class="form-control" id="favoritesSaa1" name="favoritesSaa1"
+            placeholder="Syötä sääasema suosikki"
+            [ngbTypeahead]="searchSaa1"
+            [inputFormatter]="formatterSaa"
+            [resultFormatter]="formatterSaa"
+            [editable]='false' 
+            ngModel 
+            required/>
+      
+            <input type="text" class="form-control" id="favoritesSaa2" name="favoritesSaa2"
+            placeholder="Syötä sääasema suosikki"
+            [ngbTypeahead]="searchSaa2"
+            [inputFormatter]="formatterSaa"
+            [resultFormatter]="formatterSaa"
+            [editable]='false' 
+            ngModel 
+            required/>
+          </div>
+        </ng-template>
+      </ngb-panel>
+        <ngb-panel id="static-4" title="Valmis">
+          <ng-template ngbPanelContent>
+            <p>Kun tiedot on syötetty voit rekisteröityä</p>
+              <div class="form-group">
+                <!-- Lähetetään lomake eteenpäin -->
+                <button type="submit" class="btn btn-success">Rekisteröidy</button>
+                <!-- Saadaan tyhjennettyä tiedot -->
+                <button type="button" class="btn btn-danger" (click)="f.resetForm()">
+                  Tyhjennä
+                </button>
+              </div>
+          </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
   </form>
 </div>
