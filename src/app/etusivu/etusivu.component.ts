@@ -91,23 +91,23 @@ export class EtusivuComponent implements OnInit {
       
     });
 
-    // Haetaan säähavaintoasemat
-    this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
-
     // Haetaan suosikki säähavaintoasemien fmisid numeroille havaintoaseman kokonimet
-    this.favoriteService.haeSuosikit(username).subscribe((data:any) => {
-      for (let x = 0; x < this.havaintoasemat.length; x++) {
+    this.favoriteService.haeSuosikit(username).subscribe((dataUser:any) => {
 
-        // Haetaan suosikki 1 säähavaintoaseman kokonimi
-        if (this.havaintoasemat[x].fmisid === data.favoritesSaa1) {
-          this.suosikkisaaasema1 = this.havaintoasemat[x].name;
+      // Haetaan säähavaintoasemat
+      this.havaintoAsemaService.haeHavaintoAsemat().subscribe((havaintoAsemat) => {
+        for (let x = 0; x < havaintoAsemat.length; x++) {
+          // Haetaan suosikki 1 säähavaintoaseman kokonimi
+          if (havaintoAsemat[x].fmisid === dataUser.favoritesSaa1) {
+            this.suosikkisaaasema1 = havaintoAsemat[x].name;
+          }
+        
+          // Haetaan suosikki 2 säähavaintoaseman kokonimi
+          if (havaintoAsemat[x].fmisid === dataUser.favoritesSaa2) {
+            this.suosikkisaaasema2 = havaintoAsemat[x].name;
+          }
         }
-      
-        // Haetaan suosikki 2 säähavaintoaseman kokonimi
-        if (this.havaintoasemat[x].fmisid === data.favoritesSaa2) {
-          this.suosikkisaaasema2 = this.havaintoasemat[x].name;
-        }
-      }
+      });
     });
   }
 
