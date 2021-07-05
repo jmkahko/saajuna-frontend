@@ -24,6 +24,31 @@ Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käytt�
 
 Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
+Heroku palveluun sovelluksen laitto vaatii muutos package.json tiedostoon
+
+
+Heroku
+```
+  "scripts": {
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
+    "postinstall": "ng build --aot --prod",
+    "heroku-postbuild": "ng build --prod --aot"
+  },
+```
+Paikallinen
+```
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve -o",
+    "build": "ng build",
+    "postinstall": "ng build --aot --prod",
+    "heroku-postbuild": "ng build --prod --aot"
+  },
+```
+
+
 ## Reflektio ja ajankäyttö
 
 Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON-muotoon vei paljon aikaa.
@@ -53,3 +78,4 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 - [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
 - [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
 - [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)\
+- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)\

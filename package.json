@@ -5,14 +5,17 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build",
-    "heroku-postbuild": "ng build --configuration production"
+    "postinstall": "ng build --aot --prod",
+    "heroku-postbuild": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.1",
     "@angular/cdk": "^11.2.13",
+    "@angular/cli": "~12.1.1",
     "@angular/common": "~12.1.1",
     "@angular/compiler": "~12.1.1",
+    "@angular/compiler-cli": "~12.1.1",
     "@angular/core": "~12.1.1",
     "@angular/forms": "~12.1.1",
     "@angular/localize": "~12.1.1",
@@ -23,10 +26,13 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^5.0.1",
+    "express": "^4.17.1",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "typescript": "~4.3.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -35,5 +41,9 @@
     "@angular/compiler-cli": "~12.1.1",
     "@types/node": "^12.11.1",
     "typescript": "~4.3.5"
+  },
+  "engines": {
+    "node": "14.17.2",
+    "npm": "6.14.13"
   }
 }
