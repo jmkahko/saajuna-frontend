@@ -19,7 +19,7 @@
 
         <p>
           Sijaintitieto on päivittynyt viimeksi
-          {{ junanpaikka.timestamp | date: 'dd.MM H:mm' }}.
+          {{ junanpaikka.timestamp | date: 'dd.MM H:mm':'fi' }}.
         </p>
         <p>Sijaintitieto päivittyy n. 15 sekunnin välein.</p>
         <p>
@@ -62,11 +62,11 @@
               <tr *ngIf="aikataulu.trainStopping === true">
                 <td>{{ aikataulu.stationLongName }}</td>
                 <td *ngIf="!aikataulu.liveEstimateTime">
-                  <del>{{ aikataulu.scheduledTime | date: 'H:mm' }}</del>
-                  {{ aikataulu.actualTime | date: 'H:mm' }}
+                  <del>{{ aikataulu.scheduledTime | date: 'H:mm':'fi' }}</del>
+                  {{ aikataulu.actualTime | date: 'H:mm':'fi' }}
                 </td>
                 <td *ngIf="aikataulu.liveEstimateTime">
-                  {{ aikataulu.scheduledTime | date: 'H:mm' }}
+                  {{ aikataulu.scheduledTime | date: 'H:mm':'fi' }}
                 </td>
                 <td *ngIf="!aikataulu.liveEstimateTime">
                   {{ aikataulu.differenceInMinutes }}
@@ -101,7 +101,7 @@
             <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
               <tr *ngIf="aikataulu.trainStopping === true">
                 <td>{{ aikataulu.stationLongName }}</td>
-                <td>{{ aikataulu.scheduledTime | date: 'H:mm' }}</td>
+                <td>{{ aikataulu.scheduledTime | date: 'H:mm':'fi' }}</td>
               </tr>
             </tbody>
           </table>

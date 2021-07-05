@@ -1,7 +1,4 @@
 <div class="container-md">
-  <div *ngIf="saanyt.time === '2020-09-01T09:00:00Z'" class="alert alert-warning">
-    <strong>Varoitus!</strong> Säätietojen haku epäonnistui
-  </div>
   <div class="card">
     <div class="card">
       <div *ngIf="havaintoasema">
@@ -31,7 +28,7 @@
 
     <div>
       <div class="card">
-        <h4>Sää tällä hetkellä {{ saanyt.time | date: 'dd.MM H:mm' }}</h4>
+        <h4>Sää tällä hetkellä {{ saanyt.time | date: 'dd.MM H:mm':'fi' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
@@ -102,7 +99,7 @@
 
     <div>
       <div class="card">
-        <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm' }}</h4>
+        <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm':'fi' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
