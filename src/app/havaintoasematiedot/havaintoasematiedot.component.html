@@ -28,7 +28,7 @@
 
     <div>
       <div class="card">
-        <h4>Sää tällä hetkellä {{ saanyt.time | date: 'dd.MM H:mm' :'Europe/Helsinki' }}</h4>
+        <h4>Sää tällä hetkellä {{ saanyt.time | date: 'dd.MM H:mm' : '+0300' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
@@ -99,7 +99,7 @@
 
     <div>
       <div class="card">
-        <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm':'Europe/Helsinki' }}</h4>
+        <h4>Sääennuste {{ saaennuste.time | date: 'dd.MM H:mm':'+0300' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
