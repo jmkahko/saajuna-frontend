@@ -11,7 +11,7 @@
       <div class="card">
         <h4 class="card-title">
           <h1>Suosikki sää- ja rautatieasemat</h1>
-          Sää {{ suosikkisaaasema1 }} {{ suosikkisaa1.time | date: 'H:mm':'fi' }}
+          Sää {{ suosikkisaaasema1 }} {{ suosikkisaa1.time | date: 'H:mm':'Europe/Helsinki' }}
         </h4>
         <table class="table-responsive-lg">
           <thead>
@@ -61,7 +61,7 @@
     <div class="suosikkisaa2" *ngIf="suosikkisaa2 !== null">
       <div class="card">
         <h4 class="card-title">
-          Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2.time | date: 'H:mm':'fi' }}
+          Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2.time | date: 'H:mm':'Europe/Helsinki' }}
         </h4>
         <table class="table-responsive-lg">
           <thead>
@@ -135,9 +135,9 @@
                 "
               >
                 <del>{{
-                  aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm':'fi'
+                  aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm'
                 }}</del>
-                {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm':'fi' }}
+                {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm' }}
               </td>
               <td
                 *ngIf="
@@ -145,7 +145,7 @@
                   aikataulu.arrivalDifferenceInMinutes === undefined
                 "
               >
-                {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm':'fi' }}
+                {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}
               </td>
             </tr>
           </tbody>
@@ -174,9 +174,9 @@
                 "
               >
                 <del>{{
-                  aikataulu.departureScheduledTime | date: 'dd.MM H:mm':'fi'
+                  aikataulu.departureScheduledTime | date: 'dd.MM H:mm'
                 }}</del>
-                {{ aikataulu.departureLiveEstimateTime | date: 'H:mm':'fi' }}
+                {{ aikataulu.departureLiveEstimateTime | date: 'H:mm' }}
               </td>
               <td
                 *ngIf="
@@ -184,7 +184,7 @@
                   aikataulu.departureDifferenceInMinutes === undefined
                 "
               >
-                {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm':'fi' }}
+                {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm' }}
               </td>
             </tr>
           </tbody>
@@ -220,9 +220,9 @@
                 "
               >
                 <del>{{
-                  aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm':'fi'
+                  aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm'
                 }}</del>
-                {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm':'fi' }}
+                {{ aikataulu.arrivalLiveEstimateTime | date: 'H:mm' }}
               </td>
               <td
                 *ngIf="
@@ -230,7 +230,7 @@
                   aikataulu.arrivalDifferenceInMinutes === undefined
                 "
               >
-                {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm':'fi' }}
+                {{ aikataulu.arrivalScheduledTime | date: 'dd.MM H:mm' }}
               </td>
             </tr>
           </tbody>
@@ -259,9 +259,9 @@
                 "
               >
                 <del>{{
-                  aikataulu.departureScheduledTime | date: 'dd.MM H:mm':'fi'
+                  aikataulu.departureScheduledTime | date: 'dd.MM H:mm'
                 }}</del>
-                {{ aikataulu.departureLiveEstimateTime | date: 'H:mm':'fi' }}
+                {{ aikataulu.departureLiveEstimateTime | date: 'H:mm' }}
               </td>
               <td
                 *ngIf="
@@ -269,7 +269,7 @@
                   aikataulu.departureDifferenceInMinutes === undefined
                 "
               >
-                {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm':'fi' }}
+                {{ aikataulu.departureScheduledTime | date: 'dd.MM H:mm' }}
               </td>
             </tr>
           </tbody>
