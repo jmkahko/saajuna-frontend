@@ -11,7 +11,7 @@
       <div class="card">
         <h4 class="card-title">
           <h1>Suosikki sää- ja rautatieasemat</h1>
-          Sää {{ suosikkisaaasema1 }} {{ suosikkisaa1.time | date: 'H:mm':'Europe/Helsinki' }}
+          Sää {{ suosikkisaaasema1 }} {{ suosikkisaa1.time | date: 'H:mm':'+0300' }}
         </h4>
         <table class="table-responsive-lg">
           <thead>
@@ -61,7 +61,7 @@
     <div class="suosikkisaa2" *ngIf="suosikkisaa2 !== null">
       <div class="card">
         <h4 class="card-title">
-          Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2.time | date: 'H:mm':'Europe/Helsinki' }}
+          Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2.time | date: 'H:mm':'+0300' }}
         </h4>
         <table class="table-responsive-lg">
           <thead>
