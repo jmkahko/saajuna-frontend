@@ -72,13 +72,13 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 
 ## Linkit
 
-- [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
-- [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
-- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
-- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)\
-- [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
-- [Junatietojen kuva](https://pixabay.com/fi/illustrations/vintage-veturi-moguli-steampunk-4273606/)\
-- [Säätietojen kuva](https://pixabay.com/fi/illustrations/maailmankartta-vanha-2241469/)\
-- [Navbarin logo](https://www.freelogodesign.org)\
-- [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
-- [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)\
+- [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm)
+- [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
+- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)
+- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)
+- [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/)
+- [Junatietojen kuva](https://pixabay.com/fi/illustrations/vintage-veturi-moguli-steampunk-4273606/)
+- [Säätietojen kuva](https://pixabay.com/fi/illustrations/maailmankartta-vanha-2241469/)
+- [Navbarin logo](https://www.freelogodesign.org)
+- [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)
+- [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)
