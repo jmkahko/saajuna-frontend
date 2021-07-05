@@ -26,8 +26,8 @@ Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle konee
 
 Heroku palveluun sovelluksen laitto vaatii muutos package.json tiedostoon
 
-
 Heroku
+
 ```
   "scripts": {
     "ng": "ng",
@@ -37,7 +37,9 @@ Heroku
     "heroku-postbuild": "ng build --prod --aot"
   },
 ```
+
 Paikallinen
+
 ```
   "scripts": {
     "ng": "ng",
@@ -47,7 +49,6 @@ Paikallinen
     "heroku-postbuild": "ng build --prod --aot"
   },
 ```
-
 
 ## Reflektio ja ajankäyttö
 
@@ -73,9 +74,11 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 
 - [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm) \
 - [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje) \
+- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
+- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)\
 - [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/) \
+- [Junatietojen kuva](https://pixabay.com/fi/illustrations/vintage-veturi-moguli-steampunk-4273606/)\
+- [Säätietojen kuva](https://pixabay.com/fi/illustrations/maailmankartta-vanha-2241469/)\
 - [Navbarin logo](https://www.freelogodesign.org)\
 - [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)\
-- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)\
 - [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)\
-- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)\

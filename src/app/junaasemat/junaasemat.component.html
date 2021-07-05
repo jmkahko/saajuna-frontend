@@ -1,23 +1,29 @@
-<div class="container">
-  <div class="card">
-  <h1>Rautatieasemat</h1>
-  <div class="form-group">
-    <input
-      class="form-control"
-      #searchBox
-      id="search-box"
-      (input)="search(searchBox.value)"
-      placeholder="Etsi rautatieasema"
-      autocomplete="off"
-    />
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Rautatieasemat</h1>
+      <div class="form-group">
+        <input
+          class="form-control"
+          #searchBox
+          id="search-box"
+          (input)="search(searchBox.value)"
+          placeholder="Etsi rautatieasema"
+          autocomplete="off"
+        />
 
-    <ul class="list-group no-bullets">
-      <li *ngFor="let asema of stations">
-        <a routerLink="/rautatieasema/{{ asema._id }}" class="list-group-item list-group-item-action">
-          {{ asema.stationName }}
-        </a>
-      </li>
-    </ul>
+        <ul class="list-group no-bullets">
+          <li *ngFor="let asema of stations">
+            <a
+              routerLink="/rautatieasema/{{ asema._id }}"
+              class="list-group-item list-group-item-action"
+            >
+              {{ asema.stationName }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <img src="../../assets/old-train.jpg" />
+    </div>
   </div>
-</div>
-</div>
+</body>
