@@ -1,4 +1,7 @@
 <div class="container-md">
+  <div *ngIf="saanyt.time === '2020-09-01T09:00:00Z'" class="alert alert-warning">
+    <strong>Varoitus!</strong> Säätietojen haku epäonnistui
+  </div>
   <div class="card">
     <div class="card">
       <div *ngIf="havaintoasema">

@@ -59,7 +59,6 @@ export class EtusivuComponent implements OnInit {
 
   // Hae suosikki sää- ja rautatieasemat
   haeSuosikit(username) {
-
     // Haetaan suosikit
     this.favoriteService.haeSuosikit(username).subscribe((data: any) => {
 
