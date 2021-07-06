@@ -76,6 +76,7 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 - [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
 - [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)
 - [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)
+- [Navbarin collapse](https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007)
 - [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/)
 - [Junatietojen kuva](https://pixabay.com/fi/illustrations/vintage-veturi-moguli-steampunk-4273606/)
 - [Säätietojen kuva](https://pixabay.com/fi/illustrations/maailmankartta-vanha-2241469/)

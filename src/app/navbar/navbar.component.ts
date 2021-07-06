@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html'
+  templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnDestroy {
   login: boolean;
@@ -12,7 +12,9 @@ export class NavbarComponent implements OnDestroy {
 
   constructor(private authService: AuthService) {
     // Tilataan viesti ja tallennetaan tulos this.login -muuttujaan
-    this.subscription = this.authService.loginTrue().subscribe(message => { this.login = message; });
+    this.subscription = this.authService.loginTrue().subscribe((message) => {
+      this.login = message;
+    });
 
     /* varmistetaan että login -tila säilyy myös kun sivu päivitetään
        varmistus tehdään katsomalla onko token sessionstoragessa.
@@ -35,5 +37,8 @@ export class NavbarComponent implements OnDestroy {
   doLogout() {
     this.login = false;
   }
-
+  navbarOpen = false;
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }
