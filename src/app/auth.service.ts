@@ -32,6 +32,7 @@ export class AuthService {
     this.id = currentId && currentId.id;
   }
 
+  // Haetaan kaikki käyttäjät
   haeKaikkiKayttajat(): Observable<Kayttaja[]> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -55,7 +56,7 @@ export class AuthService {
       .post(`${this.apiUrl}/login/`, { username: username, password: password })
       .pipe(
         map((res) => {
-          console.log(res); // loggaa alla olevan tyylisen vastauksen
+          //console.log(res); // loggaa alla olevan tyylisen vastauksen
           const token = res['token']; // otetaan vastauksesta token
           if (token) {
             this.token = token;
@@ -66,9 +67,9 @@ export class AuthService {
             try {
               // dekoodataan token
               const payload = this.jwtHelp.decodeToken(token);
-              console.log(payload);
+              //console.log(payload);
               this.id = payload.id;
-              console.log(payload.id);
+              //console.log(payload.id);
               // Tässä voidaan tarkistaa tokenin oikeellisuus
               if (payload.username === username && payload.isadmin === true) {
                 // token sessionStorageen
@@ -117,6 +118,7 @@ export class AuthService {
     sessionStorage.removeItem('accesstoken');
   }
 
+  // Ilmoitetaan jos rekisteröinti onnistui
   rekisterointiOnnistui(): Observable<any> {
     this.subject.next(3);
     return this.subject.asObservable();
@@ -128,7 +130,7 @@ export class AuthService {
     .post(`${this.apiUrl}/register/`, { username: username, password: password, isadmin: false })
     .pipe(
       map((res) => {
-        console.log(res); // loggaa alla olevan tyylisen vastauksen
+        //console.log(res); // loggaa alla olevan tyylisen vastauksen
         const token = res['token']; // otetaan vastauksesta token
         if (token) {
           this.token = token;
@@ -139,7 +141,7 @@ export class AuthService {
           try {
             // dekoodataan token
             const payload = this.jwtHelp.decodeToken(token);
-            console.log(payload);
+            //console.log(payload);
             // Tässä voidaan tarkistaa tokenin oikeellisuus
             if (payload.username === username && payload.isadmin === false) {
               // token sessionStorageen
@@ -175,16 +177,15 @@ export class AuthService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
 
-    console.log(this.id);
+    //console.log(this.id);
     const url = `${this.apiUrl}/changepassword/${this.id}`;
-    console.log(url);
+    //console.log(url);
 
     return this.http
       .put(url, { password: password }, tokenheaders)
       .pipe(
         map((res) => {
-          console.log(res);
-          console.log(res); // loggaa alla olevan tyylisen vastauksen
+          //console.log(res); // loggaa alla olevan tyylisen vastauksen
         const token = res['token']; // otetaan vastauksesta token
         if (token) {
           this.token = token;
@@ -195,7 +196,7 @@ export class AuthService {
           try {
             // dekoodataan token
             const payload = this.jwtHelp.decodeToken(token);
-            console.log(payload);
+            //console.log(payload);
             // Tässä voidaan tarkistaa tokenin oikeellisuus
             if (payload.username === this.username && payload.isadmin === false) {
               // token sessionStorageen
@@ -206,7 +207,7 @@ export class AuthService {
               this.router.navigate(['/omatsivut']);
               return true; // saatiin token
             } else {
-              console.log('salasanan vaihto epäonnisuti');
+              console.log('salasanan vaihto epäonnistui');
               return false; // ei saatu tokenia
             }
           } catch (err) {
@@ -229,9 +230,9 @@ export class AuthService {
     const tokenheaders = {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
-    console.log(this.id);
+    //console.log(this.id);
     const url = `${this.apiUrl}/deleteuser/${this.id}`;
-    console.log(url);
+    //console.log(url);
 
     return this.http
       .delete(url, tokenheaders)
@@ -253,9 +254,9 @@ export class AuthService {
      const tokenheaders = {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
-    console.log(iduser);
+    //console.log(iduser);
     const url = `${this.apiUrl}/deleteuser/${iduser}`;
-    console.log(url);
+    //console.log(url);
   
     return this.http
       .delete<Kayttaja>(url, tokenheaders)

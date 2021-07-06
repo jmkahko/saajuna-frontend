@@ -37,6 +37,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
   aika; // Aikatieto html sivustolle
   saaennuste; //Sääennuste html sivustolle
 
+  // Karttaa varten muuttujien esittely
   private map: any;
   latlng: L.LatLng;
   lat: number;
@@ -50,6 +51,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     private HavaintoAsematService: HavaintoasemaService,
     private SaaService: SaaService
   ) {
+    // Alustetaan koordinaatit nollatiedoilla
     this.lat = 0;
     this.lon = 0;
     this.latlng = new L.LatLng(this.lat, this.lon);
@@ -77,7 +79,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
 
   // Haetaan aseman aikataulu
   haeAsemanAikataulu(): void {
-    // Kiinteät muuttujat alkuun
+    // Kiinteät muuttujat alkuun, kuinka monta junaa haetaan tietyissä tilanteissa
     const arrived_trains = 0;
     const arriving_trains = 5;
     const departed_trains = 0;
@@ -99,6 +101,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     });
   }
 
+  // Haetaan rautatieaseman koordinaattien pohjalta sääennuste
   haeSaaEnnuste(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
@@ -109,6 +112,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     });
   }
 
+  // Näytetään tuulensuunta nimenä
   tuulenSuunta(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'koillistuulta';
@@ -131,6 +135,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään tuulensuunta kuva
   tuulenSuuntaKuva(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'north-west';
@@ -153,6 +158,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään tuulen nopeus tekstinä
   tuulenNopeus(tnopeusnro: number) {
     if (tnopeusnro < 1) {
       return 'tyyntä';
@@ -172,7 +178,6 @@ export class RautatieasemanTiedotComponent implements OnInit {
   }
 
   // Aseman sijainti kartalla
-
   haeAsemanSijaintiKartalla(): void {
     const id = this.route.snapshot.paramMap.get('id');
 

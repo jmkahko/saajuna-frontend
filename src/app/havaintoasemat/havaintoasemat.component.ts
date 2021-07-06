@@ -8,11 +8,11 @@ import { HavaintoAsemat } from '../havaintoasemat';
   styleUrls: ['./havaintoasemat.component.css'],
 })
 export class HavaintoasematComponent implements OnInit {
-  // havaintoasemat$: Observable<HavaintoAsemat[]>;
-  havaintoasemat: Array<HavaintoAsemat> = [];
-  hasemat: Array<HavaintoAsemat> = [];
+  havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat haetaan tähän tauluun
+  hasemat: Array<HavaintoAsemat> = []; // Tämä on alussa tyhjä ja kun haku kenttään syötetään tekstiä, niin tähän tauluun viedään ja haetaan
 
   constructor(private havaintoAsemaService: HavaintoasemaService) {
+    // Haetaan säähavaintoasemat
     this.havaintoAsemaService
       .haeHavaintoAsemat()
       .subscribe((data) => (this.havaintoasemat = data));

@@ -25,12 +25,14 @@ export class SaaService {
     return error.message || error;
   }
 
+  // Haetaan tietyn sääaseman säähavainnot
   haeSaaNyt(fmisid: number): Observable<SaaNyt[]> {
     return this.http
       .get<SaaNyt[]>(`${this.apiUrl}/saanyt/${fmisid}`)
       .pipe(catchError(this.handleError));
   }
 
+  // Haetaan tiettyjen koordinaattien sääennuste
   haeSaaEnnuste(latlon: string): Observable<SaaEnnuste[]> {
     return this.http
       .get<SaaEnnuste[]>(`${this.apiUrl}/saaennuste/latlon/${latlon}`)

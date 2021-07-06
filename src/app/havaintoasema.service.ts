@@ -39,26 +39,6 @@ export class HavaintoasemaService {
       .pipe(catchError(this.handleError));
   }
 
-  // haeHavaintoAsema(): Observable<any> {
-  //   // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
-  //   const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
-
-  //   // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
-  //   const tokenheaders = {
-  //     headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
-  //   };
-  //   const url = `${this.apiUrl}/:fmisid`;
-  //   console.log(url);
-
-  //   return this.http.get(url, tokenheaders).pipe(
-  //     map((res) => {
-  //       console.log(res);
-  //       console.log('Havaintoasema haettu');
-  //       return false;
-  //     })
-  //   );
-  // }
-
   // Haetaan tietyn säähavaintoaseman säätiedot, jos viimeisestä hausta on kulunyt yli 10 minuuttia
   haeHavaintoAsema10Min(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
@@ -69,7 +49,7 @@ export class HavaintoasemaService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     const url = `${this.apiUrl}/saanyt/:fmisid`;
-    console.log(url);
+    //console.log(url);
 
     return this.http.get(url, tokenheaders).pipe(
       map((res) => {
@@ -79,7 +59,8 @@ export class HavaintoasemaService {
       })
     );
   }
-  // Haetaan tietyn säähavaintoaseman sääennuste paikan nimellä
+
+  // Haetaan tietyn säähavaintoaseman sääennuste koordinaateilla
   haeHavaintoAsemaNimella(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
@@ -89,12 +70,12 @@ export class HavaintoasemaService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     const url = `${this.apiUrl}/saaennuste/:latlon`;
-    console.log(url);
+    //console.log(url);
 
     return this.http.get(url, tokenheaders).pipe(
       map((res) => {
-        console.log(res);
-        console.log('Havaintoaseman sääennuste haettu');
+        //console.log(res);
+        //console.log('Koordinaattien sääennuste haettu');
         return false;
       })
     );

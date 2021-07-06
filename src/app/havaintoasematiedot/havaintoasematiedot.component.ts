@@ -1,6 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HavaintoasemaService } from '../havaintoasema.service';
-import { HavaintoAsemat } from '../havaintoasemat';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +7,7 @@ import { SaaService } from '../saa.service';
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 
-// Nämä tuodaan karttatietoja varten
+// Nämä tuodaan karttatietoja varten, kartta iconit tallennettu assets kansioon
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -31,22 +30,22 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./havaintoasematiedot.component.css'],
 })
 export class HavaintoasematiedotComponent implements OnInit {
-  havaintoasema;
-  saanyt;
-  saaennuste;
+  havaintoasema; // Haetaan reitistä tullut havaintoaseman tiedot
+  saanyt; // Säänyt tiedot viedään html sivulle
+  saaennuste; // Sääennusteen tiedot viedään html sivulle
 
+  // Karttaa varten
   private map: any;
   latlng: L.LatLng;
   lat: number;
   lon: number;
-  name: string;
-  asema;
 
   constructor(
     private route: ActivatedRoute,
     private HavaintoAsematService: HavaintoasemaService,
     private SaaService: SaaService
   ) {
+    // Alustetaan kartta nolla koordinaateilla
     this.lat = 0;
     this.lon = 0;
     this.latlng = new L.LatLng(this.lat, this.lon);
@@ -57,10 +56,13 @@ export class HavaintoasematiedotComponent implements OnInit {
     this.haeSaaNyt();
     this.haeSaaEnnuste();
   }
+
+  // Haetaan sääaseman tiedot kartalle, kun tiedot on ladattu
   ngAfterViewInit() {
     this.haeAsemanSijaintiKartalla();
   }
 
+  // Haetaan säähavaintoaseman tiedot joka tulee reitissä
   haeHavaintoAsema(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.HavaintoAsematService.haeHavaintoAsema(id).subscribe(
@@ -68,6 +70,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     );
   }
 
+  // Haetaan säähavaintoaseman tämän hetkinen sää
   haeSaaNyt(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.HavaintoAsematService.haeHavaintoAsema(id).subscribe((data: any) => {
@@ -77,6 +80,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     });
   }
 
+  // Haetaan säähavaintoaseman koordinaattien kuluvan tunnin sääennuste
   haeSaaEnnuste(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.HavaintoAsematService.haeHavaintoAsema(id).subscribe((data: any) => {
@@ -86,13 +90,18 @@ export class HavaintoasematiedotComponent implements OnInit {
     });
   }
 
+  // Näytetään säähavaintoaseman koordinaattien pohjalta kartalla paikka
   haeAsemanSijaintiKartalla(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
+    // Haetaan säähavaintoaseman id:n perusteella tiedot
     this.HavaintoAsematService.haeHavaintoAsema(id).subscribe(
       (data) => {
+        // Havaintoaseman koordinaatit muutetaan numero muotoon ja asetaan muuttujiin
         this.lon = Number(data.longitude);
         this.lat = Number(data.latitude);
+
+        // Haetaan koordinaattien pohjalta oikea kohta kartalla
         this.latlng = new L.LatLng(this.lat, this.lon);
         this.map = L.map('kartta').setView(this.latlng, 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -103,7 +112,7 @@ export class HavaintoasematiedotComponent implements OnInit {
         }).addTo(this.map);
 
         L.control.scale().addTo(this.map);
-        L.marker(this.latlng).bindPopup('Asema: ').addTo(this.map);
+        L.marker(this.latlng).bindPopup('Säähavaintoasema').addTo(this.map);
       },
 
       // Jos tulee virheitä
@@ -113,6 +122,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     );
   }
 
+  // Näytetään tuulensuunna teksti
   tuulenSuunta(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'koillistuulta';
@@ -135,6 +145,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään tuulensuunnan kuva
   tuulenSuuntaKuva(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'north-west';
@@ -157,6 +168,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään tuulen nopeus tekstinä
   tuulenNopeus(tnopeusnro: number) {
     if (tnopeusnro < 1) {
       return 'tyyntä';
@@ -175,6 +187,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään tuulen puuska tekstinä
   tuulenPuuska(tpuuskanro: number) {
     if (tpuuskanro < 1) {
       return 'tyyntä';
@@ -193,6 +206,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  // Näytetään pilvisyys tieto
   pilvisyys(pilvinro: number) {
     if (pilvinro <= 1) {
       return 'selkeää';
@@ -205,6 +219,7 @@ export class HavaintoasematiedotComponent implements OnInit {
     }
   }
 
+  // Haetaan sääsymbolia vastaava teksti tieto
   saaSymbolit(luku) {
     let teksti = '';
     switch (luku) {

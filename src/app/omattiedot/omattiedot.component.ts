@@ -10,7 +10,6 @@ import { Favorite } from '../favorite';
 import { Kayttaja } from '../kayttaja';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
-import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-omattiedot',
@@ -18,15 +17,15 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./omattiedot.component.css']
 })
 export class OmattiedotComponent implements OnInit {
-  error = '';
-  error1 = '';
-  salasanainfo = '';
-  poistoinfo = '';
-  junainfo = '';
-  admintieto = '';
-  public username: string;
-  rautatietasemat : Array<RautatieAsemat> = [];
-  havaintoasemat: Array<HavaintoAsemat> = [];
+  error = ''; // Html sivulle virhe viesti
+  error1 = ''; // Html sivulle virhe viesti
+  salasanainfo = ''; // Html sivulle salasanan vaihdosta info
+  poistoinfo = ''; // Html sivulle käyttäjän poisto info
+  junainfo = ''; // Html sivulle tieto juna-asemien poistosta ja latauksesta
+  admintieto = ''; // Html sivulle, onko admin kirjautunut
+  public username: string; // Käyttäjänimi tieto
+  rautatietasemat : Array<RautatieAsemat> = []; // Rautatieasemat ladataan tähän taulukkoon
+  havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat ladataan tähän taulukkoon
 
   // Käyttäjiin liittyvät
   kayttajat: Array<Kayttaja> = [];
@@ -82,6 +81,7 @@ export class OmattiedotComponent implements OnInit {
     }
   }
 
+  // Salasanan vaihtaminen
   salasanvaihto(formData, isFormValid: boolean) {
     // Tarkistetaan onko uusi ja vanha salasan samoja
     if (formData.vanhasalasana !== formData.salasana) {
@@ -117,6 +117,7 @@ export class OmattiedotComponent implements OnInit {
       if (result === true) {
 
       } else {
+        // Poistetaan tunnukseen liittyvä suosikki samalla
         this.favoriteService.poistaSuosikkiTunnus(this.suosikit._id).subscribe(result => {
           if (result === true) {
             console.log('Suosikin poisto epäonnistui')
@@ -200,7 +201,7 @@ export class OmattiedotComponent implements OnInit {
     });
   }
   
-  // Säähavainto- ja rautatieasemien haku kentät
+  // Suosikki säähavainto- ja rautatieasemien haku kentät 4 kpl
   searchRautatie1: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
     debounceTime(200),
     distinctUntilChanged(),
@@ -264,17 +265,19 @@ export class OmattiedotComponent implements OnInit {
 
   // Käyttäjän poistaminen ja haetaan käyttäjälistaus uudelleen
   poistaKayttaja(k: Kayttaja) {
-
+    // Esitellään muuttuja ja alustetaan
     let suosikkiId = '';
 
+    // Etsitään kayttajaa vastaava id suosikit taulusta
     for (let x = 0; this.suosikitlista.length > x; x++) {
       if (this.suosikitlista[x].username === k.username) {
         suosikkiId = this.suosikitlista[x]._id;
       }
     }
 
-    console.log(suosikkiId);
+    //console.log(suosikkiId);
 
+    // Poisteatan käyttäjätunnus käyttäjä ja suosikit taulusta
     this.authService.poistaTunnusId(k._id)
       .subscribe(() => {
         this.favoriteService.poistaSuosikkiTunnus(suosikkiId)

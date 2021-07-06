@@ -58,7 +58,7 @@ export class FavoriteService {
     };
 
     const url = `${this.apiUrl}/${username}`;
-    console.log(url);
+    //console.log(url);
     
     return this.http
       .get<Favorite>(url, tokenheaders)
@@ -108,7 +108,7 @@ export class FavoriteService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     const url = `${this.apiUrl}/deletefavorite/${favoriteid}`;
-    console.log(url);
+    //console.log(url);
   
     return this.http
       .delete(url, tokenheaders)

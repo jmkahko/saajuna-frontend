@@ -40,7 +40,6 @@ export class JunaAsemaService {
       .pipe(catchError(this.handleError));
   }
 
-
   // Yksittäisen rautatieaseman haku lyhytkoodilla
   haeAsemaLyhytKoodi(stationShortCode: string) {
     return this.http
@@ -72,13 +71,13 @@ export class JunaAsemaService {
       headers: new HttpHeaders({ 'x-access-token': mytoken.token }),
     };
     const url = `${this.apiUrl}/lisaaasemat`;
-    console.log(url);
+    //console.log(url);
 
     return this.http
       .get(url, tokenheaders)
       .pipe(
         map((res) => {
-          console.log(res);
+          //console.log(res);
           console.log('Rautatieasemat lisätty');
           return false;
         })
@@ -96,13 +95,13 @@ export class JunaAsemaService {
     };
 
     const url = `${this.apiUrl}/poistaasemat`;
-    console.log(url);
+    //console.log(url);
 
     return this.http
       .delete(url, tokenheaders)
       .pipe(
         map((res) => {
-          console.log(res);
+          //console.log(res);
           console.log('Rautatieasemat poistettu');
           return false;
         })

@@ -23,8 +23,8 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RekisteroidyComponent implements OnInit {
   // Virheiden näyttämiseen
-  error1 = '';
-  error = '';
+  error1 = ''; // Html viestien näyttämiseen
+  error = ''; // Html viestien näyttämiseen
   naytasalasana: boolean // Salasanan näyttäminen
 
   // Rautatie- ja säähavaintoasemien hakuun nettisivulla
@@ -53,7 +53,7 @@ export class RekisteroidyComponent implements OnInit {
       .subscribe((data) => (this.havaintoasemat = data));
   }
 
-  // Säähavainto- ja rautatieasemien hakukentät
+  // Suosikki säähavainto- ja rautatieasemien hakukentät
   searchRautatie1: OperatorFunction<string, readonly { stationName }[]> = (
     text$: Observable<string>
   ) =>
@@ -110,12 +110,12 @@ export class RekisteroidyComponent implements OnInit {
       )
     );
 
-  // lomakkeen lähetys
+  // Lomakkeen lähetys
   onSubmit(formData, isFormValid: boolean) {
     // Esitellään sää- ja junaasemien muuttujat
     let lsaa1, lsaa2, ljuna1, ljuna2;
 
-    // Tarkistaan onko tuleva tieto undefined tai tyhjä, jos on niin viedään tieto null. Muuten tallennetaan tuleva data
+    // Tarkistaan onko tuleva tieto undefined tai tyhjä, jos on tyhjä niin viedään null tieto, muuten tallennetaan tuleva data
     if (formData.favoritesSaa1 === undefined || formData.favoritesSaa1 === '') {
       lsaa1 = null;
     } else {
@@ -146,7 +146,7 @@ export class RekisteroidyComponent implements OnInit {
       ljuna2 = formData.favoritesJuna2.stationShortCode;
     }
 
-    // Tiedon tallennus
+    // Tiedon tallennus. Tallennetaan käyttäjätiedot käyttäjätauluun ja suosikkitiedot suosikki tauluun
     this.authService.rekisteroidy(formData.tunnus, formData.salasana).subscribe(
       (result) => {
         if (result === true) {
@@ -171,6 +171,7 @@ export class RekisteroidyComponent implements OnInit {
     );
   }
 
+  // Salasanan näyttäminen
   naytasalasanaType() {
     this.naytasalasana = !this.naytasalasana;
   }

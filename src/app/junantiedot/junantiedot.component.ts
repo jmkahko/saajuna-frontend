@@ -4,7 +4,6 @@ import { JunaService } from '../juna.service';
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan 
 
-
 // Nämä tuodaan karttatietoja varten
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -22,7 +21,6 @@ const iconDefault = L.icon({
 L.Marker.prototype.options.icon = iconDefault;
 // Tähän asti tuodaan karttatietoja varten
 
-
 @Component({
   selector: 'app-junantiedot',
   templateUrl: './junantiedot.component.html',
@@ -30,7 +28,7 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class JunantiedotComponent implements AfterViewInit, OnInit {
   // Esitellään tarvittavat komponentit junan aikataulutieto
-  public junaaikataulu;
+  public junaaikataulu; 
   public junanpaikka;
   public aika;
 
@@ -46,7 +44,7 @@ export class JunantiedotComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute,
     private junaService: JunaService
   ) { 
-    // Asetetaan sijantitietoja varten aloitusarvot
+    // Asetetaan sijantitietoja, nopeutta ja junanumeroa varten aloitusarvot
     this.lat = 0;
     this.lon = 0;
     this.juna = 0;
@@ -118,7 +116,7 @@ export class JunantiedotComponent implements AfterViewInit, OnInit {
           // show the scale bar on the lower left corner
           L.control.scale().addTo(this.map);
     
-          // show a marker on the map // Missä näkyy sininen merkki ja siitä kun painaa niin tulee oheinen teksti näkyviin
+          // show a marker on the map / Missä näkyy sininen merkki ja siitä kun painaa niin tulee oheinen teksti näkyviin
           L.marker(this.latlng).bindPopup('Juna: ' + this.juna).addTo(this.map); 
           },
 

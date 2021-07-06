@@ -31,6 +31,7 @@ export class NavbarComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  // Kirjaudutaan ulos painike
   doLogout() {
     this.login = false;
   }
