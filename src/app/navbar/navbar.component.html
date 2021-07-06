@@ -11,6 +11,7 @@
   <button
     class="navbar-toggler"
     type="button"
+    (click)="toggleNavbar()"
     data-toggle="collapse"
     data-target="#collapsibleNavbar"
   >
@@ -18,7 +19,11 @@
   </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <div
+    class="collapse navbar-collapse"
+    id="collapsibleNavbar"
+    [ngClass]="{ show: navbarOpen }"
+  >
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" routerLink="etusivu">Etusivu</a>
@@ -34,7 +39,7 @@
       </li>
     </ul>
 
-    <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto" id="collapsibleNavbar">
       <li *ngIf="!login" class="nav-item navbar-right">
         <a class="nav-link" routerLink="rekisteroidy">Rekisteröidy</a>
       </li>
