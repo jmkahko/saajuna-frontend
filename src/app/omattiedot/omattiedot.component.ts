@@ -45,6 +45,10 @@ export class OmattiedotComponent implements OnInit {
   favoritesJuna1Name: string;
   favoritesJuna2Name: string;
 
+  naytasalasana: boolean; // Salasanan näyttäminen
+  naytasalasanaUudelleen: boolean; // Salasanan näyttäminen
+  naytasalasanaUudelleenUusi: boolean; // Salasanan näyttäminen
+
   // Rautatie- ja säähavaintoasemien hakuun nettisivulla
   formatterRauta = (rauta: RautatieAsemat) => rauta.stationName;
   formatterSaa = (saa: HavaintoAsemat) => saa.name;
@@ -275,7 +279,22 @@ export class OmattiedotComponent implements OnInit {
       .subscribe(() => {
         this.favoriteService.poistaSuosikkiTunnus(suosikkiId)
           .subscribe(() => this.haeKayttajat())})
-    }
+  }
+
+  // Salasanan näyttäminen
+  naytasalasanaType() {
+    this.naytasalasana = !this.naytasalasana;
+  }
+
+  // Salasanan näyttäminen
+  naytasalasanaUudelleenType() {
+    this.naytasalasanaUudelleen = !this.naytasalasanaUudelleen;
+  }
+
+  // Salasanan näyttäminen
+  naytasalasanaUudelleenUusiType() {
+    this.naytasalasanaUudelleenUusi = !this.naytasalasanaUudelleenUusi;
+  }
 }
 
 

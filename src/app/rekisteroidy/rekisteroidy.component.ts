@@ -25,6 +25,7 @@ export class RekisteroidyComponent implements OnInit {
   // Virheiden näyttämiseen
   error1 = '';
   error = '';
+  naytasalasana: boolean // Salasanan näyttäminen
 
   // Rautatie- ja säähavaintoasemien hakuun nettisivulla
   formatterRauta = (rauta: RautatieAsemat) => rauta.stationName;
@@ -169,4 +170,9 @@ export class RekisteroidyComponent implements OnInit {
       }
     );
   }
+
+  naytasalasanaType() {
+    this.naytasalasana = !this.naytasalasana;
+  }
+
 }

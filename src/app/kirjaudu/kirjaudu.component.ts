@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class KirjauduComponent implements OnInit {
   error = '';
+  naytasalasana: boolean; // Salasanan näyttäminen
 
   // injektoidaan router ja authService
   constructor(private router: Router,
@@ -38,6 +39,10 @@ export class KirjauduComponent implements OnInit {
           this.error = 'Tunnus tai salasana väärä';
         }
       });
+  }
+
+  naytasalasanaType() {
+    this.naytasalasana = !this.naytasalasana;
   }
 }
 
