@@ -17,6 +17,6 @@ export class SaaNyt {
     public n_man: Number, // Pilvisyys
     public wawa: Number, // Säätila
     public fmisid: Number, // esim. Kajaani Petäisenniska 126736
-    public place: String
+    public place: String //paikkakunta
   ) {}
 }

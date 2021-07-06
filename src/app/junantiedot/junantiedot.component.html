@@ -1,11 +1,11 @@
 <div class="container">
   <!-- Tarkistetaan onko dataa tulossa, muuten näytetään varoitukset -->
   <div class="alert alert-warning" *ngIf="junaaikataulu?.length <= 0">
-    <strong>Varoitus!</strong> Junan aikataulu tietoa ei saada
+    <strong>Varoitus!</strong> Junan aikataulu tietoa ei ole saatavilla
   </div>
 
   <div class="alert alert-warning" *ngIf="junanpaikka?.length <= 0">
-    <strong>Varoitus!</strong> Junan sijainti tietoa ei saada
+    <strong>Varoitus!</strong> Junan sijainti tietoa ei ole saatavilla
   </div>
   <div class="card">
     <div class="card">

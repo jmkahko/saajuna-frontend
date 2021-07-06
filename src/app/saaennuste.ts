@@ -7,8 +7,8 @@ export class SaaEnnuste {
     public Temperature: Number, //Lämpötila
     public Pressure: Number,
     public Humidity: Number,
-    public WindDirection: Number,
-    public WindSpeedMS: Number,
+    public WindDirection: Number, //Tuulen suunta
+    public WindSpeedMS: Number, //Tuulen nopeus
     public WindUMS: Number,
     public WindVMS: Number,
     public MaximumWind: Number,

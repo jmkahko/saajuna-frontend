@@ -7,15 +7,19 @@ import { HavaintoAsemat } from '../havaintoasemat';
 import { JunaAsemaService } from '../juna-asema.service';
 import { RautatieAsemat } from '../rautatieAsemat';
 import { Observable, OperatorFunction } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  filter,
+} from 'rxjs/operators';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-
 
 @Component({
   selector: 'app-rekisteroidy',
   templateUrl: './rekisteroidy.component.html',
   styleUrls: ['./rekisteroidy.component.css'],
-  providers: [NgbTypeaheadConfig] // add NgbTypeaheadConfig to the component providers
+  providers: [NgbTypeaheadConfig], // add NgbTypeaheadConfig to the component providers
 })
 export class RekisteroidyComponent implements OnInit {
   // Virheiden näyttämiseen
@@ -29,51 +33,81 @@ export class RekisteroidyComponent implements OnInit {
   rautatieasemat: Array<RautatieAsemat> = []; // Rautatieasemat taulukko
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat taulukko
 
-
   // injektoidaan router ja authService
   constructor(
     private router: Router,
     private favoriteService: FavoriteService,
     private authService: AuthService,
     private junaAsematService: JunaAsemaService,
-    private havaintoAsemaService: HavaintoasemaService,
-    ) {}
+    private havaintoAsemaService: HavaintoasemaService
+  ) {}
 
   ngOnInit() {
-    // Haetaan kun sivu latautuu säähavainto- ja rautatieasemat
-    this.junaAsematService.haeAsemat().subscribe(data => this.rautatieasemat = data);
-    this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
+    // Haetaan sivun latautuessa säähavainto- ja rautatieasemat
+    this.junaAsematService
+      .haeAsemat()
+      .subscribe((data) => (this.rautatieasemat = data));
+    this.havaintoAsemaService
+      .haeHavaintoAsemat()
+      .subscribe((data) => (this.havaintoasemat = data));
   }
 
+  // Säähavainto- ja rautatieasemien hakukentät
+  searchRautatie1: OperatorFunction<string, readonly { stationName }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.rautatieasemat
+          .filter((rauta) => new RegExp(term, 'mi').test(rauta.stationName))
+          .slice(0, 10)
+      )
+    );
 
-  // Säähavainto- ja rautatieasemien haku kentät
-  searchRautatie1: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
-  )
+  searchRautatie2: OperatorFunction<string, readonly { stationName }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.rautatieasemat
+          .filter((rauta) => new RegExp(term, 'mi').test(rauta.stationName))
+          .slice(0, 10)
+      )
+    );
 
-  searchRautatie2: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.rautatieasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
-  )
+  searchSaa1: OperatorFunction<string, readonly { name }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.havaintoasemat
+          .filter((saa) => new RegExp(term, 'mi').test(saa.name))
+          .slice(0, 10)
+      )
+    );
 
-  searchSaa1: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
-  )
-
-  searchSaa2: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
-  )
+  searchSaa2: OperatorFunction<string, readonly { name }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.havaintoasemat
+          .filter((saa) => new RegExp(term, 'mi').test(saa.name))
+          .slice(0, 10)
+      )
+    );
 
   // lomakkeen lähetys
   onSubmit(formData, isFormValid: boolean) {
@@ -93,44 +127,46 @@ export class RekisteroidyComponent implements OnInit {
       lsaa2 = formData.favoritesSaa2.fmisid;
     }
 
-    if (formData.favoritesJuna1 === undefined || formData.favoritesJuna1 === '') {
+    if (
+      formData.favoritesJuna1 === undefined ||
+      formData.favoritesJuna1 === ''
+    ) {
       ljuna1 = null;
     } else {
       ljuna1 = formData.favoritesJuna1.stationShortCode;
     }
 
-    if (formData.favoritesJuna2 === undefined || formData.favoritesJuna2 === '') {
+    if (
+      formData.favoritesJuna2 === undefined ||
+      formData.favoritesJuna2 === ''
+    ) {
       ljuna2 = null;
     } else {
       ljuna2 = formData.favoritesJuna2.stationShortCode;
     }
 
     // Tiedon tallennus
-    this.authService.rekisteroidy(formData.tunnus, formData.salasana)
-      .subscribe(result => {
+    this.authService.rekisteroidy(formData.tunnus, formData.salasana).subscribe(
+      (result) => {
         if (result === true) {
-          this.favoriteService.lisaaSuosikit(formData.tunnus, lsaa1, lsaa2, ljuna1, ljuna2)
-          .subscribe(result => {
-            if (result === true) {
-              this.error = 'Rekisteröinti onnistui'
-              this.router.navigate(['/etusivu']);
-            } else {
-              this.error = 'Rekisteröinti epäonnistui';
-            }
-          });
+          this.favoriteService
+            .lisaaSuosikit(formData.tunnus, lsaa1, lsaa2, ljuna1, ljuna2)
+            .subscribe((result) => {
+              if (result === true) {
+                this.error = 'Rekisteröinti onnistui';
+                this.router.navigate(['/etusivu']);
+              } else {
+                this.error = 'Rekisteröinti epäonnistui';
+              }
+            });
         } else {
           this.error = 'Rekisteröinti epäonnistui';
         }
       },
       (error) => {
-        this.error1 = 'Rekisteröinti epäonnistui'
-        console.log('Rekisteröinti epäonnistui')
-      });
+        this.error1 = 'Rekisteröinti epäonnistui';
+        console.log('Rekisteröinti epäonnistui');
+      }
+    );
   }
-
 }
-
-
-
-
-

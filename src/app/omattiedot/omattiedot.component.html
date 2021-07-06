@@ -3,14 +3,14 @@
     <strong>Onnistui!</strong> Salasanasi on vaihdettu
   </div>
   <div *ngIf="poistoinfo" class="alert alert-info">
-    <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta.
+    <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta
   </div>
   <div *ngIf="error" class="alert alert-danger">
-    <strong>Salasanan vaihto epäonnistui!</strong> Salasanat eivät täsmää.
+    <strong>Salasanan vaihto epäonnistui!</strong> Salasanat eivät täsmää
   </div>
   <div *ngIf="error1" class="alert alert-danger">
     <strong>Salasanan vaihto epäonnistui!</strong> Vanha ja uusi salasana eivät
-    voi olla samat.
+    voi olla samat
   </div>
   <div *ngIf="junainfo" class="alert alert-info">
     <strong>Toiminto onnistui!</strong> {{ junainfo }}
@@ -23,12 +23,12 @@
   </div>
 
   <div class="card" *ngIf="username !== 'admin' && username !== null">
-  <h2>Hei käyttäjä, {{ username }}</h2>
-  <p>Omissa tiedoissa voit vaihtaa suosikki sää- ja juna-asemia, muuttaa salasanasi ja myös poistaa käyttäjätunnuksesi</p>
-</div>
-
-
-
+    <h2>Hei {{ username }}</h2>
+    <p>
+      Omissa tiedoissa voit vaihtaa suosikki sää- ja juna-asemia, muuttaa
+      salasanasi ja myös poistaa käyttäjätunnuksesi
+    </p>
+  </div>
 
   <!-- Näytetään admin käyttäjälle rautatieasemien ja käyttäjien ylläpito -->
   <div *ngIf="username === 'admin'">
@@ -90,13 +90,21 @@
         <ngb-panel id="static-3" title="Rautatieasemien ylläpito">
           <ng-template ngbPanelContent>
             <p>
-              Ennen asemien lisäystä, vanhat asemat täytyy poistaa tietokannasta. Muuten
-              asemat ovat kahteen kertaan.
+              Ennen asemien lisäystä, vanhat asemat täytyy poistaa
+              tietokannasta. Muuten ne tulevat kahteen kertaan.
             </p>
-            <button type="button" class="btn btn-success" (click)="lisaaJunaAsemat()">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="lisaaJunaAsemat()"
+            >
               Lisää asemat
             </button>
-            <button type="button" class="btn btn-warning" (click)="poistaJunaAsemat()">
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="poistaJunaAsemat()"
+            >
               Poista asemat
             </button>
           </ng-template>
@@ -111,64 +119,94 @@
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
         <ngb-panel title="Suosikki rautatie- ja säähavaintoasemien päivitys">
           <ng-template ngbPanelContent>
-            <form #f="ngForm" (ngSubmit)="suosikkienPaivitys(f.value)" novalidate>
+            <form
+              #f="ngForm"
+              (ngSubmit)="suosikkienPaivitys(f.value)"
+              novalidate
+            >
               <div class="form-group">
-            <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
-            <input type="search" class="form-control" id="favoritesJuna1" name="favoritesJuna1"
-              placeholder="{{ favoritesJuna1Name }}"
-              [(ngModel)]="favoritesJuna1"
-              [ngbTypeahead]="searchRautatie1"
-              [inputFormatter]="formatterRauta"
-              [resultFormatter]="formatterRauta"
-              [editable]='false' 
-              ngModel 
-              required/>
-    
-            <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
-            <input type="search"  class="form-control"  id="favoritesJuna2" name="favoritesJuna2"
-              placeholder="{{ favoritesJuna2Name }}"
-              [(ngModel)]="favoritesJuna2"
-              [ngbTypeahead]="searchRautatie2"
-              [inputFormatter]="formatterRauta"
-              [resultFormatter]="formatterRauta"
-              [editable]='false' 
-              ngModel 
-              required/>
-    
-            <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
-            <input type="search" class="form-control" id="favoritesSaa1" name="favoritesSaa1"
-              placeholder="{{ favoritesSaa1Name }}"
-              [(ngModel)]="favoritesSaa1"
-              [ngbTypeahead]="searchSaa1"
-              [inputFormatter]="formatterSaa"
-              [resultFormatter]="formatterSaa"
-              [editable]='false' 
-              ngModel 
-              required/>
-    
-            <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
-            <input type="search" class="form-control" id="favoritesSaa2" name="favoritesSaa2"
-              placeholder="{{ favoritesSaa2Name }}"
-              [(ngModel)]="favoritesSaa2"
-              [ngbTypeahead]="searchSaa2"
-              [inputFormatter]="formatterSaa"
-              [resultFormatter]="formatterSaa"
-              [editable]='false' 
-              ngModel 
-              required/>
-          </div>
-    
-          <br />
-          <div class="form-group">
-            <!-- Lähetetään lomake eteenpäin -->
-            <button type="submit" class="btn btn-success">Päivitä suosikit</button>
-          </div>
-        </form>
+                <label for="favoritesJuna1">Rautatieasema suosikki 1:</label>
+                <input
+                  type="search"
+                  class="form-control"
+                  id="favoritesJuna1"
+                  name="favoritesJuna1"
+                  placeholder="{{ favoritesJuna1Name }}"
+                  [(ngModel)]="favoritesJuna1"
+                  [ngbTypeahead]="searchRautatie1"
+                  [inputFormatter]="formatterRauta"
+                  [resultFormatter]="formatterRauta"
+                  [editable]="false"
+                  ngModel
+                  required
+                />
+
+                <label for="favoritesJuna2">Rautatieasema suosikki 2:</label>
+                <input
+                  type="search"
+                  class="form-control"
+                  id="favoritesJuna2"
+                  name="favoritesJuna2"
+                  placeholder="{{ favoritesJuna2Name }}"
+                  [(ngModel)]="favoritesJuna2"
+                  [ngbTypeahead]="searchRautatie2"
+                  [inputFormatter]="formatterRauta"
+                  [resultFormatter]="formatterRauta"
+                  [editable]="false"
+                  ngModel
+                  required
+                />
+
+                <label for="favoritesSaa1">Säähavainto suosikki 1:</label>
+                <input
+                  type="search"
+                  class="form-control"
+                  id="favoritesSaa1"
+                  name="favoritesSaa1"
+                  placeholder="{{ favoritesSaa1Name }}"
+                  [(ngModel)]="favoritesSaa1"
+                  [ngbTypeahead]="searchSaa1"
+                  [inputFormatter]="formatterSaa"
+                  [resultFormatter]="formatterSaa"
+                  [editable]="false"
+                  ngModel
+                  required
+                />
+
+                <label for="favoritesSaa2">Säähavainto suosikki 2:</label>
+                <input
+                  type="search"
+                  class="form-control"
+                  id="favoritesSaa2"
+                  name="favoritesSaa2"
+                  placeholder="{{ favoritesSaa2Name }}"
+                  [(ngModel)]="favoritesSaa2"
+                  [ngbTypeahead]="searchSaa2"
+                  [inputFormatter]="formatterSaa"
+                  [resultFormatter]="formatterSaa"
+                  [editable]="false"
+                  ngModel
+                  required
+                />
+              </div>
+
+              <br />
+              <div class="form-group">
+                <!-- Lähetetään lomake eteenpäin -->
+                <button type="submit" class="btn btn-success">
+                  Päivitä suosikit
+                </button>
+              </div>
+            </form>
           </ng-template>
         </ngb-panel>
         <ngb-panel id="static-2" title="Salasanan vaihto">
           <ng-template ngbPanelContent>
-            <form #f="ngForm" (ngSubmit)="salasanvaihto(f.value, f.valid)" novalidate>
+            <form
+              #f="ngForm"
+              (ngSubmit)="salasanvaihto(f.value, f.valid)"
+              novalidate
+            >
               <div class="form-group">
                 <label for="vanhasalasana">Vanha salasana:</label>
                 <input
@@ -182,7 +220,7 @@
                   required
                 />
               </div>
-        
+
               <div class="form-group">
                 <label for="salasana">Uusi salasana:</label>
                 <input
@@ -203,7 +241,7 @@
                   <strong>Varoitus!</strong> Salasanasi on liian lyhyt
                 </div>
               </div>
-        
+
               <div class="form-group">
                 <label for="salasana2">Uusi salasana uudelleen:</label>
                 <input
@@ -244,14 +282,17 @@
         <ngb-panel id="static-3" title="Poista tunnus">
           <ng-template ngbPanelContent>
             <div class="form-group">
-            <p>Käyttäjätunnuksen poisto</p>
-            <button type="button" class="btn btn-danger" (click)="poistaTunnus()">
-              Poista tunnus
-            </button>
+              <p>Käyttäjätunnuksen poisto</p>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="poistaTunnus()"
+              >
+                Poista tunnus
+              </button>
 
-          <br />
-  
-        </div>
+              <br />
+            </div>
           </ng-template>
         </ngb-panel>
       </ngb-accordion>

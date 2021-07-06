@@ -6,7 +6,7 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistune
 
 ## Yleisesittely
 
-[Sääjuna-frontend](https://saajuna-frontend.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [Sääjuna-backend](https://saajuna-backend.herokuapp.com/) sivustolle.
+[Sääjuna-frontend](https://saajuna.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [Sääjuna-backend](https://saajuna.herokuapp.com/) sivustolle.
 Tarjottavia frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
@@ -24,7 +24,7 @@ Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käytt�
 
 Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
-Heroku palveluun sovelluksen laitto vaatii muutos package.json tiedostoon
+Heroku palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon
 
 Heroku
 
