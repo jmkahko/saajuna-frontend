@@ -112,9 +112,9 @@ export class HavaintoasematComponent implements OnInit {
               // Säähavaintoaseman linkki
               let urllinkki = this.apiUrl + data[x]['_id'];
 
-              // Kun sinistä merkkiä klikkaa rautatieasemantiedot avautuvat
+              // Kun sinistä merkkiä klikkaa säähavaintoaseman tiedot avautuvat
               linkki.on('click', function() {
-                window.open(urllinkki);
+                window.open(urllinkki, '_self');
               })
             }
           

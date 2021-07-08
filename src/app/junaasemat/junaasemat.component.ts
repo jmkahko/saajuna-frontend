@@ -100,7 +100,7 @@ export class JunaasematComponent implements OnInit {
 
                 // Kun sinistä merkkiä klikkaa rautatieasemantiedot avautuvat
                 linkki.on('click', function() {
-                  window.open(urllinkki);
+                  window.open(urllinkki, '_self');
                 })
               }
             }
