@@ -38,8 +38,6 @@ export class JunaasematComponent implements OnInit {
   lon: number;
 
   // Tietoja html sivulta, että mitä haetaan
-  asematyyppi: string;
-  kaytossa: boolean;
   private apiUrl = environment.ownUrlEnv + '/rautatieasema/'; // Pää url
 
   constructor(
