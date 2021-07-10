@@ -33,6 +33,7 @@ export class HavaintoasematiedotComponent implements OnInit {
   havaintoasema; // Haetaan reitistä tullut havaintoaseman tiedot
   saanyt; // Säänyt tiedot viedään html sivulle
   saaennuste; // Sääennusteen tiedot viedään html sivulle
+  time: string;
 
   // Karttaa varten
   private map: any;

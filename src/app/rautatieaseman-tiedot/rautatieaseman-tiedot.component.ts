@@ -44,6 +44,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
   lon: number;
   name: string;
   asema;
+  time: string;
 
   constructor(
     private route: ActivatedRoute,

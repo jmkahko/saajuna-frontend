@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
@@ -27,6 +28,7 @@ export class EtusivuComponent implements OnInit {
   suosikkirautatie2; // Suosikki 2 rautatieasema aikataulu
   login: boolean; //tarkistetaan onko käyttäjä kirjautuneena sisään
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat
+  time: string;
 
   constructor(
     private favoriteService: FavoriteService,
@@ -55,7 +57,9 @@ export class EtusivuComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.time = null;
+  }
 
   // Hae suosikki sää- ja rautatieasemat
   haeSuosikit(username) {

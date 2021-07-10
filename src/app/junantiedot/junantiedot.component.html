@@ -12,14 +12,14 @@
       <!-- Junan nopeus ym. tietoja -->
       <div class="sijainti" *ngIf="junanpaikka?.length !== 0">
         <h1>
-          Junan {{ junaaikataulu.trainNumber }}
-          {{ junaaikataulu.trainType }} sijainti
+          Junan {{ junaaikataulu?.trainNumber }}
+          {{ junaaikataulu?.trainType }} sijainti
         </h1>
-        <p>Junan nopeus tällä hetkellä {{ junanpaikka.speed }} km/h.</p>
+        <p>Junan nopeus tällä hetkellä {{ junanpaikka?.speed }} km/h.</p>
 
         <p>
           Sijaintitieto on päivittynyt viimeksi
-          {{ junanpaikka.timestamp | date: 'dd.MM H:mm' }}.
+          {{ junanpaikka?.timestamp | date: 'dd.MM H:mm' }}.
         </p>
         <p>Sijaintitieto päivittyy n. 15 sekunnin välein.</p>
         <p>
@@ -38,15 +38,15 @@
       <!-- Junan aikataulu, kun juna on liikkeellä -->
       <div
         class="aikataulu"
-        *ngIf="junaaikataulu?.length !== 0 && junaaikataulu.runningCurrently"
+        *ngIf="junaaikataulu?.length !== 0 && junaaikataulu?.runningCurrently"
       >
         <h2>
-          Juna {{ junaaikataulu.trainNumber }} {{ junaaikataulu.trainType }}
+          Juna {{ junaaikataulu?.trainNumber }} {{ junaaikataulu?.trainType }}
         </h2>
         <p>
           <strong>
-            {{ junaaikataulu.startStationLongName }} ->
-            {{ junaaikataulu.endStationLongName }}</strong
+            {{ junaaikataulu?.startStationLongName }} ->
+            {{ junaaikataulu?.endStationLongName }}</strong
           >
         </p>
         <div>
@@ -58,20 +58,20 @@
                 <th>Aikatauluero (min)</th>
               </tr>
             </thead>
-            <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
-              <tr *ngIf="aikataulu.trainStopping === true">
-                <td>{{ aikataulu.stationLongName }}</td>
-                <td *ngIf="!aikataulu.liveEstimateTime">
-                  <del>{{ aikataulu.scheduledTime | date: 'H:mm' }}</del>
-                  {{ aikataulu.actualTime | date: 'H:mm' }}
+            <tbody *ngFor="let aikataulu of junaaikataulu?.timeTableRows">
+              <tr *ngIf="aikataulu?.trainStopping === true">
+                <td>{{ aikataulu?.stationLongName }}</td>
+                <td *ngIf="!aikataulu?.liveEstimateTime">
+                  <del>{{ aikataulu?.scheduledTime | date: 'H:mm' }}</del>
+                  {{ aikataulu?.actualTime | date: 'H:mm' }}
                 </td>
-                <td *ngIf="aikataulu.liveEstimateTime">
-                  {{ aikataulu.scheduledTime | date: 'H:mm' }}
+                <td *ngIf="aikataulu?.liveEstimateTime">
+                  {{ aikataulu?.scheduledTime | date: 'H:mm' }}
                 </td>
-                <td *ngIf="!aikataulu.liveEstimateTime">
-                  {{ aikataulu.differenceInMinutes }}
+                <td *ngIf="!aikataulu?.liveEstimateTime">
+                  {{ aikataulu?.differenceInMinutes }}
                 </td>
-                <td *ngIf="aikataulu.liveEstimateTime"></td>
+                <td *ngIf="aikataulu?.liveEstimateTime"></td>
               </tr>
             </tbody>
           </table>
@@ -81,14 +81,14 @@
       <!-- Junan aikataulu, kun juna ei on liikkeellä -->
       <div
         class="aikataulu"
-        *ngIf="junaaikataulu?.length !== 0 && !junaaikataulu.runningCurrently"
+        *ngIf="junaaikataulu?.length !== 0 && !junaaikataulu?.runningCurrently"
       >
         <h3>
-          Juna {{ junaaikataulu.trainNumber }} {{ junaaikataulu.trainType }}
+          Juna {{ junaaikataulu?.trainNumber }} {{ junaaikataulu?.trainType }}
         </h3>
         <p>
-          {{ junaaikataulu.startStationLongName }} ->
-          {{ junaaikataulu.endStationLongName }}
+          {{ junaaikataulu?.startStationLongName }} ->
+          {{ junaaikataulu?.endStationLongName }}
         </p>
         <div>
           <table class="table table-hover">
@@ -98,10 +98,10 @@
                 <th>Aika</th>
               </tr>
             </thead>
-            <tbody *ngFor="let aikataulu of junaaikataulu.timeTableRows">
-              <tr *ngIf="aikataulu.trainStopping === true">
-                <td>{{ aikataulu.stationLongName }}</td>
-                <td>{{ aikataulu.scheduledTime | date: 'H:mm' }}</td>
+            <tbody *ngFor="let aikataulu of junaaikataulu?.timeTableRows">
+              <tr *ngIf="aikataulu?.trainStopping === true">
+                <td>{{ aikataulu?.stationLongName }}</td>
+                <td>{{ aikataulu?.scheduledTime | date: 'H:mm' }}</td>
               </tr>
             </tbody>
           </table>

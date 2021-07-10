@@ -9,12 +9,17 @@ import { FavoriteService } from '../favorite.service';
 import { Favorite } from '../favorite';
 import { Kayttaja } from '../kayttaja';
 import { Observable, OperatorFunction } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  filter,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-omattiedot',
   templateUrl: './omattiedot.component.html',
-  styleUrls: ['./omattiedot.component.css']
+  styleUrls: ['./omattiedot.component.css'],
 })
 export class OmattiedotComponent implements OnInit {
   error = ''; // Html sivulle virhe viesti
@@ -24,7 +29,7 @@ export class OmattiedotComponent implements OnInit {
   junainfo = ''; // Html sivulle tieto juna-asemien poistosta ja latauksesta
   admintieto = ''; // Html sivulle, onko admin kirjautunut
   public username: string; // Käyttäjänimi tieto
-  rautatietasemat : Array<RautatieAsemat> = []; // Rautatieasemat ladataan tähän taulukkoon
+  rautatietasemat: Array<RautatieAsemat> = []; // Rautatieasemat ladataan tähän taulukkoon
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat ladataan tähän taulukkoon
 
   // Käyttäjiin liittyvät
@@ -43,6 +48,7 @@ export class OmattiedotComponent implements OnInit {
   favoritesSaa2Name: string;
   favoritesJuna1Name: string;
   favoritesJuna2Name: string;
+  time: string;
 
   naytasalasana: boolean; // Salasanan näyttäminen
   naytasalasanaUudelleen: boolean; // Salasanan näyttäminen
@@ -58,21 +64,26 @@ export class OmattiedotComponent implements OnInit {
     private authService: AuthService,
     private junaAsematService: JunaAsemaService,
     private favoriteService: FavoriteService,
-    private havaintoAsemaService: HavaintoasemaService) {
-      // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
-      const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
-      this.username = currentUser && currentUser.username;
+    private havaintoAsemaService: HavaintoasemaService
+  ) {
+    // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin
+    const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
+    this.username = currentUser && currentUser.username;
 
-      // Haetaan suosikki säähavainto- ja rautatieasemat
-      this.junaAsematService.haeAsemat().subscribe(data => this.rautatietasemat = data);
-      this.havaintoAsemaService.haeHavaintoAsemat().subscribe(data => this.havaintoasemat = data);
-      this.haeKaikkiSuosikit(); // Haetaan kaikki suosikit
+    // Haetaan suosikki säähavainto- ja rautatieasemat
+    this.junaAsematService
+      .haeAsemat()
+      .subscribe((data) => (this.rautatietasemat = data));
+    this.havaintoAsemaService
+      .haeHavaintoAsemat()
+      .subscribe((data) => (this.havaintoasemat = data));
+    this.haeKaikkiSuosikit(); // Haetaan kaikki suosikit
 
-      // Jos admin on kirjautunut, niin haetaan käyttäjät
-      if (this.username === 'admin') {
-        this.haeKayttajat();
-      }
+    // Jos admin on kirjautunut, niin haetaan käyttäjät
+    if (this.username === 'admin') {
+      this.haeKayttajat();
     }
+  }
 
   ngOnInit() {
     // Jos on joku muu kuin admin-käyttäjä niin haetaan tiedot
@@ -88,18 +99,17 @@ export class OmattiedotComponent implements OnInit {
       // Tarkistetaan onko uusi ja sama uudelleen salasanat samoja
       if (formData.salasana === formData.salasana2) {
         // Tähän laittaa salasanan poistolle pyyntö
-        this.authService.vaihdaSalana(formData.salasana)
-          .subscribe(result => {
-            if (result === true) {
-              } else {
-                this.salasanainfo = 'Salasana vaihdettu';
-              }
-          })
+        this.authService.vaihdaSalana(formData.salasana).subscribe((result) => {
+          if (result === true) {
+          } else {
+            this.salasanainfo = 'Salasana vaihdettu';
+          }
+        });
       } else {
         this.error = 'Salasanat eivät täsmää';
       }
     } else {
-      this.error1 = 'Uusi ja vanha sama salasana'
+      this.error1 = 'Uusi ja vanha sama salasana';
     }
   }
 
@@ -112,19 +122,19 @@ export class OmattiedotComponent implements OnInit {
 
   // Tunnuksen poisto
   poistaTunnus() {
-    this.authService.poistaTunnus()
-      .subscribe(result => {
+    this.authService.poistaTunnus().subscribe((result) => {
       if (result === true) {
-
       } else {
         // Poistetaan tunnukseen liittyvä suosikki samalla
-        this.favoriteService.poistaSuosikkiTunnus(this.suosikit._id).subscribe(result => {
-          if (result === true) {
-            console.log('Suosikin poisto epäonnistui')
-          } else  {
-            console.log('Suosikin poisto onnistui')
-          }
-        });
+        this.favoriteService
+          .poistaSuosikkiTunnus(this.suosikit._id)
+          .subscribe((result) => {
+            if (result === true) {
+              console.log('Suosikin poisto epäonnistui');
+            } else {
+              console.log('Suosikin poisto onnistui');
+            }
+          });
         this.poistoinfo = 'Käyttäjätunnus on poistettu';
         this.authService.logout(); // Tehdään uloskirjautuminen
         window.location.reload(); // Ladataan sivu uudelleen
@@ -134,10 +144,8 @@ export class OmattiedotComponent implements OnInit {
 
   // Rautatieasemien lisäys admin oikeudella
   lisaaJunaAsemat() {
-    this.junaAsematService.lisaaAsemat()
-      .subscribe(result => {
+    this.junaAsematService.lisaaAsemat().subscribe((result) => {
       if (result === true) {
-        
       } else {
         this.junainfo = 'Rautatieasemat lisätty';
       }
@@ -146,10 +154,8 @@ export class OmattiedotComponent implements OnInit {
 
   // Rautatieasemien poisto admin oikeudella
   poistaJunaAsemat() {
-    this.junaAsematService.poistaAsemat()
-      .subscribe(result => {
+    this.junaAsematService.poistaAsemat().subscribe((result) => {
       if (result === true) {
-        
       } else {
         this.junainfo = 'Rautatieasemat poistettu';
       }
@@ -158,19 +164,21 @@ export class OmattiedotComponent implements OnInit {
 
   // Haetaan kaikki suosikit
   haeKaikkiSuosikit() {
-    this.favoriteService.haeKaikkiSuosikit().subscribe(data => this.suosikitlista = data);
+    this.favoriteService
+      .haeKaikkiSuosikit()
+      .subscribe((data) => (this.suosikitlista = data));
   }
 
   // Hae suosikki sää- ja rautatieasemat
   haeSuosikit(username) {
-    this.favoriteService.haeSuosikit(username).subscribe(data => this.suosikit = data);
+    this.favoriteService
+      .haeSuosikit(username)
+      .subscribe((data) => (this.suosikit = data));
 
-    this.favoriteService.haeSuosikit(username).subscribe((dataUser:any) => {
-
+    this.favoriteService.haeSuosikit(username).subscribe((dataUser: any) => {
       // Haetaan rautatieaseman suosikit
-      this.junaAsematService.haeAsemat().subscribe((data:any) => {
+      this.junaAsematService.haeAsemat().subscribe((data: any) => {
         for (let x = 0; x < data.length; x++) {
-
           // Suosikki rautatatie 1
           if (dataUser.favoritesJuna1 === data[x].stationShortCode) {
             this.favoritesJuna1Name = data[x].stationName;
@@ -181,12 +189,11 @@ export class OmattiedotComponent implements OnInit {
             this.favoritesJuna2Name = data[x].stationName;
           }
         }
-      })
+      });
 
       // Haetaan säähavaintoasema suosikit
-      this.havaintoAsemaService.haeHavaintoAsemat().subscribe((data:any) => {
+      this.havaintoAsemaService.haeHavaintoAsemat().subscribe((data: any) => {
         for (let x = 0; x < data.length; x++) {
-
           // Suosikki rautatatie 1
           if (dataUser.favoritesSaa1 === data[x].fmisid) {
             this.favoritesSaa1Name = data[x].name;
@@ -197,38 +204,66 @@ export class OmattiedotComponent implements OnInit {
             this.favoritesSaa2Name = data[x].name;
           }
         }
-      })
+      });
     });
   }
-  
+
   // Suosikki säähavainto- ja rautatieasemien haku kentät 4 kpl
-  searchRautatie1: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.rautatietasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
-  )
+  searchRautatie1: OperatorFunction<string, readonly { stationName }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.rautatietasemat
+          .filter((rauta) => new RegExp(term, 'mi').test(rauta.stationName))
+          .slice(0, 10)
+      )
+    );
 
-  searchRautatie2: OperatorFunction<string, readonly {stationName}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.rautatietasemat.filter(rauta => new RegExp(term, 'mi').test(rauta.stationName)).slice(0, 10))
-  )
+  searchRautatie2: OperatorFunction<string, readonly { stationName }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.rautatietasemat
+          .filter((rauta) => new RegExp(term, 'mi').test(rauta.stationName))
+          .slice(0, 10)
+      )
+    );
 
-  searchSaa1: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
-  )
+  searchSaa1: OperatorFunction<string, readonly { name }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.havaintoasemat
+          .filter((saa) => new RegExp(term, 'mi').test(saa.name))
+          .slice(0, 10)
+      )
+    );
 
-  searchSaa2: OperatorFunction<string, readonly {name}[]> = (text$: Observable<string>) => text$.pipe(
-    debounceTime(200),
-    distinctUntilChanged(),
-    filter(term => term.length >= 2),
-    map(term => this.havaintoasemat.filter(saa => new RegExp(term, 'mi').test(saa.name)).slice(0, 10))
-  )
+  searchSaa2: OperatorFunction<string, readonly { name }[]> = (
+    text$: Observable<string>
+  ) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter((term) => term.length >= 2),
+      map((term) =>
+        this.havaintoasemat
+          .filter((saa) => new RegExp(term, 'mi').test(saa.name))
+          .slice(0, 10)
+      )
+    );
 
   // Suosikki sää- ja rautatieasemien päivitys
   suosikkienPaivitys(formData) {
@@ -237,30 +272,32 @@ export class OmattiedotComponent implements OnInit {
 
     // Tarkistetaan, että onko datassa undefined, jos ei ole niin tallennetaan tuleva sanoma. Muuten undefined ei aiheuta muutosta
     if (formData.favoritesSaa1 !== undefined) {
-      fsaa1 = formData.favoritesSaa1.fmisid
+      fsaa1 = formData.favoritesSaa1.fmisid;
     }
 
     if (formData.favoritesSaa2 !== undefined) {
-      fsaa2 = formData.favoritesSaa2.fmisid
+      fsaa2 = formData.favoritesSaa2.fmisid;
     }
 
     if (formData.favoritesJuna1 !== undefined) {
-      fjuna1 = formData.favoritesJuna1.stationShortCode
+      fjuna1 = formData.favoritesJuna1.stationShortCode;
     }
 
     if (formData.favoritesJuna2 !== undefined) {
-      fjuna2 = formData.favoritesJuna2.stationShortCode
+      fjuna2 = formData.favoritesJuna2.stationShortCode;
     }
 
     // Päivitetään tiedot tietokantaan
-    this.favoriteService.paivitaSuosikit(this.suosikit._id, fsaa1, fsaa2, fjuna1, fjuna2)
-      .subscribe(() => this.haeSuosikit(this.username))
+    this.favoriteService
+      .paivitaSuosikit(this.suosikit._id, fsaa1, fsaa2, fjuna1, fjuna2)
+      .subscribe(() => this.haeSuosikit(this.username));
   }
 
   // Hae kaikki käyttäjät admin työkaluun
   haeKayttajat() {
-    this.authService.haeKaikkiKayttajat()
-      .subscribe(data => this.kayttajat = data);
+    this.authService
+      .haeKaikkiKayttajat()
+      .subscribe((data) => (this.kayttajat = data));
   }
 
   // Käyttäjän poistaminen ja haetaan käyttäjälistaus uudelleen
@@ -278,10 +315,11 @@ export class OmattiedotComponent implements OnInit {
     //console.log(suosikkiId);
 
     // Poisteatan käyttäjätunnus käyttäjä ja suosikit taulusta
-    this.authService.poistaTunnusId(k._id)
-      .subscribe(() => {
-        this.favoriteService.poistaSuosikkiTunnus(suosikkiId)
-          .subscribe(() => this.haeKayttajat())})
+    this.authService.poistaTunnusId(k._id).subscribe(() => {
+      this.favoriteService
+        .poistaSuosikkiTunnus(suosikkiId)
+        .subscribe(() => this.haeKayttajat());
+    });
   }
 
   // Salasanan näyttäminen
@@ -299,5 +337,3 @@ export class OmattiedotComponent implements OnInit {
     this.naytasalasanaUudelleenUusi = !this.naytasalasanaUudelleenUusi;
   }
 }
-
-

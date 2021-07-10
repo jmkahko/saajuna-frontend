@@ -14,10 +14,10 @@
       <ul class="list-group no-bullets">
         <li *ngFor="let havaintoasema of hasemat">
           <a
-            routerLink="/havaintoasematiedot/{{ havaintoasema._id }}"
+            routerLink="/havaintoasematiedot/{{ havaintoasema?._id }}"
             class="list-group-item list-group-item-action"
           >
-            {{ havaintoasema.name }}
+            {{ havaintoasema?.name }}
           </a>
         </li>
       </ul>
