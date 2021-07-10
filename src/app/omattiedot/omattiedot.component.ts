@@ -48,7 +48,6 @@ export class OmattiedotComponent implements OnInit {
   favoritesSaa2Name: string;
   favoritesJuna1Name: string;
   favoritesJuna2Name: string;
-  time: string;
 
   naytasalasana: boolean; // Salasanan näyttäminen
   naytasalasanaUudelleen: boolean; // Salasanan näyttäminen
