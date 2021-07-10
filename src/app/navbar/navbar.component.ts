@@ -37,7 +37,9 @@ export class NavbarComponent implements OnDestroy {
   doLogout() {
     this.login = false;
   }
+
   navbarOpen = false;
+  
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
