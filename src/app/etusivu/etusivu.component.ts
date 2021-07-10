@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment'; // Tuodaan enviromen
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 import { JunaService } from '../juna.service';
-import { interval } from 'rxjs';
 
 // Nämä tuodaan karttaa varten
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -176,9 +175,6 @@ export class EtusivuComponent implements OnInit {
 
   // Kaikkien junien sijainti tiedot
   kaikkienJunienSijainnit(): any {
-    setTimeout(function () {
-      this.map.invalidateSize(true);
-    }, 1500);
     // Haetaan junien sijantitiedot
     this.junatService.haeKaikkienPaikkaTiedot().subscribe(
       (data) => {
@@ -187,6 +183,14 @@ export class EtusivuComponent implements OnInit {
 
         // 'kartta' viittaus on html kohtaan <div id="kartta"></div>
         this.map = L.map('kartta').setView(this.latlng, 6);
+
+        // add the OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+          maxZoom: 18,
+          minZoom: 3,
+        }).addTo(this.map);
 
         // show the scale bar on the lower left corner
         L.control.scale().addTo(this.map);
