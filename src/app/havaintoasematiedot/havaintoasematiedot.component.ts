@@ -41,8 +41,6 @@ export class HavaintoasematiedotComponent implements OnInit {
   lat: number;
   lon: number;
 
-  timeTesti: string;
-
   constructor(
     private route: ActivatedRoute,
     private HavaintoAsematService: HavaintoasemaService,
@@ -52,7 +50,6 @@ export class HavaintoasematiedotComponent implements OnInit {
     this.lat = 0;
     this.lon = 0;
     this.latlng = new L.LatLng(this.lat, this.lon);
-    this.timeTesti = "2021-07-10T14:20:00.000Z";
   }
 
   ngOnInit(): void {
