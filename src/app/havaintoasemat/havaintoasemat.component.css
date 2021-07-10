@@ -14,18 +14,6 @@ ul.no-bullets {
   padding: 0;
 }
 
-img {
-  margin: 2%;
-  opacity: 40%;
-  background-repeat: no-repeat;
-  max-width: 100%;
-  max-height: 100%;
-  background-position: top;
-  background-position: center;
-  width: 100%;
-  bottom: 0;
-}
-
 .kartta-sijainti {
   position: static;
   top: 0;

@@ -81,7 +81,7 @@ export class HavaintoasematComponent implements OnInit {
     this.kaikkienAsemienSijainnit();
   }
 
-  // Kaikkien rautatieasemien sijainnit kartalla
+  // Kaikkien säähavaintoasemien sijainnit kartalla
   kaikkienAsemienSijainnit(): any {
     // Haetaan asemien sijantitiedot
     this.havaintoAsemaService.haeHavaintoAsemat().subscribe(
