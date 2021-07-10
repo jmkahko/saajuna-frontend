@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment'; // Tuodaan enviromen
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 import { JunaService } from '../juna.service';
+import { interval } from 'rxjs';
 
 // Nämä tuodaan karttaa varten
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -175,6 +176,9 @@ export class EtusivuComponent implements OnInit {
 
   // Kaikkien junien sijainti tiedot
   kaikkienJunienSijainnit(): any {
+    setTimeout(function () {
+      this.map.invalidateSize(true);
+    }, 1500);
     // Haetaan junien sijantitiedot
     this.junatService.haeKaikkienPaikkaTiedot().subscribe(
       (data) => {
@@ -184,33 +188,24 @@ export class EtusivuComponent implements OnInit {
         // 'kartta' viittaus on html kohtaan <div id="kartta"></div>
         this.map = L.map('kartta').setView(this.latlng, 6);
 
-        // add the OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution:
-            '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>',
-          maxZoom: 18,
-          minZoom: 3,
-        }).addTo(this.map);
-
         // show the scale bar on the lower left corner
         L.control.scale().addTo(this.map);
 
         // Ensimmäisen sijaintilistassa olevan junan aikataulu tieto html-sivulle
-        this.timeEkanJunan = data[0]['timestamp']
+        this.timeEkanJunan = data[0]['timestamp'];
 
         // Käydään jokaisen junan sijaintitieto läpi
         for (let x = 0; data.length; x++) {
-
           // Haetaan koordinaatit muuttujiin
           this.lon = data[x]['location']['coordinates'][0]; // Longitude sijainti
           this.lat = data[x]['location']['coordinates'][1]; // Latitude sijainti
-          let aika = data[x]['departureDate'] // Aikataulu
-          let junannumero = data[x]['trainNumber'] // Junan numero
-          let nopeus = data[x]['speed'] // Junan nopeus
+          let aika = data[x]['departureDate']; // Aikataulu
+          let junannumero = data[x]['trainNumber']; // Junan numero
+          let nopeus = data[x]['speed']; // Junan nopeus
 
           // Laitetaan merkki kartalle ja otetaan muuttujaan tieto
           let linkki = new L.marker(new L.LatLng(this.lat, this.lon))
-            .bindPopup('Juna: ' + junannumero + ', nopeus: ' + nopeus + ' km/h' )
+            .bindPopup('Juna: ' + junannumero + ', nopeus: ' + nopeus + ' km/h')
             .addTo(this.map);
 
           // Junan aikataulu linkki
@@ -219,19 +214,18 @@ export class EtusivuComponent implements OnInit {
           // Kun hiiri viedään sinisen merkin päälle avautuu popuppi joka on määritelty bindPopup kohdassa
           linkki.on('mouseover', function () {
             this.openPopup();
-          })
+          });
 
           // Kun hiiri viedään pois sinisen merkin päältä popuppi sulkeutuu
           linkki.on('mouseout', function () {
             this.closePopup();
-          })
+          });
 
           // Kun sinistä merkkiä klikkaa aukeaa junan aikataulu tiedot
           linkki.on('click', function () {
             window.open(urllinkki, '_self');
           });
         }
-        
       },
 
       // Jos tulee virheitä
