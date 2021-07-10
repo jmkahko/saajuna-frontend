@@ -117,7 +117,17 @@ export class HavaintoasematComponent implements OnInit {
           // Säähavaintoaseman linkki
           let urllinkki = this.apiUrl + data[x]['_id'];
 
-          // Kun sinistä merkkiä klikkaa säähavaintoaseman tiedot avautuvat
+          // Kun hiiri viedään sinisen merkin päälle avautuu popuppi joka on määritelty bindPopup kohdassa
+          linkki.on('mouseover', function () {
+            this.openPopup();
+          });
+
+          // Kun hiiri viedään pois sinisen merkin päältä popuppi sulkeutuu
+          linkki.on('mouseout', function () {
+            this.closePopup();
+          });
+
+          // Kun sinistä merkkiä klikkaa aukeaa junan aikataulu tiedot
           linkki.on('click', function () {
             window.open(urllinkki, '_self');
           });
