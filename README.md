@@ -11,7 +11,13 @@ Tarjottavia frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien 
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja eli 4 yhteensä (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan, poistaa käyttäjätunnuksia ja näkee kuinka paljon tietoja on tallennettu tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
+SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Sovelluksessa käyttäjä voi hakea esimerkiksi haluamansa rautatieaseman, jolloin hän näkee aseman tietoja, sinne tällä hetkellä tulevat ja lähtevät junat sekä aseman sääennusteen. Klikkaamalla junaa hän näkee junan aikataulun ja missä kohti se on kartalla menossa tällä hetkellä.
+
+Käyttäjä voi myös hakea haluamaansa paikkakuntaa ja sen säähavaintoasemaa, jolloin hänelle haetaan aseman tiedot, tämänhetkinen sää joko sovelluksen tietokannasta (mikäli se on haettu viimeisen 10 minuutin aikana) tai Ilmatieteen laitoksen avoimesta tietokannasta. Samalla haetaan myös kyseiselle asemalle myös tuleva sääennuste.
+
+Karttojen kuvakkeita klikkaamalla käyttäjä pääsee myös rautatieasemien, säähavaintoasemien ja kulussa olevien junien tietoihin suoraan.
+
+Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja eli 4 yhteensä (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan, poistaa käyttäjätunnuksia ja näkee kuinka paljon tietoja on tallennettu tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
 
 ## Kuvaus teknologioista
 
@@ -77,9 +83,6 @@ Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.co
 - [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)
 - [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)
 - [Navbarin collapse](https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007)
-- [Etusivun junan kuva](https://pixabay.com/fi/photos/junan-hylky-katastrofi-myrsky-3719422/)
-- [Junatietojen kuva](https://pixabay.com/fi/illustrations/vintage-veturi-moguli-steampunk-4273606/)
-- [Säätietojen kuva](https://pixabay.com/fi/illustrations/maailmankartta-vanha-2241469/)
 - [Navbarin logo](https://www.freelogodesign.org)
 - [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)
 - [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)
