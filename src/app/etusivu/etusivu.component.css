@@ -50,3 +50,19 @@ th {
   grid-column-start: 2;
   grid-column-end: 3;
 }
+
+.kartta-sijainti {
+  position: static;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0px;
+}
+
+#kartta {
+  height: 600px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}

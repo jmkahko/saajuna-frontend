@@ -38,4 +38,11 @@ export class JunaService {
     .pipe(catchError(this.handleError));
   }
 
+  // Haetaan kaikkien junien paikkatiedot
+  haeKaikkienPaikkaTiedot() {
+    return this.http
+    .get(`${this.apiUrl}/paikkatieto`)
+    .pipe(catchError(this.handleError));
+  }
+
 }
