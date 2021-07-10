@@ -2,11 +2,11 @@
 <div class="container-md" *ngIf="!login">
   <div class="aloituskuva">
     <div class="card">
+      <h1>Junat kartalla</h1>
       <div class="kartta-sijainti">
         <div id="kartta"></div>
       </div>
       <div class="card">
-        <h1>Junat kartalla</h1>
         <p>
           Sijaintitieto on päivittynyt viimeksi
           {{ timeEkanJunan | date: 'H:mm:ss' }}. Sijaintitieto päivittyy n. 15
@@ -266,7 +266,7 @@
               <td>
                 <a
                   routerLink="/juna/aikataulu/{{
-                    aikataulu?.arrivalScheduledTime | date: 'yyyy-MM-dd'
+                    aikataulu?.departureScheduledTime | date: 'yyyy-MM-dd'
                   }}/{{ aikataulu?.trainNumber }}"
                   >{{ aikataulu?.trainNumber }} {{ aikataulu?.trainType }}</a
                 >

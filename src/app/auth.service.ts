@@ -19,6 +19,7 @@ export class AuthService {
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut
   private id: string;
   public username: string;
+  public rekisterointi: boolean; // Rekisteröinti onnistui
 
   constructor(
     private http: HttpClient,
@@ -120,7 +121,7 @@ export class AuthService {
 
   // Ilmoitetaan jos rekisteröinti onnistui
   rekisterointiOnnistui(): Observable<any> {
-    this.subject.next(3);
+    this.subject.next(true);
     return this.subject.asObservable();
   }
 
@@ -149,6 +150,7 @@ export class AuthService {
                 'accesstoken',
                 JSON.stringify({ username: username, adminlogin: false, token: token })
               );
+              this.rekisterointi = true;
               console.log('käyttäjä rekisteröinti onnistui');
               this.router.navigate(['/kirjaudu']);
               return true; // saatiin token
@@ -239,6 +241,7 @@ export class AuthService {
       .pipe(
         map((res) => {
           console.log(res);
+          this.router.navigate(['/etusivu']);
           console.log('Poisto onnistui');
           return false;
         })
