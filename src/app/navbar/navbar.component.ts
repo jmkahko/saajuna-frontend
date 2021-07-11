@@ -37,8 +37,13 @@ export class NavbarComponent implements OnDestroy {
   doLogout() {
     this.login = false;
   }
+<<<<<<< HEAD
   // Navbarin collapse -ohje lainattu tästä linkistä https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007
+=======
+
+>>>>>>> 287aca57ff025ab23e6ef040417236f3277f0cb7
   navbarOpen = false;
+  
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
