@@ -8,7 +8,7 @@ import { SaaService } from '../saa.service';
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 
-// Nämä tuodaan karttatietoja varten
+// Nämä tuodaan karttatietoja varten, kartta ikonit tallennettu assets-kansioon.
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -136,7 +136,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
     }
   }
 
-  // Näytetään tuulensuunta kuva
+  // Näytetään tuulensuunnan kuva
   tuulenSuuntaKuva(tsuuntanro: number) {
     if (tsuuntanro >= 23 && tsuuntanro <= 68) {
       return 'north-west';
