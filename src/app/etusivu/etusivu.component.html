@@ -28,10 +28,11 @@
     <!-- Sää suosikki 1-->
     <div class="suosikkisaa1" *ngIf="suosikkisaa1 !== null">
       <div class="card">
-        <h4 class="card-title">
+        <h2 class="card-title">
           <h1>Suosikki sää- ja rautatieasemat</h1>
-          Sää {{ suosikkisaaasema1 }} {{ suosikkisaa1?.time | date: 'H:mm' }}
-        </h4>
+          Sää {{ suosikkisaaasema1 }} klo
+          {{ suosikkisaa1?.time | date: 'H:mm' }}
+        </h2>
         <table class="table-responsive-lg">
           <thead>
             <tr>
@@ -79,9 +80,10 @@
     <!-- Sää suosikki 2-->
     <div class="suosikkisaa2" *ngIf="suosikkisaa2 !== null">
       <div class="card">
-        <h4 class="card-title">
-          Sää {{ suosikkisaaasema2 }} {{ suosikkisaa2?.time | date: 'H:mm' }}
-        </h4>
+        <h2 class="card-title">
+          Sää {{ suosikkisaaasema2 }} klo
+          {{ suosikkisaa2?.time | date: 'H:mm' }}
+        </h2>
         <table class="table-responsive-lg">
           <thead>
             <tr>
@@ -129,7 +131,7 @@
     <!-- Rautatie suosikki 1-->
     <div class="suosikkirautatie1" *ngIf="suosikkirautatie1 !== null">
       <div class="card">
-        <h4 class="card-title">Rautatie {{ junaasema1?.stationName }}</h4>
+        <h2 class="card-title">Rautatie {{ junaasema1?.stationName }}</h2>
         <table class="table-responsive-lg">
           <thead>
             <tr>
@@ -214,7 +216,7 @@
     <!-- Rautatie suosikki 2-->
     <div class="suosikkirautatie2" *ngIf="suosikkirautatie2 !== null">
       <div class="card">
-        <h4 class="card-title">Rautatie {{ junaasema2?.stationName }}</h4>
+        <h2 class="card-title">Rautatie {{ junaasema2?.stationName }}</h2>
         <table class="table-responsive-lg">
           <thead>
             <tr>
