@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JunaAsemaService } from '../juna-asema.service';
 import { RautatieAsemat } from '../rautatieAsemat';
 import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet

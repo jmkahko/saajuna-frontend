@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HavaintoasemaService } from '../havaintoasema.service';
 import { HavaintoAsemat } from '../havaintoasemat';
 import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet

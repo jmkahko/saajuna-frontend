@@ -1,9 +1,8 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Tämän avulla saadaan tietoa reitistä  komponenttiin
 import { ActivatedRoute } from '@angular/router';
 import { JunaAsemaService } from '../juna-asema.service';
-import { HavaintoasemaService } from '../havaintoasema.service';
 import { SaaService } from '../saa.service';
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
@@ -49,7 +48,6 @@ export class RautatieasemanTiedotComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private junaAsematService: JunaAsemaService,
-    private HavaintoAsematService: HavaintoasemaService,
     private SaaService: SaaService
   ) {
     // Alustetaan koordinaatit nollatiedoilla
