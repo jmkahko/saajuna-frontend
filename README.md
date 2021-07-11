@@ -6,31 +6,35 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistune
 
 ## Yleisesittely
 
-[SääJuna-frontend](https://saajuna.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [SääJuna-backend](https://saajuna.herokuapp.com/) sivustolle.
-Tarjottavia frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
+[SääJuna-frontend](https://saajuna.herokuapp.com/) sivuston backend pyörii [SääJuna-backend](https://saajuna-backend.herokuapp.com/) osoitteessa.
+Frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Sovelluksessa käyttäjä voi hakea esimerkiksi haluamansa rautatieaseman, jolloin hän näkee aseman tietoja, sinne tällä hetkellä tulevat ja lähtevät junat sekä aseman sääennusteen. Klikkaamalla junaa hän näkee junan aikataulun ja missä kohti se on kartalla tällä hetkellä.
+SääJuna-sovelluksessa haetaan tiedot sekä [Rautatieliikenteen](https://www.digitraffic.fi/rautatieliikenne/) että [Ilmatieteen laitoksen](https://www.ilmatieteenlaitos.fi/) avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Sovelluksessa käyttäjä voi hakea esimerkiksi haluamansa rautatieaseman, jolloin hän näkee aseman tietoja, sinne tällä hetkellä tulevat ja lähtevät junat sekä aseman sääennusteen. Klikkaamalla junaa hän näkee junan aikataulun ja missä kohti se on kartalla tällä hetkellä (sijanti saadaan vain, jos juna lähettää GPS-sijaintitietoa).
 
-Käyttäjä voi myös hakea haluamaansa paikkakuntaa ja sen säähavaintoasemaa, jolloin hänelle haetaan kyseisen säähavaintoaseman tiedot, tämänhetkinen sää joko sovelluksen tietokannasta (mikäli se on haettu viimeisen 10 minuutin aikana) tai jos hausta on pidempi aika, niin sitten se haetaan Ilmatieteen laitoksen avoimesta tietokannasta. Samalla haetaan myös kyseiselle asemalle myös tuleva sääennuste.
+Käyttäjä voi myös hakea haluamaansa paikkakuntaa ja sen säähavaintoasemaa, jolloin hänelle haetaan kyseisen säähavaintoaseman tiedot, tämänhetkinen sää joko sovelluksen tietokannasta (mikäli se on haettu viimeisen 10 minuutin aikana) tai jos hausta on pidempi aika, niin sitten se haetaan Ilmatieteen laitoksen avoimesta tietokannasta. Samalla haetaan myös kyseiselle säähavaintoasemalle myös kuluvan tunnin sääennuste.
 
-Karttojen kuvakkeita klikkaamalla käyttäjä pääsee myös rautatieasemien, säähavaintoasemien ja kulussa olevien junien tietoihin suoraan.
+Karttojen kuvakkeita klikkaamalla käyttäjä pääsee myös suoraan rautatieasemien, säähavaintoasemien ja kulussa olevien junien tietoihin.
 
-Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl suosikkeja eli 4 yhteensä (esim. suosikkipaikkakuntia tai junia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan, poistaa käyttäjätunnuksia ja näkee kuinka paljon tietoja on tallennettu tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
+Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 2 kpl säähavaihtoaseman ja rautatieaseman suosikkeja eli 4 yhteensä. Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan, poistaa käyttäjätunnuksia ja näkee kuinka paljon tietoja on tallennettu tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
 
 ## Kuvaus teknologioista
 
-SääJuna-lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on sekä frontend että backend ja sen taustalla on tietokanta.
-Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Molemmat sekä frontend että backend on julkaistu Heroku:hun.
+SääJuna-frontend sovellus on luotu Angularilla. Sivustolta tehdään REST API-rajapinnan kautta MongoDB-tietokannan CRUD- ja junienhakutoimintoja [SääJuna-backend](https://saajuna-backend.herokuapp.com/) palveluun.
 
-Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käyttäjätunnusten luonti, muokkaus ja poisto sekä suosikkien lisäys, muokkaus ja poistaminen).
+[SääJuna-frontend](https://saajuna.herokuapp.com/) -sivusto on julkaistu [Heroku](https://www.heroku.com/) palvelussa. Julkaisua varten Angular projektiin on lisätty myös [Node Express](https://expressjs.com/).
 
 ### Komennot
 
 Alla on komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
-Heroku-palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon
+1. `git clone git@github.com:jmkahko/saajuna-frontend.git`
+2. Tarkista, että [SääJuna-backend](https://github.com/jmkahko/saajuna-backend) on toiminnossa
+3. Tarvittaessa SääJuna-backend palvelun osoitetta voi muokata ./environments/environment.ts tiedostoon
+3. Sitten käynnistä projekti `npm start` komennolla.
+
+Heroku-palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon, komento jolla sivusto käynnistyy
 
 Heroku
 
@@ -58,11 +62,8 @@ Paikallinen
 
 ## Reflektio ja ajankäyttö
 
-Työ on onnistunut hyvin ja yllättävän sujuvasti. Vaikeimpia asioita ovat olleet aikatietojen muokkaaminen ja parserointi (UTC-aika), tietojen vieminen eri komponenttien välillä (emme saaneet sitä onnistumaan kaikissa kohteissa). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON-muotoon vei paljon aikaa.
-
-Junien ja rautatieasemien parserointiin JSON-sanomasta meni aikaa.Varsinkin alussa ennen kuin huomattiin, että ajan muutoksia voi tehdä helpostikin.
-
-Käyttäjän poistaminen epäonnistuu, jos on kirjautuneena pitkään toisella sivulla. Tähän ei löytynyt ratkaisua.
+Työ on onnistunut hyvin ja yllättävän sujuvasti. Ongelmia jonkin verran aiheutti sivujen välillä tietojen siirto esimerkiksi käyttäjä rekisteröintyy ja siirrytään kirjaudu-sivustolle. Tämä ongelma saatiin kierrettyä, että luotiin uusi kirjaudu-sivusto, johon käyttäjä ohjataan rekisteröinnin jälkeen. Käyttäjätunnuksen poistaminen ja salasanan vaihtaminen aiheutti myös jonkin verran ongelmia, ennen kuin saatiin ongelma ratkaistua viemällä käyttäjän id-tieto sessionStorageen kirjautumisen yhteydessä.
+Html sivulla elementtien sijainnin määrittely ja saaminen haluttuun kohtaan.
 
 Frontendin tekemiseen on käytetty aikaa 60-80 h.
 
@@ -72,7 +73,7 @@ Frontendin tekemiseen on käytetty aikaa 60-80 h.
 
 Web-kehittäjä koulutuksen Frontend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella esimerkiksi käyttäjätunnuksien luontiin, kirjautumiseen ja token-tiedon hyödyntämiseen.
 
-Lisäksi on käytetty myös Rautatieliikenteen ja Ilmatieteen laitoksen omia avoimen datan ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
+Lisäksi on käytetty myös [Rautatieliikenteen](https://www.digitraffic.fi/rautatieliikenne/) ja [Ilmatieteen laitoksen](https://www.ilmatieteenlaitos.fi/) omia avoimen datan ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
 
 Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä.
 
@@ -89,3 +90,5 @@ Alla on linkit muutamiin sivustoihin, joita on myös hyödynnetty lopputyössä.
 - [Navbarin logo](https://www.freelogodesign.org)
 - [Footerin ulkoasu ja koodi, on lainattu täältä](https://epicbootstrap.com/snippets/footer-dark)
 - [Ulkoasun CSS, on lainattu täältä](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)
+
+Näiden linkkien lisäksi on paljon hyödynnetty vinkkejä ja vihjeitä [Stack Overflow](https://stackoverflow.com/) sivustolta.
