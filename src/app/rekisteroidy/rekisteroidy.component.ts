@@ -155,7 +155,6 @@ export class RekisteroidyComponent implements OnInit {
             .subscribe((result) => {
               if (result === true) {
                 this.error = 'Rekisteröinti onnistui';
-                this.router.navigate(['/etusivu']);
               } else {
                 this.error = 'Rekisteröinti epäonnistui';
               }

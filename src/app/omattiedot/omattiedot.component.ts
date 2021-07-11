@@ -122,7 +122,9 @@ export class OmattiedotComponent implements OnInit {
   // Tunnuksen poisto
   poistaTunnus() {
     this.authService.poistaTunnus().subscribe((result) => {
+      console.log(result);
       if (result === true) {
+        console.log('Poisto epäonnistui')
       } else {
         // Poistetaan tunnukseen liittyvä suosikki samalla
         this.favoriteService

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-kirjaudu',
-  templateUrl: './kirjaudu.component.html',
-  styleUrls: ['./kirjaudu.component.css']
+  selector: 'app-rekirjaus',
+  templateUrl: './rekirjaus.component.html',
+  styleUrls: ['./rekirjaus.component.css']
 })
-export class KirjauduComponent implements OnInit {
+export class RekirjausComponent implements OnInit {
   error = ''; // Virhetietojen näyttämistä html sivulla
   naytasalasana: boolean; // Salasanan näyttäminen
   rekisterointi: boolean; // Onko rekisteröinti onnistunut
@@ -43,5 +43,5 @@ export class KirjauduComponent implements OnInit {
   naytasalasanaType() {
     this.naytasalasana = !this.naytasalasana;
   }
-}
 
+}

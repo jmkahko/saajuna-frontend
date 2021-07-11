@@ -52,6 +52,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RekirjausComponent } from './rekirjaus/rekirjaus.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HavaintoasematiedotComponent,
     JunantiedotComponent,
     InfoComponent,
+    RekirjausComponent,
   ],
   imports: [
     BrowserModule,

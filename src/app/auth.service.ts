@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Kayttaja } from './kayttaja';
 import { environment } from 'src/environments/environment'; // Tuodaan enviromentista url osoitteet
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Injectable({
   providedIn: 'root',
@@ -68,7 +69,6 @@ export class AuthService {
             try {
               // dekoodataan token
               const payload = this.jwtHelp.decodeToken(token);
-              //console.log(payload);
               this.id = payload.id;
               //console.log(payload.id);
               // Tässä voidaan tarkistaa tokenin oikeellisuus
@@ -82,10 +82,10 @@ export class AuthService {
                 console.log('admin login onnistui');
                 return true; // saatiin token
               } else if (payload.username === username && payload.isadmin === false) {
-                // token sessionStorageen
+                // token sessionStorageen. Käyttäjätunnus, adminlogin on false, käyttäjän id ja token tieto
                 sessionStorage.setItem(
                   'accesstoken',
-                  JSON.stringify({ username: username, adminlogin: false, token: token })
+                  JSON.stringify({ username: username, adminlogin: false, id: this.id, token: token })
                 );
                 this.loginTrue(); // lähetetään viesti navbariin että vaihdetaan login:true -tilaan
                 console.log('käyttäjä login onnistui');
@@ -152,7 +152,7 @@ export class AuthService {
               );
               this.rekisterointi = true;
               console.log('käyttäjä rekisteröinti onnistui');
-              this.router.navigate(['/kirjaudu']);
+              this.router.navigate(['/rekirjaus']);
               return true; // saatiin token
             } else {
               console.log('rekisteröinti epäonnistui');
@@ -173,6 +173,10 @@ export class AuthService {
   vaihdaSalana(password: string): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+
+    // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin käyttäjän id tieto
+    const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
+    this.id = currentUser && currentUser.id;
 
     // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
     const tokenheaders = {
@@ -227,6 +231,12 @@ export class AuthService {
   poistaTunnus(): Observable<any> {
     // Otetaan token tieto käyttäjätunnuksen poistosanoman mukaan
     const mytoken = JSON.parse(sessionStorage.getItem('accesstoken'));
+
+    // Jos token on jo sessionStoragessa, otetaan se sieltä muistiin käyttäjän id tieto
+    const currentUser = JSON.parse(sessionStorage.getItem('accesstoken'));
+    this.id = currentUser && currentUser.id;
+
+    //console.log(this.id)
 
     // Asetaan muuttujaan headers tieto, jossa kerrotaan token tieto
     const tokenheaders = {
