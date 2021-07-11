@@ -9,6 +9,9 @@ Admin-käyttäjälle näytetään myös rautatieasemien ja käyttäjien ylläpit
   <div *ngIf="poistoinfo" class="alert alert-info">
     <strong>Käyttäjätunnus poistettu!</strong> Kirjaudu ulos ylälaidasta
   </div>
+  <div *ngIf="suosikithtml" class="alert alert-info">
+    <strong>Onnistui!</strong> Suosikit päivitetty
+  </div>
   <div *ngIf="error" class="alert alert-danger">
     <strong>Salasanan vaihto epäonnistui!</strong> Salasanat eivät täsmää
   </div>

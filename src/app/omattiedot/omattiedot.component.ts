@@ -31,6 +31,7 @@ export class OmattiedotComponent implements OnInit {
   public username: string; // Käyttäjänimi tieto
   rautatietasemat: Array<RautatieAsemat> = []; // Rautatieasemat ladataan tähän taulukkoon
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat ladataan tähän taulukkoon
+  suosikithtml: boolean // Html sivulle status viesti
 
   // Käyttäjiin liittyvät
   kayttajat: Array<Kayttaja> = [];
@@ -291,7 +292,10 @@ export class OmattiedotComponent implements OnInit {
     // Päivitetään tiedot tietokantaan
     this.favoriteService
       .paivitaSuosikit(this.suosikit._id, fsaa1, fsaa2, fjuna1, fjuna2)
-      .subscribe(() => this.haeSuosikit(this.username));
+      .subscribe(() => {
+        this.suosikithtml = true;
+        this.haeSuosikit(this.username)
+      });
   }
 
   // Haetaan kaikki käyttäjät admin työkaluun
