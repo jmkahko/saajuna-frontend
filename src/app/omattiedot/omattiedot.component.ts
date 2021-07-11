@@ -93,11 +93,11 @@ export class OmattiedotComponent implements OnInit {
 
   // Salasanan vaihtaminen
   salasanvaihto(formData, isFormValid: boolean) {
-    // Tarkistetaan onko uusi ja vanha salasan samoja
+    // Tarkistetaan onko uusi ja vanha salasana samat
     if (formData.vanhasalasana !== formData.salasana) {
-      // Tarkistetaan onko uusi ja sama uudelleen salasanat samoja
+      // Tarkistetaan onko uusi ja sama uudelleen salasanat samat
       if (formData.salasana === formData.salasana2) {
-        // Tähän laittaa salasanan poistolle pyyntö
+        // Tähän laitetaan salasanan poistolle pyyntö
         this.authService.vaihdaSalana(formData.salasana).subscribe((result) => {
           if (result === true) {
           } else {
@@ -112,7 +112,7 @@ export class OmattiedotComponent implements OnInit {
     }
   }
 
-  // Kun käyttöliittymässä painetaan Tyhjennä nappia poistetaan samalla virheet ja päivitetään Omat tiedot sivusto
+  // Kun käyttöliittymässä painetaan Tyhjennä-nappia, poistetaan samalla virheet ja päivitetään Omat tiedot sivusto.
   virheidenPoisto() {
     this.error = '';
     this.error1 = '';
@@ -124,7 +124,7 @@ export class OmattiedotComponent implements OnInit {
     this.authService.poistaTunnus().subscribe((result) => {
       if (result === true) {
       } else {
-        // Poistetaan tunnukseen liittyvä suosikki samalla
+        // Poistetaan tunnukseen liittyvät suosikit samalla
         this.favoriteService
           .poistaSuosikkiTunnus(this.suosikit._id)
           .subscribe((result) => {
@@ -193,12 +193,12 @@ export class OmattiedotComponent implements OnInit {
       // Haetaan säähavaintoasema suosikit
       this.havaintoAsemaService.haeHavaintoAsemat().subscribe((data: any) => {
         for (let x = 0; x < data.length; x++) {
-          // Suosikki rautatatie 1
+          // Suosikki sää 1
           if (dataUser.favoritesSaa1 === data[x].fmisid) {
             this.favoritesSaa1Name = data[x].name;
           }
 
-          // Suosikki rautatatie 2
+          // Suosikki sää 2
           if (dataUser.favoritesSaa2 === data[x].fmisid) {
             this.favoritesSaa2Name = data[x].name;
           }
@@ -269,7 +269,7 @@ export class OmattiedotComponent implements OnInit {
     // Esitellään sää- ja junaasemien muuttujat
     let fsaa1, fsaa2, fjuna1, fjuna2;
 
-    // Tarkistetaan, että onko datassa undefined, jos ei ole niin tallennetaan tuleva sanoma. Muuten undefined ei aiheuta muutosta
+    // Tarkistetaan, että onko datassa undefined, jos ei ole niin tallennetaan tuleva sanoma, muuten undefined ei aiheuta muutosta.
     if (formData.favoritesSaa1 !== undefined) {
       fsaa1 = formData.favoritesSaa1.fmisid;
     }
@@ -292,7 +292,7 @@ export class OmattiedotComponent implements OnInit {
       .subscribe(() => this.haeSuosikit(this.username));
   }
 
-  // Hae kaikki käyttäjät admin työkaluun
+  // Haetaan kaikki käyttäjät admin työkaluun
   haeKayttajat() {
     this.authService
       .haeKaikkiKayttajat()
@@ -301,10 +301,10 @@ export class OmattiedotComponent implements OnInit {
 
   // Käyttäjän poistaminen ja haetaan käyttäjälistaus uudelleen
   poistaKayttaja(k: Kayttaja) {
-    // Esitellään muuttuja ja alustetaan
+    // Esitellään muuttuja ja alustetaan se.
     let suosikkiId = '';
 
-    // Etsitään kayttajaa vastaava id suosikit taulusta
+    // Etsitään kayttajaa vastaava id suosikit taulusta.
     for (let x = 0; this.suosikitlista.length > x; x++) {
       if (this.suosikitlista[x].username === k.username) {
         suosikkiId = this.suosikitlista[x]._id;
@@ -313,7 +313,7 @@ export class OmattiedotComponent implements OnInit {
 
     //console.log(suosikkiId);
 
-    // Poisteatan käyttäjätunnus käyttäjä ja suosikit taulusta
+    // Poistetaan käyttäjätunnus käyttäjä- ja suosikit taulusta
     this.authService.poistaTunnusId(k._id).subscribe(() => {
       this.favoriteService
         .poistaSuosikkiTunnus(suosikkiId)
