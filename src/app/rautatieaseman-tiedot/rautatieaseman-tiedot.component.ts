@@ -196,7 +196,7 @@ export class RautatieasemanTiedotComponent implements OnInit {
         }).addTo(this.map);
 
         L.control.scale().addTo(this.map);
-        L.marker(this.latlng).bindPopup('Asema: ').addTo(this.map);
+        L.marker(this.latlng).bindPopup('Asema').addTo(this.map);
       },
 
       // Jos tulee virheitä
