@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment'; // Tuodaan enviromen
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 
-// Nämä tuodaan buildausta varten
+// Nämä tuodaan karttatietoja varten, kartta ikonit tallennettu assets-kansioon.
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -20,7 +20,7 @@ const iconDefault = L.icon({
   shadowSize: [41, 41],
 });
 L.Marker.prototype.options.icon = iconDefault;
-// Tähän asti ylhäältä
+// Tähän asti tuodaan karttatietoja varten
 
 @Component({
   selector: 'app-havaintoasemat',
@@ -29,8 +29,8 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class HavaintoasematComponent implements OnInit {
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat haetaan tähän tauluun
-  hasemat: Array<HavaintoAsemat> = []; // Tämä on alussa tyhjä ja kun haku kenttään syötetään tekstiä, niin tähän tauluun viedään ja haetaan
-  time: string;
+  hasemat: Array<HavaintoAsemat> = []; // Tämä on alussa tyhjä ja kun haku kenttään syötetään tekstiä, niin se tieto viedään tähän tauluun ja haetaan sieltä.
+  time: string; // Aika
 
   // Esitellään karttatiedot asemien tietoa varten
   private map: any;
@@ -47,7 +47,7 @@ export class HavaintoasematComponent implements OnInit {
       .haeHavaintoAsemat()
       .subscribe((data) => (this.havaintoasemat = data));
 
-    // Säähavaintoasemien sijaintietoja varten
+    // Säähavaintoasemien sijaintitietoja varten
     this.lat = 0;
     this.lon = 0;
     this.latlng = new L.LatLng(this.lat, this.lon);
@@ -55,7 +55,7 @@ export class HavaintoasematComponent implements OnInit {
 
   // Haetaan säähavaintoasema
   search(term: string): void {
-    // Kun kirjaimia on syötetty 2 tai enemmän, näytetään maksimissaan 10 hakutulosta
+    // Kun kirjaimia on syötetty 2 tai enemmän, näytetään maksimissaan 10 hakutulosta.
     if (term.length > 1) {
       this.hasemat = this.havaintoasemat
         .filter((str) => {
@@ -64,7 +64,7 @@ export class HavaintoasematComponent implements OnInit {
         .slice(0, 10);
     }
 
-    // Kun kirjaimia on syötetty 0 niin ei näytetä yhtään hakutulosta listasta
+    // Kun kirjaimia on syötetty 0 niin ei näytetä yhtään hakutulosta listasta.
     if (term.length === 0) {
       this.hasemat = this.havaintoasemat
         .filter((str) => {
@@ -76,7 +76,7 @@ export class HavaintoasematComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Jutut jotka tehdään sitten kun templaatti eli html-osa on latautunut muistiin
+  // Jutut, jotka tehdään sitten kun templaatti eli html-osa on latautunut muistiin
   ngAfterViewInit() {
     this.kaikkienAsemienSijainnit();
   }
@@ -103,13 +103,13 @@ export class HavaintoasematComponent implements OnInit {
         // show the scale bar on the lower left corner
         L.control.scale().addTo(this.map);
 
-        // Käydään asemien sijainnit läpi ja laitetaan kartalle
+        // Käydään asemien sijainnit läpi ja laitetaan ne kartalle.
         for (let x = 0; x < data.length; x++) {
           // Haetaan koordinaatit muuttujiin
           this.lon = Number(data[x]['longitude']); // Longitude sijainti
           this.lat = Number(data[x]['latitude']); // Latitude sijainti
 
-          // Laitetaan merkki kartalle ja otetaan muuttujaan tieto
+          // Laitetaan merkki kartalle ja otetaan tieto muuttujaan.
           let linkki = new L.marker(new L.LatLng(this.lat, this.lon))
             .bindPopup(data[x]['name'])
             .addTo(this.map);
