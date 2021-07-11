@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment'; // Tuodaan enviromen
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 import { JunaService } from '../juna.service';
 
-// Nämä tuodaan karttaa varten
+// Nämä tuodaan karttatietoja varten, kartta ikonit tallennettu assets-kansioon.
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -26,7 +26,7 @@ const iconDefault = L.icon({
   shadowSize: [41, 41],
 });
 L.Marker.prototype.options.icon = iconDefault;
-// Tähän asti ylhäältä
+// Tähän asti tuodaan karttatietoja varten
 
 @Component({
   selector: 'app-etusivu',
@@ -48,7 +48,7 @@ export class EtusivuComponent implements OnInit {
   suosikkirautatie2; // Suosikki 2 rautatieasema aikataulu
   login: boolean; //tarkistetaan onko käyttäjä kirjautuneena sisään
   havaintoasemat: Array<HavaintoAsemat> = []; // Säähavaintoasemat
-  time: string;
+  time: string; // Aika
   timeEkanJunan: string;
 
   // Esitellään karttatiedot asemien tietoa varten
@@ -133,14 +133,14 @@ export class EtusivuComponent implements OnInit {
         );
     });
 
-    // Haetaan suosikki säähavaintoasemien fmisid numeroille havaintoaseman kokonimet
+    // Haetaan suosikki säähavaintoasemien fmisid numeroille havaintoaseman koko nimet
     this.favoriteService.haeSuosikit(username).subscribe((dataUser: any) => {
       // Haetaan säähavaintoasemat
       this.havaintoAsemaService
         .haeHavaintoAsemat()
         .subscribe((havaintoAsemat) => {
           for (let x = 0; x < havaintoAsemat.length; x++) {
-            // Haetaan suosikki 1 säähavaintoaseman kokonimi
+            // Haetaan suosikki 1 säähavaintoaseman koko nimi
             if (havaintoAsemat[x].fmisid === dataUser.favoritesSaa1) {
               this.suosikkisaaasema1 = havaintoAsemat[x].name;
             }
@@ -154,7 +154,7 @@ export class EtusivuComponent implements OnInit {
     });
   }
 
-  // Saadaan html sivulle tuulen nopeuden teksti
+  // Saadaan html sivulle tuulen nopeuden tekstit
   tuulenNopeus(tnopeusnro: number) {
     if (tnopeusnro < 1) {
       return 'tyyntä';
@@ -173,7 +173,7 @@ export class EtusivuComponent implements OnInit {
     }
   }
 
-  // Kaikkien junien sijainti tiedot
+  // Kaikkien junien sijaintitiedot
   kaikkienJunienSijainnit(): any {
     // Haetaan junien sijantitiedot
     this.junatService.haeKaikkienPaikkaTiedot().subscribe(

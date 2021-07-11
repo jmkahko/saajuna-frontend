@@ -1,19 +1,19 @@
 # JAMK Web-kehittäjä-kurssin lopputyön SääJuna frontend
 
-Backend löytyy [projektista](https://github.com/jmkahko/saajuna-backend).
+Backend löytyy tästä [projektista](https://github.com/jmkahko/saajuna-backend).
 
 Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistuneet sekä backendin että frontendin kehittämiseen.
 
 ## Yleisesittely
 
-[Sääjuna-frontend](https://saajuna.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [Sääjuna-backend](https://saajuna.herokuapp.com/) sivustolle.
+[SääJuna-frontend](https://saajuna.herokuapp.com/) tarjoaa sivuston kautta frontend-palveluita [SääJuna-backend](https://saajuna.herokuapp.com/) sivustolle.
 Tarjottavia frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Sovelluksessa käyttäjä voi hakea esimerkiksi haluamansa rautatieaseman, jolloin hän näkee aseman tietoja, sinne tällä hetkellä tulevat ja lähtevät junat sekä aseman sääennusteen. Klikkaamalla junaa hän näkee junan aikataulun ja missä kohti se on kartalla menossa tällä hetkellä.
+SääJuna-sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteen laitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Sovelluksessa käyttäjä voi hakea esimerkiksi haluamansa rautatieaseman, jolloin hän näkee aseman tietoja, sinne tällä hetkellä tulevat ja lähtevät junat sekä aseman sääennusteen. Klikkaamalla junaa hän näkee junan aikataulun ja missä kohti se on kartalla tällä hetkellä.
 
-Käyttäjä voi myös hakea haluamaansa paikkakuntaa ja sen säähavaintoasemaa, jolloin hänelle haetaan aseman tiedot, tämänhetkinen sää joko sovelluksen tietokannasta (mikäli se on haettu viimeisen 10 minuutin aikana) tai Ilmatieteen laitoksen avoimesta tietokannasta. Samalla haetaan myös kyseiselle asemalle myös tuleva sääennuste.
+Käyttäjä voi myös hakea haluamaansa paikkakuntaa ja sen säähavaintoasemaa, jolloin hänelle haetaan kyseisen säähavaintoaseman tiedot, tämänhetkinen sää joko sovelluksen tietokannasta (mikäli se on haettu viimeisen 10 minuutin aikana) tai jos hausta on pidempi aika, niin sitten se haetaan Ilmatieteen laitoksen avoimesta tietokannasta. Samalla haetaan myös kyseiselle asemalle myös tuleva sääennuste.
 
 Karttojen kuvakkeita klikkaamalla käyttäjä pääsee myös rautatieasemien, säähavaintoasemien ja kulussa olevien junien tietoihin suoraan.
 
@@ -21,16 +21,16 @@ Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi t
 
 ## Kuvaus teknologioista
 
-Lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on sekä frontend että backend ja sen taustalla on tietokanta.
-Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Sekä frontend että backend on julkaistu Heroku:hun.
+SääJuna-lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on sekä frontend että backend ja sen taustalla on tietokanta.
+Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Molemmat sekä frontend että backend on julkaistu Heroku:hun.
 
 Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käyttäjätunnusten luonti, muokkaus ja poisto sekä suosikkien lisäys, muokkaus ja poistaminen).
 
 ### Komennot
 
-Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
+Alla on komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
-Heroku palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon
+Heroku-palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon
 
 Heroku
 
@@ -58,31 +58,34 @@ Paikallinen
 
 ## Reflektio ja ajankäyttö
 
-Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON-muotoon vei paljon aikaa.
+Työ on onnistunut hyvin ja yllättävän sujuvasti. Vaikeimpia asioita ovat olleet aikatietojen muokkaaminen ja parserointi (UTC-aika), tietojen vieminen eri komponenttien välillä (emme saaneet sitä onnistumaan kaikissa kohteissa). Myös Ilmatieteen laitoksen säätietojen XML-sanoman parserointi ja muuttaminen JSON-muotoon vei paljon aikaa.
 
-Käyttäjätunnuksen poistaminen ja suosikki sää- ja rautatieasemien muuttaminen ei onnistu, jos käyttäjä on rekisteröitynyt ja yrittää heti tehdä muutosta. Käyttäjätunnuksen poistaminen ja suosikkisää- ja rautatieasemien muuttaminen onnistuu, kun käyttäjä on kirjautunut ulos ja kirjautunut takaisin sisälle. Tähän meni paljon aikaa, mutta se on nyt muutettu niin, että Admin käyttäjällä on oikeus poistaa käyttäjiä.
+Junien ja rautatieasemien parserointiin JSON-sanomasta meni aikaa.Varsinkin alussa ennen kuin huomattiin, että ajan muutoksia voi tehdä helpostikin.
 
-Junien ja rautatieasemien parserointi JSON sanomasta meni aikaa.Varsinkin alussa ennen kuin huomasi, että ajan muutoksia voi tehdä helpostikin.
+Käyttäjän poistaminen epäonnistuu, jos on kirjautuneena pitkään toisella sivulla. Tähän ei löytynyt ratkaisua.
 
-Aikaa on käytetty frontendiin 40-50 h.
+Frontendin tekemiseen on käytetty aikaa 60-80 h.
 
 ## Työssä hyödynnetyt tutoriaalit
 
-[Tour of Heroes](https://angular.io/tutorial) tutoriaalia on käytetty apuna frontendissä.
+[Tour of Heroes](https://angular.io/tutorial) tutoriaalia on käytetty paljon apuna frontendissä.
 
-Web-kehittäjä koulutuksen Frondend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella käyttäjätunnuksien luontiin, kirjautumiseen ja token tiedon hyödyntämiseen.
+Web-kehittäjä koulutuksen Frontend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella esimerkiksi käyttäjätunnuksien luontiin, kirjautumiseen ja token-tiedon hyödyntämiseen.
 
-Lisäksi on käytetty myös Rautatieliikenteen ja Ilmatieteen laitoksen omia ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
+Lisäksi on käytetty myös Rautatieliikenteen ja Ilmatieteen laitoksen omia avoimen datan ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
 
 Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä.
 
 ## Linkit
 
-- [Tuulen suunnat asteikko](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm)
-- [Sääsymbolien selitykset FMI](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
-- [Bootstrap haku-kentän teko](https://ng-bootstrap.github.io/#/components/typeahead/examples)
-- [Sovellus Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)
-- [Navbarin collapse](https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007)
+Alla on linkit muutamiin sivustoihin, joita on myös hyödynnetty lopputyössä.
+
+- [Asteikko tuulen suunnille](http://snowfence.umn.edu/Components/winddirectionanddegrees.htm)
+- [Sääsymbolien selitykset - Ilmatieteen laitos](https://www.ilmatieteenlaitos.fi/latauspalvelun-pikaohje)
+- [Ohje Bootstrap haku-kentän tekemiseen](https://ng-bootstrap.github.io/#/components/typeahead/examples)
+- [Ohje sovelluksen lisäämiseen Herokuhun](https://www.youtube.com/watch?v=HWBSSC7Vbg0)
+- [Ohje kuinka käsitellä tietokantahaun undefined tai null-arvoja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+- [Navbarin collapse-ohje](https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007)
 - [Navbarin logo](https://www.freelogodesign.org)
-- [Footerin ulkoasu ja koodi](https://epicbootstrap.com/snippets/footer-dark)
-- [Ulkoasun CSS](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)
+- [Footerin ulkoasu ja koodi, on lainattu täältä](https://epicbootstrap.com/snippets/footer-dark)
+- [Ulkoasun CSS, on lainattu täältä](https://bbbootstrap.com/snippets/bootstrap-weather-widget-card-temperature-44293170)

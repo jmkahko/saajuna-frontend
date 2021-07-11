@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnDestroy {
-  login: boolean;
+  login: boolean; // Kirjautumistieto
   subscription: Subscription; // Subscription -tyyppiseen olioon voidaan tallentaa observablen tilaus.
 
   constructor(private authService: AuthService) {
@@ -37,9 +37,9 @@ export class NavbarComponent implements OnDestroy {
   doLogout() {
     this.login = false;
   }
-
+  // Navbarin collapse -ohje lainattu tästä linkistä https://medium.com/@tiboprea/build-a-responsive-bootstrap-4-navbar-in-angular-5-without-jquery-c59ad35b007
   navbarOpen = false;
-  
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }

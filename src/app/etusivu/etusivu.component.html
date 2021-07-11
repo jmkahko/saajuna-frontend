@@ -1,4 +1,4 @@
-<!-- Jos ei olla kirjauduttu -->
+<!-- Jos ei olla kirjauduttu sisään-->
 <div class="container-md" *ngIf="!login">
   <div class="aloituskuva">
     <div class="card">
@@ -25,7 +25,7 @@
 
 <div class="card" *ngIf="login && username !== 'admin'">
   <div class="grid-container" *ngIf="login && username !== 'admin'">
-    <!-- Sää suosikkki 1-->
+    <!-- Sää suosikki 1-->
     <div class="suosikkisaa1" *ngIf="suosikkisaa1 !== null">
       <div class="card">
         <h4 class="card-title">
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <!-- Sää suosikkki 2-->
+    <!-- Sää suosikki 2-->
     <div class="suosikkisaa2" *ngIf="suosikkisaa2 !== null">
       <div class="card">
         <h4 class="card-title">
@@ -126,7 +126,7 @@
       </div>
     </div>
 
-    <!-- Rautatie suosikkki 1-->
+    <!-- Rautatie suosikki 1-->
     <div class="suosikkirautatie1" *ngIf="suosikkirautatie1 !== null">
       <div class="card">
         <h4 class="card-title">Rautatie {{ junaasema1?.stationName }}</h4>
@@ -211,7 +211,7 @@
       </div>
     </div>
 
-    <!-- Rautatie suosikkki 2-->
+    <!-- Rautatie suosikki 2-->
     <div class="suosikkirautatie2" *ngIf="suosikkirautatie2 !== null">
       <div class="card">
         <h4 class="card-title">Rautatie {{ junaasema2?.stationName }}</h4>
