@@ -6,7 +6,7 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistune
 
 ## Yleisesittely
 
-[SääJuna-frontend](https://saajuna.herokuapp.com/) sivuston backend pyörii [SääJuna-backend](https://saajuna-backend.herokuapp.com/) osoitteessa.
+[SääJuna-frontend](https://saajuna.herokuapp.com/) sivuston backend toimii [SääJuna-backend](https://saajuna-backend.herokuapp.com/) osoitteessa.
 Frontend-palveluita ovat mm. sovellukseen kirjautuminen, suosikkien tallentaminen, junien ja säätietojen hakeminen.
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
@@ -32,9 +32,9 @@ Alla on komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omal
 1. `git clone git@github.com:jmkahko/saajuna-frontend.git`
 2. Tarkista, että [SääJuna-backend](https://github.com/jmkahko/saajuna-backend) on toiminnossa
 3. Tarvittaessa SääJuna-backend palvelun osoitetta voi muokata ./environments/environment.ts tiedostoon
-3. Sitten käynnistä projekti `npm start` komennolla.
+4. Sitten käynnistä projekti `npm start` komennolla.
 
-Heroku-palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon, komento jolla sivusto käynnistyy
+Heroku-palveluun sovelluksen lisääminen vaatii muutoksen package.json -tiedostoon, komento jolla sivusto käynnistyy.
 
 Heroku
 
@@ -62,8 +62,8 @@ Paikallinen
 
 ## Reflektio ja ajankäyttö
 
-Työ on onnistunut hyvin ja yllättävän sujuvasti. Ongelmia jonkin verran aiheutti sivujen välillä tietojen siirto esimerkiksi käyttäjä rekisteröintyy ja siirrytään kirjaudu-sivustolle. Tämä ongelma saatiin kierrettyä, että luotiin uusi kirjaudu-sivusto, johon käyttäjä ohjataan rekisteröinnin jälkeen. Käyttäjätunnuksen poistaminen ja salasanan vaihtaminen aiheutti myös jonkin verran ongelmia, ennen kuin saatiin ongelma ratkaistua viemällä käyttäjän id-tieto sessionStorageen kirjautumisen yhteydessä.
-Html sivulla elementtien sijainnin määrittely ja saaminen haluttuun kohtaan.
+Työ on onnistunut hyvin ja yllättävän sujuvasti. Ongelmia jonkin verran aiheutti sivujen välillä tietojen siirto esimerkiksi siinä kun käyttäjä rekisteröityy ja siirrytään kirjaudu-sivustolle. Tämä ongelma saatiin kierrettyä siten, että luotiin uusi kirjaudu-sivusto, johon käyttäjä ohjataan rekisteröinnin jälkeen. Käyttäjätunnuksen poistaminen ja salasanan vaihtaminen aiheutti myös jonkin verran ongelmia, ennen kuin saatiin ongelma ratkaistua viemällä käyttäjän id-tieto sessionStorageen kirjautumisen yhteydessä.
+Html sivulla elementtien sijainnin määrittely ja saaminen haluttuun kohtaan aiheutti myös välillä aikamoista päänvaivaa.
 
 Frontendin tekemiseen on käytetty aikaa 60-80 h.
 
@@ -73,7 +73,7 @@ Frontendin tekemiseen on käytetty aikaa 60-80 h.
 
 Web-kehittäjä koulutuksen Frontend -sovelluskehitys ja Nodejs -sovelluskehitys kurssien materiaalia käytetty hyödyksi backendin ja frontendin puolella esimerkiksi käyttäjätunnuksien luontiin, kirjautumiseen ja token-tiedon hyödyntämiseen.
 
-Lisäksi on käytetty myös [Rautatieliikenteen](https://www.digitraffic.fi/rautatieliikenne/) ja [Ilmatieteen laitoksen](https://www.ilmatieteenlaitos.fi/) omia avoimen datan ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määritystä varten.
+Lisäksi on käytetty myös [Rautatieliikenteen](https://www.digitraffic.fi/rautatieliikenne/) ja [Ilmatieteen laitoksen](https://www.ilmatieteenlaitos.fi/) omia avoimen datan ohjeita ja heidän GitHub-sivustojaan esimerkiksi tiedon määrityksiä varten.
 
 Junakartan tekemiseen käytetty tätä [tutoriaalia](https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet) ja Node.js-kurssilla käytyä esimerkkiä.
 
