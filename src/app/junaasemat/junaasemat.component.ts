@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment'; // Tuodaan enviromen
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 
-// Nämä tuodaan buildausta varten
+// Nämä tuodaan karttatietoja varten, kartta ikonit tallennettu assets-kansioon.
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -20,7 +20,7 @@ const iconDefault = L.icon({
   shadowSize: [41, 41],
 });
 L.Marker.prototype.options.icon = iconDefault;
-// Tähän asti ylhäältä
+// Tähän asti tuodaan karttatietoja varten
 
 @Component({
   selector: 'app-junaasemat',
@@ -30,7 +30,7 @@ L.Marker.prototype.options.icon = iconDefault;
 export class JunaasematComponent implements OnInit {
   rautatieasemat: Array<RautatieAsemat> = []; // Rautatieasemien taulukko johon asemat haetaan käynnistyksessä
   stations: Array<RautatieAsemat> = []; // Tyhjä taulukko jota käytetään rautatieasemien hakuun
-  time: string;
+  time: string; // Aika
 
   // Esitellään karttatiedot asemien tietoa varten
   private map: any;
@@ -47,7 +47,7 @@ export class JunaasematComponent implements OnInit {
       .haeAsemat()
       .subscribe((data) => (this.rautatieasemat = data));
 
-    // Rautatieasemien sijaintietoja varten
+    // Rautatieasemien sijaintitietoja varten
     this.lat = 0;
     this.lon = 0;
     this.latlng = new L.LatLng(this.lat, this.lon);
@@ -82,7 +82,7 @@ export class JunaasematComponent implements OnInit {
         // show the scale bar on the lower left corner
         L.control.scale().addTo(this.map);
 
-        // Käydään asemien sijainnit läpi ja laitetaan kartalle
+        // Käydään asemien sijainnit läpi ja lisätään ne kartalle
         for (let x = 0; x < data.length; x++) {
           // Näytetään käytössä olevat asemat ja seisakkeet
           if (
@@ -94,7 +94,7 @@ export class JunaasematComponent implements OnInit {
             this.lon = Number(data[x]['longitude']); // Longitude sijainti
             this.lat = Number(data[x]['latitude']); // Latitude sijainti
 
-            // Laitetaan merkki kartalle ja otetaan muuttujaan tieto
+            // Laitetaan merkki kartalle ja otetaan tieto muuttujaan.
             let linkki = new L.marker(new L.LatLng(this.lat, this.lon))
               .bindPopup(data[x]['stationName'])
               .addTo(this.map);
@@ -129,7 +129,7 @@ export class JunaasematComponent implements OnInit {
 
   // Rautatieaseman haku
   search(term: string): void {
-    // Kun kirjaimia on syötetty 2 tai enemmän, näytetään maksimissaan 10 hakutulosta
+    // Kun kirjaimia on syötetty 2 tai enemmän, näytetään maksimissaan 10 hakutulosta.
     if (term.length > 1) {
       this.stations = this.rautatieasemat
         .filter((str) => {
@@ -140,7 +140,7 @@ export class JunaasematComponent implements OnInit {
         .slice(0, 10);
     }
 
-    // Kun kirjaimia on syötetty 0 niin ei näytetä yhtään hakutulosta listasta
+    // Kun kirjaimia on syötetty 0 niin ei näytetä yhtään hakutulosta listasta.
     if (term.length === 0) {
       this.stations = this.rautatieasemat
         .filter((str) => {
