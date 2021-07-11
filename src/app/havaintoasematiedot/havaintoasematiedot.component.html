@@ -1,3 +1,6 @@
+<!-- Tällä sivulle tuodaan säähavaintoasema ja sen tiedot.
+Se näkyy myös karttamerkkinä kartalla ja sen alapuolelle tuodaan aseman tämän hetkinen sää ja tuleva sääennuste. -->
+
 <div class="container-md">
   <div
     *ngIf="saanyt?.time === '2020-09-01T09:00:00Z'"
@@ -5,6 +8,7 @@
   >
     <strong>Varoitus!</strong> Säätietojen haku epäonnistui
   </div>
+  <!-- Säähavaintoaseman tiedot -->
   <div class="card">
     <div class="card">
       <div *ngIf="havaintoasema">
@@ -31,14 +35,13 @@
     <div class="kartta-sijainti" *ngIf="latlng?.length !== 0">
       <div id="kartta"></div>
     </div>
-
+    <!-- Tämän hetkinen säähavaintoaseman sää -->
     <div>
       <div class="card">
         <h4>Sää tällä hetkellä {{ saanyt?.time | date: 'dd.MM H:mm' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
-              <!-- <th>Aika</th> -->
               <th *ngIf="saanyt?.t2m !== null">Lämpötila</th>
               <th *ngIf="saanyt?.ws_10min !== null">Tuulen nopeus</th>
               <th *ngIf="saanyt?.wg_10min !== null">Tuulen puuska</th>
@@ -58,7 +61,6 @@
           </thead>
           <tbody>
             <tr>
-              <!-- <td></td> -->
               <td *ngIf="saanyt?.t2m !== null">
                 {{ saanyt?.t2m | number: '1.0-0' }} ℃
               </td>
@@ -102,14 +104,13 @@
         </table>
       </div>
     </div>
-
+    <!-- Säähavaintoaseman sääennuste -->
     <div>
       <div class="card">
         <h4>Sääennuste {{ saaennuste?.time | date: 'dd.MM H:mm' }}</h4>
         <table class="table-responsive-sm w-auto">
           <thead>
             <tr>
-              <!-- <th>Aika</th> -->
               <th *ngIf="saaennuste?.Temperature !== null">Lämpötila</th>
               <th *ngIf="saaennuste?.WindSpeedMS !== null">Tuulen nopeus</th>
               <th *ngIf="saaennuste?.WindDirection !== null">Tuulen suunta</th>
@@ -119,7 +120,6 @@
           </thead>
           <tbody>
             <tr>
-              <!-- <td></td> -->
               <td *ngIf="saaennuste?.Temperature !== null">
                 {{ saaennuste?.Temperature | number: '1.0-0' }} ℃
               </td>
