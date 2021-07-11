@@ -4,7 +4,7 @@ import { JunaService } from '../juna.service';
 
 import * as L from 'leaflet'; // Kartta jutut tuodaan
 
-// Nämä tuodaan karttatietoja varten
+// Nämä tuodaan karttatietoja varten, kartta ikonit tallennettu assets-kansioon.
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -61,12 +61,12 @@ export class JunantiedotComponent implements AfterViewInit, OnInit {
     this.haeJunaSijaintiKartalla();
   }
 
-  // Haetaan junan aikataulu tiedot
+  // Haetaan junan aikataulutiedot
   haeAikataulu(): void {
     const aika = this.route.snapshot.paramMap.get('aika'); // aika tieto on string, josta johtuen ei muuteta numeroksi
     const junanumero = Number(this.route.snapshot.paramMap.get('junanumero')); // junanumero tieto on numero, josta johtuen muutetaan numeroksi tieto
 
-    // Haetaan junaaikataulu muuttujaan junanaikataulu tieto
+    // Haetaan junaaikataulu muuttujaan junan aikataulu tieto
     this.junaService
       .haeAikataulu(aika, junanumero)
       .subscribe((junaaikataulu) => (this.junaaikataulu = junaaikataulu));
